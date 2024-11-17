@@ -1,0 +1,68 @@
+library(ISLR)
+library(MASS)
+data("Boston")
+dim(Boston)
+str(Boston)
+attach(Boston)
+#b Scatter plot
+pairs(Boston)
+library(ggplot2)
+#c
+Boston.corr=cor(Boston)
+Boston.corr.crim<-Boston.corr[-1,1]
+print(
+  Boston.corr.crim[order(abs(Boston.corr.crim), decreasing = T)]
+)
+par(mfrow=c(2,2))
+# get the four most correlated variables
+aux = names(Boston.corr.crim[order(abs(Boston.corr.crim), decreasing = T)][1:4])
+for(i in aux){
+  plot(get(i), crim, xlab=i)
+}
+#Crime Rate
+summary(crim)
+length(crim[crim>30])
+#Tax Rate
+par(mfrow=c(1,1))
+hist(tax)
+length(tax[tax>500])
+#Pupil Teacher Ratio
+hist(ptratio)
+length(ptratio[ptratio<14])
+#e
+table(chas)
+#f
+median(ptratio)
+#g
+subs.lw<-which(medv<median(medv))
+print(subs.lw)
+#Compare with the rest of the other predictors.
+
+Boston.corr.subs.lw = cor(Boston[subs.lw, ])
+corr.compare = data.frame('lower'=Boston.corr.subs.lw[, "medv"], 'all'=Boston.corr[, "medv"])
+corr.compare$diff = corr.compare$lower - corr.compare$all
+
+#Check how much vary the differences.
+
+hist(corr.compare$diff, xlab="Correlation Differences")
+hist(abs(corr.compare$diff), xlab="Correlation Differences")
+#The main correlation diffences were at the variables:
+  
+  main.diffs = head(corr.compare[order(abs(corr.compare$diff), decreasing = T), ], 5)
+
+print(main.diffs)
+print(rownames(main.diffs))
+#h
+hist(rm, main="Distribution of Rooms by Dwelling", xlab="Rooms")
+#More than 7 rooms per dweling
+length(rm[rm>7])
+#More than 8 rooms per dweling
+length(rm[rm>8])
+#Let's see the prices of these houses compared over all others suburb houses.
+
+frm =as.factor(as.character(lapply(rm, function(x) ifelse(x>8, "]8, +Inf[", ifelse(x>7,"]7,8]","[0,7]")))))
+plot(frm, medv, varwidth=T, xlab="Number of Rooms", 
+     ylab="Median Values by $1000s",
+     title="Median Value of Owner-Occupied Homes")
+
+Boston[rm>8 & medv<30, ]

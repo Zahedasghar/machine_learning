@@ -1,0 +1,9 @@
+"0","# Scale-Location Plot (Spread of residuals)
+ggplot(augmented_data, aes(.fitted, sqrt(abs(.std.resid)))) +
+  geom_point() +
+  geom_smooth(method = 'loess', col = 'blue', se = FALSE) +
+  labs(title = ""Scale-Location"", x = ""Fitted values"", y = ""Sqrt(|Standardized Residuals|)"") +
+  theme_minimal()
+"
+"2","Error: object 'augmented_data' not found
+"

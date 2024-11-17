@@ -1,0 +1,10 @@
+"0","#| label: model-evaluation
+list( glm_accuracy = glm_accuracy,
+  lda_accuracy = lda_accuracy,
+  qda_accuracy = qda_accuracy,
+  knn_accuracy = knn_accuracy,
+  dt_accuracy = dt_accuracy
+)
+"
+"2","Error: object 'dt_accuracy' not found
+"

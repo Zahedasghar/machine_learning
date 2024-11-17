@@ -1,0 +1,3 @@
+"0","lm_fit <- lm(Sales ~ . + Income:Advertising + Price:Age,"
+"0","    data = Carseats)"
+"0","msummary(lm_fit)"

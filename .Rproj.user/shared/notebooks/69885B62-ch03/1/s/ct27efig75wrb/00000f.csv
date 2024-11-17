@@ -1,0 +1,6 @@
+"0","# Residuals vs Fitted Plot"
+"0","ggplot(augmented_data, aes(.fitted, .resid)) +"
+"0","  geom_point() +"
+"0","  geom_smooth(method = 'loess', col = 'blue', se = FALSE) +"
+"0","  labs(title = ""Residuals vs Fitted"", x = ""Fitted values"", y = ""Residuals"") +"
+"0","  theme_minimal()"

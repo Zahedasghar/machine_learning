@@ -1,0 +1,9 @@
+"0","lm_fit <- lm(medv ~ lstat, data = Boston)"
+"0","attach(Boston)  # attach the Boston data set"
+"2","The following objects are masked from Boston (pos = 4):
+
+    age, black, chas, crim, dis, indus, lstat, medv, nox, ptratio, rad,
+    rm, tax, zn
+
+"
+"0","lm_fit <- lm(medv ~ lstat) # fit the model with data already attached"

@@ -1,0 +1,1 @@
+{"frames":[{"func":"ggplot(augmented_data, aes(.fitted, sqrt(abs(.std.resid))))","file":"","line_number":0,"end_line_number":0,"character_number":0,"end_character_number":0}],"message":"Error: object 'augmented_data' not found\n"}

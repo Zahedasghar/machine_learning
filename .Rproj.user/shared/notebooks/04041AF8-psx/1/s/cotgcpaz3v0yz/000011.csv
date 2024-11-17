@@ -1,0 +1,16 @@
+"0","# Fit Decision Tree model (CART)"
+"0","dt_fit <- rpart(direction ~ lag1 + lag2 + lag3 + lag4 + lag5 + vol,"
+"0","                 data = train_data,"
+"0","                 method = ""class"")"
+"0",""
+"0","# Predict on test data"
+"0",""
+"0","dt_pred <- predict(dt_fit, newdata = test_data, type = ""class"")"
+"0",""
+"0",""
+"0","# Evaluate Decision Tree model"
+"0",""
+"0","dt_accuracy <- mean(dt_pred == test_data$direction)"
+"2","Error in Ops.factor(dt_pred, test_data$direction) : 
+  level sets of factors are different
+"

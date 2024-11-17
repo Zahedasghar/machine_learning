@@ -1,0 +1,32 @@
+---
+title: "Author"
+image: profile.png
+about:
+  id: hero-heading
+  template: trestles
+  image-shape: rectangle
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/zahedasghar
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/zahid-asghar
+    - icon: github
+      text: Github
+      href: https://github.com/zahedasghar
+---
+
+::: {#hero-heading}
+
+I am a Professor  at School of Economics, Quaid-i-Azam University, Islamabad. 
+
+My work is about 
+
+I am interested in developing packages. For example,
+`PakPC`, `PakNAcc`
+...
+
+
+:::
+

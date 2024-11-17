@@ -1,0 +1,1 @@
+"0","msummary(lm(medv ~ lstat * age, data = Boston), estimate = ""std.error"", stars = TRUE)"

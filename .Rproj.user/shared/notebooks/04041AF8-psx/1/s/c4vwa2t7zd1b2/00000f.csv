@@ -1,0 +1,36 @@
+"0","#| label: load-data"
+"0","psx <- read_csv(""data/psx.csv"")"
+"2","[1mRows: [22m[34m1827[39m [1mColumns: [22m[34m7[39m"
+"2","[36m──[39m [1mColumn specification[22m [36m─────────────────────────[39m
+[1mDelimiter:[22m "",""
+[31mchr[39m (3): Date, Vol., Change %
+[32mdbl[39m (4): Price, Open, High, Low"
+"2","
+[36mℹ[39m Use `spec()` to retrieve the full column specification for this data.
+[36mℹ[39m Specify the column types or set `show_col_types = FALSE` to quiet this message."
+"0","# Inspect the data structure (rows, columns, and types)"
+"0","dim(psx)"
+"1","[1]"
+"1"," 1827"
+"1","    7"
+"1","
+"
+"0","glimpse(psx)"
+"1","Rows: 1,827"
+"1",""
+"1","
+"
+"1","Columns: 7"
+"1",""
+"1","
+"
+"1","$ Date       [3m[38;5;246m<chr>[39m[23m ""11/15/2024"", ""11/14/2024"", …
+$ Price      [3m[38;5;246m<dbl>[39m[23m 17.42, 17.19, 16.78, 16.86, …
+$ Open       [3m[38;5;246m<dbl>[39m[23m 17.40, 16.70, 16.95, 17.00, …
+$ High       [3m[38;5;246m<dbl>[39m[23m 17.60, 17.60, 16.95, 17.20, …
+$ Low        [3m[38;5;246m<dbl>[39m[23m 16.90, 16.55, 16.50, 16.70, …
+$ Vol.       [3m[38;5;246m<chr>[39m[23m ""896.83K"", ""1.01M"", ""239.44K…
+$ `Change %` [3m[38;5;246m<chr>[39m[23m ""1.34%"", ""2.44%"", ""-0.47%"", …"
+"1",""
+"1","
+"

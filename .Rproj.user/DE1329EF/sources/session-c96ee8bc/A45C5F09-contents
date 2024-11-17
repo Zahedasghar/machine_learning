@@ -1,0 +1,19 @@
+# Load required libraries
+library(gapminder)
+library(purrr)
+library(dplyr)
+
+# Define a function to fit a linear model and extract coefficients
+get_lm_coeffs <- function(data) {
+  model <- lm(lifeExp ~ year, data = data)
+  coeffs <- coef(model)
+  return(list(intercept = coeffs[1], slope = coeffs[2]))
+}
+
+# Apply the function to each continent using split and map
+results <- gapminder %>%
+  split(.$continent) %>%
+  map(get_lm_coeffs)
+
+# Print the results
+print(results)

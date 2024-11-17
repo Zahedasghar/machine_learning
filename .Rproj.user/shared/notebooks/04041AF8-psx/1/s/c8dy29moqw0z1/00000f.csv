@@ -1,0 +1,8 @@
+"0","#| label: load-libraries"
+"0","library(caret)      # For model evaluation and cross-validation"
+"0","library(rpart)      # For Decision Trees"
+"0","library(tidyverse)  # For data manipulation and visualization"
+"0","library(Metrics)    # For additional evaluation metrics"
+"0","library(janitor)    # For cleaning column names"
+"0","library(MASS)"
+"0","library(class)    # For KNN"

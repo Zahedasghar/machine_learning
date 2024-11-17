@@ -1,0 +1,23 @@
+"0","lm(medv ~ lstat, data = Boston)
+"
+"1","
+Call:
+"
+"1",""
+"1","lm(formula = medv ~ lstat, data = Boston)"
+"1",""
+"1","
+
+"
+"1","Coefficients:
+"
+"1","(Intercept)  "
+"1","      lstat  "
+"1","
+"
+"1","      34.55  "
+"1","      -0.95  "
+"1","
+"
+"1","
+"

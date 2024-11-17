@@ -1,0 +1,22 @@
+library(ISLR)
+data("College")
+college<-College
+attach(college)
+ggplot(college)+aes(Private,Outstate,color="red")+geom_boxplot()
+
+Elite<-rep("No",nrow(college))
+Elite[college$Top10perc>50]="Yes"
+Elite=as.factor(Elite)
+college<-data.frame(college,Elite)
+summary(Elite)
+ggplot(college)+aes(Elite,Outstate,col="red")+geom_boxplot()
+par(mfrow=c(2,2))
+ggplot(college,aes(Top10perc,col="red"))+geom_histogram(bins = 10,fill="red")
+ggplot(college,aes(Apps,col="red"))+geom_histogram(bins = 10,fill="green")
+ggplot(college,aes(Personal,col="red"))+geom_histogram(bins = 10,fill="orange")
+ggplot(college,aes(PhD,col="red"))+geom_histogram(bins = 10,fill="blue")
+summary(PhD)
+row.names(college[PhD>100,])
+summary(Apps)
+row.names(college[Apps>25000,])
+detach(college)

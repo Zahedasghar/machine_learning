@@ -1,0 +1,6 @@
+"0","# Normal Q-Q Plot"
+"0","ggplot(augmented_data, aes(sample = .std.resid)) +"
+"0","  geom_qq() +"
+"0","  geom_qq_line() +"
+"0","  labs(title = ""Normal Q-Q"", x = ""Theoretical Quantiles"", y = ""Standardized Residuals"") +"
+"0","  theme_minimal()"

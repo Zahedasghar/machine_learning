@@ -1,0 +1,43 @@
+---
+title: "Ch2.ISLR"
+author: "Zahid Asghar"
+date: "February 21, 2017"
+output: html_document
+---
+
+```{r }
+#install.packages("ISLR")
+library(ISLR)
+
+library(dplyr)
+
+library(ggplot2)
+
+Adv<-read.csv("Advertising.csv",header = TRUE) 
+
+summarise(Adv)
+
+par(mfrow=c(3,1))
+
+ggplot(Adv)+aes(TV,Sales)+geom_point(size=2, aes(color="Red"))+stat_smooth(method = lm)
+
+
+ggplot(Adv)+aes(Radio,Sales)+geom_point(size=2, aes(color="Red"))+stat_smooth(method = lm)
+
+
+
+
+ggplot(Adv)+aes(Newspaper,Sales)+geom_point(size=2, aes(color="Red"))+stat_smooth(method = lm)
+
+
+
+
+
+
+```
+Now we would see which medium of advertisement has stronger relationship with Sales
+
+
+```{r}
+
+

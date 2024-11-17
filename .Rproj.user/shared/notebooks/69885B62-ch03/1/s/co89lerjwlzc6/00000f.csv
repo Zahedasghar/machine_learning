@@ -1,0 +1,9 @@
+"0","ggplot(Boston, aes(x = lstat, y = medv)) +
+  geom_point() +
+  geom_smooth(method = ""lm"", se = FALSE) +
+  geom_abline(intercept = 34, slope = -1, color = ""red"", size = 3) +
+  geom_point(color = ""red"") +
+  geom_point(shape = 20) 
+"
+"2","Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+Please use `linewidth` instead."

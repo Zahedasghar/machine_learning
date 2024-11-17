@@ -1,0 +1,12 @@
+---
+title: "ISLR Ch.1"
+author: "Zahid Asghar"
+date: "February 19, 2017"
+output: html_document
+---
+
+```{r}
+library(dplyr)
+library(ggplot2)
+install.packages("ISLR")
+library(ISLR)

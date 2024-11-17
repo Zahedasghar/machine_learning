@@ -1,0 +1,180 @@
+---
+title: "Untitled"
+jupyter: python3
+---
+
+
+This exercise involves the Boston housing data set.
+
+(a) To begin, load in the Boston data set. The Boston data set is
+part of the `ISLR2` library. 
+Now the data set is contained in the object Boston.
+
+Read about the data set:
+
+### p_01
+
+```{python}
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_boston
+
+# Load the Boston dataset
+boston = load_boston()
+
+# Create a DataFrame
+Boston = pd.DataFrame(boston.data, columns=boston.feature_names)
+Boston['MEDV'] = boston.target
+
+# Display dataset information
+print(Boston.info())
+```
+
+### p_0b
+
+How many rows are in this data set? How many columns? What
+do the rows and columns represent?
+
+```{python}
+# Get the dimensions of the dataset
+rows, columns = Boston.shape
+print(f"Number of rows: {rows}")
+print(f"Number of columns: {columns}")
+
+# Display a glimpse of the dataset
+print(Boston.head())
+print(Boston.describe())
+```
+
+### p_1b  
+Make some pairwise scatterplots of the predictors (columns) in this data set. Describe your findings.
+
+```{python}
+# Pairwise scatterplots
+sns.pairplot(Boston)
+plt.tight_layout()
+plt.show()
+```
+
+Also have correlation matrix in heatmap with labels
+
+```{python}
+import numpy as np
+
+# Calculate the correlation matrix
+cor_matrix = Boston.corr()
+
+# Plot the correlation heatmap
+plt.figure(figsize=(12, 10))
+sns.heatmap(cor_matrix, annot=True, fmt=".2f", cmap='coolwarm', square=True)
+plt.title('Correlation Matrix Heatmap')
+plt.show()
+```
+
+Have correlation between `crim` with other variables
+
+```{python}
+# Extract the correlation of 'CRIM' with all other variables
+crim_correlations = cor_matrix['CRIM'].sort_values(ascending=False)
+
+# Display the sorted correlations
+print(crim_correlations)
+```
+
+### p_0c 
+
+Are any of the predictors associated with per capita crime rate? If so, explain the relationship.
+
+*Provide your analysis based on the correlation results and scatterplots.*
+
+### p_0d 
+
+Do any of the census tracts of Boston appear to have particularly high crime rates? Tax rates? Pupil-teacher ratios? Comment on the range of each predictor.
+
+```{python}
+# Summary statistics for 'CRIM', 'TAX', and 'PTRATIO'
+summary_stats = Boston[['CRIM', 'TAX', 'PTRATIO']].describe()
+print(summary_stats)
+```
+
+```{python}
+# Identify high values based on the top 5% thresholds
+high_crim_threshold = Boston['CRIM'].quantile(0.95)
+high_tax_threshold = Boston['TAX'].quantile(0.95)
+high_ptratio_threshold = Boston['PTRATIO'].quantile(0.95)
+
+print(f"95th percentile for CRIM: {high_crim_threshold}")
+print(f"95th percentile for TAX: {high_tax_threshold}")
+print(f"95th percentile for PTRATIO: {high_ptratio_threshold}")
+
+# Find census tracts with high values
+high_tracts = Boston[
+    (Boston['CRIM'] > high_crim_threshold) |
+    (Boston['TAX'] > high_tax_threshold) |
+    (Boston['PTRATIO'] > high_ptratio_threshold)
+][['CRIM', 'TAX', 'PTRATIO']]
+
+print("Census Tracts with High Values for 'CRIM', 'TAX', or 'PTRATIO':")
+print(high_tracts.head())
+```
+
+### p_0e 
+
+How many of the census tracts in this data set bound the Charles river?
+
+```{python}
+# Number of census tracts bounding the Charles River (CHAS == 1)
+chas_count = Boston[Boston['CHAS'] == 1].shape[0]
+print(f"Number of census tracts bounding the Charles River: {chas_count}")
+```
+
+### p_0f
+
+What is the median pupil-teacher ratio among the towns in this data set? 
+
+```{python}
+# Median pupil-teacher ratio
+median_ptratio = Boston['PTRATIO'].median()
+print(f"Median pupil-teacher ratio: {median_ptratio}")
+```
+
+### p_0g
+
+Which census tract of Boston has the lowest median value of owner-occupied homes? What are the values of the other predictors for that census tract, and how do those values compare to the overall ranges for those predictors? Comment on your findings. 
+
+```{python}
+# Find the census tract with the lowest median value of owner-occupied homes
+lowest_medv_tract = Boston.loc[Boston['MEDV'].idxmin()]
+print("Census Tract with the Lowest Median Value of Owner-Occupied Homes:")
+print(lowest_medv_tract)
+```
+
+```{python}
+# Overall ranges for each predictor
+overall_ranges = Boston.describe().loc[['min', 'max']]
+print("Overall Ranges for Each Predictor:")
+print(overall_ranges)
+```
+
+### p_0h
+
+In this data set, how many of the census tracts average more than seven rooms per dwelling? More than eight rooms per dwelling? Comment on the census tracts that average more than eight rooms per dwelling. 
+
+```{python}
+# Count of census tracts with more than 7 rooms per dwelling
+count_more_than_7 = Boston[Boston['RM'] > 7].shape[0]
+print(f"Number of census tracts averaging more than 7 rooms per dwelling: {count_more_than_7}")
+
+# Count of census tracts with more than 8 rooms per dwelling
+count_more_than_8 = Boston[Boston['RM'] > 8].shape[0]
+print(f"Number of census tracts averaging more than 8 rooms per dwelling: {count_more_than_8}")
+```
+
+```{python}
+# Details of census tracts with more than 8 rooms per dwelling
+tracts_more_than_8 = Boston[Boston['RM'] > 8]
+print("Details of Census Tracts Averaging More Than 8 Rooms Per Dwelling:")
+print(tracts_more_than_8)
+```
+```

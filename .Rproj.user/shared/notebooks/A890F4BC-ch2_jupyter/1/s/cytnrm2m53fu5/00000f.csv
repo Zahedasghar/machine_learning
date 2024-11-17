@@ -1,0 +1,260 @@
+"0","reticulate::repl_python()"
+"1","Using Python: C:/Program Files/Python311/python.exe
+"
+"1","Creating virtual environment ""r-reticulate"" ... 
+"
+"2","+ ""C:/Program Files/Python311/python.exe"" -m venv ""C:/Users/92300/Documents/.virtualenvs/r-reticulate""
+"
+"1","Done!
+"
+"1","Installing packages: pip, wheel, setuptools
+"
+"2","+ ""C:/Users/92300/Documents/.virtualenvs/r-reticulate/Scripts/python.exe"" -m pip install --upgrade pip wheel setuptools
+"
+"1","Requirement already satisfied: pip in c:\users\92300\docume~1\virtua~1\r-reti~1\lib\site-packages (23.1.2)
+"
+"1","Collecting pip
+"
+"1","  Downloading pip-24.3.1-py3-none-any.whl (1.8 MB)
+"
+"1","     ---------------------------------------- 1.8/1.8 MB 3.3 MB/s eta 0:00:00
+"
+"1","Collecting wheel
+"
+"1","  Using cached wheel-0.44.0-py3-none-any.whl (67 kB)
+"
+"1","Requirement already satisfied: setuptools in c:\users\92300\docume~1\virtua~1\r-reti~1\lib\site-packages (65.5.0)
+"
+"1","Collecting setuptools
+"
+"1","  Downloading setuptools-75.3.0-py3-none-any.whl (1.3 MB)
+"
+"1","     ---------------------------------------- 1.3/1.3 MB 15.9 MB/s eta 0:00:00
+"
+"1","Installing collected packages: wheel, setuptools, pip
+"
+"1","  Attempting uninstall: setuptools
+"
+"1","    Found existing installation: setuptools 65.5.0
+"
+"1","    Uninstalling setuptools-65.5.0:
+"
+"1","      Successfully uninstalled setuptools-65.5.0
+"
+"1","  Attempting uninstall: pip
+"
+"1","    Found existing installation: pip 23.1.2
+"
+"1","    Uninstalling pip-23.1.2:
+"
+"1","      Successfully uninstalled pip-23.1.2
+"
+"1","Successfully installed pip-24.3.1 setuptools-75.3.0 wheel-0.44.0
+"
+"1","Installing packages: numpy
+"
+"2","+ ""C:/Users/92300/Documents/.virtualenvs/r-reticulate/Scripts/python.exe"" -m pip install --upgrade --no-user numpy
+"
+"1","Collecting numpy
+"
+"1","  Downloading numpy-2.1.3-cp311-cp311-win_amd64.whl.metadata (60 kB)
+"
+"1","Downloading numpy-2.1.3-cp311-cp311-win_amd64.whl (12.9 MB)
+"
+"1","   ---------------------------------------- 12.9/12.9 MB 12.2 MB/s eta 0:00:00
+"
+"1","Installing collected packages: numpy
+"
+"1","Successfully installed numpy-2.1.3
+"
+"1","Virtual environment 'r-reticulate' successfully created.
+"
+"0","reticulate::repl_python()"
+"2","  File ""<string>"", line 1
+    reticulate::repl_python()
+               ^
+SyntaxError: invalid syntax
+"
+"0","import pandas as pd"
+"2","Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+  File ""[90m]8;line = 122;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 122, in _find_and_load_hook
+    return _run_hook(name, _hook)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 96;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 96, in _run_hook
+    module = hook()
+             ^^^^^^
+  File ""[90m]8;line = 120;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 120, in _hook
+    return _find_and_load(name, import_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 22;file://C:\Users\92300\AppData\Roaming\Python\Python311\site-packages\pandas\__init__.pyC:\Users\92300\AppData\Roaming\Python\Python311\site-packages\pandas\__init__.py]8;;[39m"", line 22, in <module>
+    from pandas.compat import is_numpy_dev as _is_numpy_dev  # pyright: ignore # noqa:F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 122;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 122, in _find_and_load_hook
+    return _run_hook(name, _hook)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 96;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 96, in _run_hook
+    module = hook()
+             ^^^^^^
+  File ""[90m]8;line = 120;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 120, in _hook
+    return _find_and_load(name, import_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 25;file://C:\Users\92300\AppData\Roaming\Python\Python311\site-packages\pandas\compat\__init__.pyC:\Users\92300\AppData\Roaming\Python\Python311\site-packages\pandas\compat\__init__.py]8;;[39m"", line 25, in <module>
+    from pandas.compat.numpy import (
+  File ""[90m]8;line = 122;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 122, in _find_and_load_hook
+    return _run_hook(name, _hook)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 96;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 96, in _run_hook
+    module = hook()
+             ^^^^^^
+  File ""[90m]8;line = 120;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 120, in _hook
+    return _find_and_load(name, import_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 4;file://C:\Users\92300\AppData\Roaming\Python\Python311\site-packages\pandas\compat\numpy\__init__.pyC:\Users\92300\AppData\Roaming\Python\Python311\site-packages\pandas\compat\numpy\__init__.py]8;;[39m"", line 4, in <module>
+    from pandas.util.version import Version
+  File ""[90m]8;line = 122;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 122, in _find_and_load_hook
+    return _run_hook(name, _hook)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 96;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 96, in _run_hook
+    module = hook()
+             ^^^^^^
+  File ""[90m]8;line = 120;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 120, in _hook
+    return _find_and_load(name, import_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 122;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 122, in _find_and_load_hook
+    return _run_hook(name, _hook)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 96;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 96, in _run_hook
+    module = hook()
+             ^^^^^^
+  File ""[90m]8;line = 120;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 120, in _hook
+    return _find_and_load(name, import_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 2;file://C:\Users\92300\AppData\Roaming\Python\Python311\site-packages\pandas\util\__init__.pyC:\Users\92300\AppData\Roaming\Python\Python311\site-packages\pandas\util\__init__.py]8;;[39m"", line 2, in <module>
+    from pandas.util._decorators import (  # noqa:F401
+  File ""[90m]8;line = 122;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 122, in _find_and_load_hook
+    return _run_hook(name, _hook)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 96;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 96, in _run_hook
+    module = hook()
+             ^^^^^^
+  File ""[90m]8;line = 120;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 120, in _hook
+    return _find_and_load(name, import_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 14;file://C:\Users\92300\AppData\Roaming\Python\Python311\site-packages\pandas\util\_decorators.pyC:\Users\92300\AppData\Roaming\Python\Python311\site-packages\pandas\util\_decorators.py]8;;[39m"", line 14, in <module>
+    from pandas._libs.properties import cache_readonly
+  File ""[90m]8;line = 122;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 122, in _find_and_load_hook
+    return _run_hook(name, _hook)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 96;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 96, in _run_hook
+    module = hook()
+             ^^^^^^
+  File ""[90m]8;line = 120;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 120, in _hook
+    return _find_and_load(name, import_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 122;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 122, in _find_and_load_hook
+    return _run_hook(name, _hook)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 96;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 96, in _run_hook
+    module = hook()
+             ^^^^^^
+  File ""[90m]8;line = 120;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 120, in _hook
+    return _find_and_load(name, import_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 13;file://C:\Users\92300\AppData\Roaming\Python\Python311\site-packages\pandas\_libs\__init__.pyC:\Users\92300\AppData\Roaming\Python\Python311\site-packages\pandas\_libs\__init__.py]8;;[39m"", line 13, in <module>
+    from pandas._libs.interval import Interval
+  File ""[90m]8;line = 122;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 122, in _find_and_load_hook
+    return _run_hook(name, _hook)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 96;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 96, in _run_hook
+    module = hook()
+             ^^^^^^
+  File ""[90m]8;line = 120;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 120, in _hook
+    return _find_and_load(name, import_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""pandas\_libs\interval.pyx"", line 1, in init pandas._libs.interval
+ValueError: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject
+"
+"0","import seaborn as sns"
+"2","Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+  File ""[90m]8;line = 122;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 122, in _find_and_load_hook
+    return _run_hook(name, _hook)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 96;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 96, in _run_hook
+    module = hook()
+             ^^^^^^
+  File ""[90m]8;line = 120;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 120, in _hook
+    return _find_and_load(name, import_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'seaborn'
+"
+"0","import matplotlib.pyplot as plt"
+"2","Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+  File ""[90m]8;line = 122;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 122, in _find_and_load_hook
+    return _run_hook(name, _hook)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 96;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 96, in _run_hook
+    module = hook()
+             ^^^^^^
+  File ""[90m]8;line = 120;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 120, in _hook
+    return _find_and_load(name, import_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 122;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 122, in _find_and_load_hook
+    return _run_hook(name, _hook)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 96;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 96, in _run_hook
+    module = hook()
+             ^^^^^^
+  File ""[90m]8;line = 120;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 120, in _hook
+    return _find_and_load(name, import_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'matplotlib'
+"
+"0","from sklearn.datasets import load_boston"
+"2","Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+  File ""[90m]8;line = 122;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 122, in _find_and_load_hook
+    return _run_hook(name, _hook)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 96;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 96, in _run_hook
+    module = hook()
+             ^^^^^^
+  File ""[90m]8;line = 120;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 120, in _hook
+    return _find_and_load(name, import_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 122;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 122, in _find_and_load_hook
+    return _run_hook(name, _hook)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File ""[90m]8;line = 96;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 96, in _run_hook
+    module = hook()
+             ^^^^^^
+  File ""[90m]8;line = 120;file://C:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.pyC:\Users\92300\AppData\Local\R\win-library\4.4\reticulate\python\rpytools\loader.py]8;;[39m"", line 120, in _hook
+    return _find_and_load(name, import_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'sklearn'
+"
+"0","# Load the Boston dataset"
+"0","boston = load_boston()"
+"2","Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+NameError: name 'load_boston' is not defined
+"
+"0","# Create a DataFrame"
+"0","Boston = pd.DataFrame(boston.data, columns=boston.feature_names)"
+"2","Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+NameError: name 'pd' is not defined
+"
+"0","Boston['MEDV'] = boston.target"
+"2","Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+NameError: name 'boston' is not defined
+"
+"0","# Display dataset information"
+"0","print(Boston.info())"
+"2","Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+NameError: name 'Boston' is not defined
+"

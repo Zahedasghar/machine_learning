@@ -1,0 +1,31 @@
+library(tidyverse)
+
+adv <- read_csv("Advertising.csv")
+
+dim(adv)
+head(adv)
+tail(adv)
+summary(adv)
+
+names(adv)
+
+library(ggthemes)
+ggplot(adv,aes(x=TV,y=Sales))+geom_point()+
+  geom_smooth(method="lm",se=FALSE) + 
+  labs(title="Sales vs TV",x="TV",y="Sales", caption="By Zahid ,Source: ISLR")+
+  theme_economist()
+
+
+lm(Sales~TV,adv)
+
+library(broom)
+
+fit1 <- lm(Sales~TV,adv)
+
+tidy(fit1)
+
+library(modelsummary)
+
+msummary(fit1)
+
+lm(Sales~TV+Radio+Newspaper+ TV*Radio,adv) |> tidy()

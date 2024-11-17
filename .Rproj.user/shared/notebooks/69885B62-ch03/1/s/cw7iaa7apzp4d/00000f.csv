@@ -1,0 +1,7 @@
+"0","# Residuals vs Leverage Plot"
+"0","ggplot(augmented_data, aes(.hat, .std.resid)) +"
+"0","  geom_point() +"
+"0","  geom_smooth(method = 'loess', col = 'blue', se = FALSE) +"
+"0","  geom_hline(yintercept = c(-3, 3), linetype = ""dashed"", color = ""red"") +"
+"0","  labs(title = ""Residuals vs Leverage"", x = ""Leverage"", y = ""Standardized Residuals"") +"
+"0","  theme_minimal()"

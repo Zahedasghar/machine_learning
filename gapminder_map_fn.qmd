@@ -1,0 +1,59 @@
+---
+title: "gapminder_map_function"
+---
+
+The provided code chunks are in R and make use of `tidyverse` packages to work with the `gapminder` dataset and apply a linear model (`lm`) to analyze life expectancy as a function of year for each continent.
+
+Here's a breakdown of what the code does:
+
+1. **Load necessary libraries**:
+
+```{r}
+   library(tidyverse)
+
+```
+
+2. **Load and clean the `gapminder` data**:
+```{r}
+   dat_gapminder <- gapminder::gapminder |>
+     janitor::clean_names()
+```
+   - This creates a data frame `dat_gapminder` from the `gapminder` dataset and standardizes column names using `janitor::clean_names()`.
+
+3. **Apply a linear model using `map`**:
+   
+```{r}
+   dat_gapminder |>
+     nest(.by = continent) |>
+     mutate(
+       lin_mod = map(
+         data,
+         ~ lm(life_exp ~ year, data = .x)
+       )
+     )
+``` 
+
+   - `nest(.by = continent)`: Groups and nests the data by the `continent` column, creating a list-column with data frames for each continent.
+   - `mutate()` creates a new column, `lin_mod`, where the `map()` function is applied.
+   - `map()` iterates over each nested data frame (`data`) and applies the `lm(life_exp ~ year, data = .x)` function, fitting a linear model for life expectancy as a function of year.
+
+This process results in a data frame with a column that stores the fitted linear model for each continent. To extract coefficients (intercept and slope) from these models, an additional step using `map()` combined with `broom::tidy()` or `coef()` can be added:
+
+```{r}
+dat_gapminder |>
+  nest(.by = continent) |>
+  mutate(
+    lin_mod = map(
+      data,
+      \(x) lm(life_exp ~ year, data = x)
+    ),
+    coeffs = map(
+      lin_mod,
+      coefficients
+    ),
+    slope = map_dbl(coeffs, \(x) x[2]),
+    intercept = map_dbl(coeffs, \(x) x[1])
+  )
+
+```
+
