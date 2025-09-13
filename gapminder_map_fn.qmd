@@ -1,5 +1,7 @@
 ---
 title: "gapminder_map_function"
+editor_options: 
+  chunk_output_type: console
 ---
 
 The provided code chunks are in R and make use of `tidyverse` packages to work with the `gapminder` dataset and apply a linear model (`lm`) to analyze life expectancy as a function of year for each continent.
@@ -41,7 +43,7 @@ This process results in a data frame with a column that stores the fitted linear
 
 ```{r}
 dat_gapminder |>
-  nest(.by = continent) |>
+  nest(.by = country) |>
   mutate(
     lin_mod = map(
       data,

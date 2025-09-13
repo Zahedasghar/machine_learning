@@ -162,6 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#quadratic-discriminant-analysis-qda" id="toc-quadratic-discriminant-analysis-qda" class="nav-link" data-scroll-target="#quadratic-discriminant-analysis-qda">5. Quadratic Discriminant Analysis (QDA)</a></li>
   <li><a href="#k-nearest-neighbors-knn" id="toc-k-nearest-neighbors-knn" class="nav-link" data-scroll-target="#k-nearest-neighbors-knn">6. K-Nearest Neighbors (KNN)</a></li>
   <li><a href="#decision-trees-cart" id="toc-decision-trees-cart" class="nav-link" data-scroll-target="#decision-trees-cart">7. Decision Trees (CART)</a></li>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
   <li><a href="#model-evaluation" id="toc-model-evaluation" class="nav-link" data-scroll-target="#model-evaluation">8. Model Evaluation</a></li>
   <li><a href="#output-results" id="toc-output-results" class="nav-link" data-scroll-target="#output-results">Output results</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
@@ -481,67 +482,20 @@ $ `Change %` &lt;chr&gt; "1.34%", "2.44%", "-0.47%", "-0.94%", "-1.16%", "0.47%"
 <span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>dt_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>(dt_pred <span class="sc">==</span> test_data<span class="sc">$</span>direction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Explanation:</strong> 1. We fit the Decision Tree (CART) model using the training data. 2. Predictions are made on the test set, and the accuracy is calculated.</p>
+</section>
+<section id="logistic-regression" class="level2">
+<h2 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Train logistic regression on train data</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>glm_train <span class="ot">&lt;-</span> <span class="fu">glm</span>(direction <span class="sc">~</span> lag1 <span class="sc">+</span> lag2 <span class="sc">+</span> lag3 <span class="sc">+</span> lag4 <span class="sc">+</span> lag5 <span class="sc">+</span> vol,</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> train_data, <span class="at">family =</span> binomial)</span>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First ensure direction is properly encoded as numeric binary in psx_clean</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>psx_clean <span class="ot">&lt;-</span> psx_clean <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">direction =</span> <span class="fu">as.numeric</span>(direction))  <span class="co"># Should be 0 or 1</span></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on train data</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> train_data <span class="sc">%&gt;%</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">glm_probs =</span> <span class="fu">predict</span>(glm_train, <span class="at">newdata =</span> train_data, <span class="at">type =</span> <span class="st">"response"</span>),</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">glm_pred =</span> <span class="fu">if_else</span>(glm_probs <span class="sc">&gt;</span> <span class="fl">0.5</span>, <span class="st">"Up"</span>, <span class="st">"Down"</span>)</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate confusion matrix and accuracy for train data</span></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>train_confusion_matrix <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">glm_pred =</span> train_data<span class="sc">$</span>glm_pred, <span class="at">actual =</span> train_data<span class="sc">$</span>direction)</span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>glm_train_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>(train_data<span class="sc">$</span>glm_pred <span class="sc">==</span> train_data<span class="sc">$</span>direction)</span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on test data</span></span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> test_data <span class="sc">%&gt;%</span></span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">glm_probs =</span> <span class="fu">predict</span>(glm_train, <span class="at">newdata =</span> test_data, <span class="at">type =</span> <span class="st">"response"</span>),</span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">glm_pred =</span> <span class="fu">if_else</span>(glm_probs <span class="sc">&gt;</span> <span class="fl">0.5</span>, <span class="st">"Up"</span>, <span class="st">"Down"</span>)</span>
-<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate confusion matrix and accuracy for test data</span></span>
-<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>test_confusion_matrix <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">glm_pred =</span> test_data<span class="sc">$</span>glm_pred, <span class="at">actual =</span> test_data<span class="sc">$</span>direction)</span>
-<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>glm_test_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>(test_data<span class="sc">$</span>glm_pred <span class="sc">==</span> test_data<span class="sc">$</span>direction)</span>
-<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Display results</span></span>
-<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
-<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">train_confusion_matrix =</span> train_confusion_matrix,</span>
-<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">glm_train_accuracy =</span> glm_train_accuracy,</span>
-<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">test_confusion_matrix =</span> test_confusion_matrix,</span>
-<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">glm_test_accuracy =</span> glm_test_accuracy</span>
-<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$train_confusion_matrix
-        actual
-glm_pred   0   1
-    Down 756 510
-    Up   119 222
-
-$glm_train_accuracy
-[1] 0
-
-$test_confusion_matrix
-        actual
-glm_pred  0  1
-    Down 69 37
-    Up   46 63
-
-$glm_test_accuracy
-[1] 0</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Logistic regression model</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>glm_fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(direction <span class="sc">~</span> lag1 <span class="sc">+</span> lag2 <span class="sc">+</span> lag3 <span class="sc">+</span> lag4 <span class="sc">+</span> lag5 <span class="sc">+</span> vol,</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> psx_clean, <span class="at">family =</span> binomial)</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Model summary</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Logistic regression model</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>glm_fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(direction <span class="sc">~</span> lag1 <span class="sc">+</span> lag2 <span class="sc">+</span> lag3 <span class="sc">+</span> lag4 <span class="sc">+</span> lag5 <span class="sc">+</span> vol,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> psx_clean, <span class="at">family =</span> binomial)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Model summary</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -568,87 +522,94 @@ AIC: 2410.3
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict probabilities and classify directions</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>psx_clean1 <span class="ot">&lt;-</span> psx_clean <span class="sc">%&gt;%</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">glm_probs =</span> <span class="fu">predict</span>(glm_fit, <span class="at">type =</span> <span class="st">"response"</span>),</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">glm_pred =</span> <span class="fu">if_else</span>(glm_probs <span class="sc">&gt;</span> <span class="fl">0.5</span>, <span class="st">"Up"</span>, <span class="st">"Down"</span>)</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate model accuracy</span></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>confusion_matrix <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">glm_pred =</span> psx_clean1<span class="sc">$</span>glm_pred, <span class="at">actual =</span> psx_clean1<span class="sc">$</span>direction)</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>(psx_clean1<span class="sc">$</span>glm_pred <span class="sc">==</span> psx_clean1<span class="sc">$</span>direction)</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into train and test sets (based on date &lt; 2024)</span></span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> psx_clean1 <span class="sc">%&gt;%</span></span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">&lt;</span> <span class="fu">as.Date</span>(<span class="st">"2024-01-01"</span>))</span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> psx_clean1 <span class="sc">%&gt;%</span></span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">"2024-01-01"</span>))</span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Train logistic regression on train data</span></span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>glm_train <span class="ot">&lt;-</span> <span class="fu">glm</span>(direction <span class="sc">~</span> lag1 <span class="sc">+</span> lag2 <span class="sc">+</span> lag3 <span class="sc">+</span> lag4 <span class="sc">+</span> lag5 <span class="sc">+</span> vol,</span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> train, <span class="at">family =</span> binomial)</span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on test data</span></span>
-<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span></span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">glm_probs =</span> <span class="fu">predict</span>(glm_train, <span class="at">newdata =</span> ., <span class="at">type =</span> <span class="st">"response"</span>),</span>
-<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">glm_pred =</span> <span class="fu">if_else</span>(glm_probs <span class="sc">&gt;</span> <span class="fl">0.5</span>, <span class="st">"Up"</span>, <span class="st">"Down"</span>)</span>
-<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert predictions and true labels to factors with the same levels</span></span>
-<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span>glm_pred <span class="ot">&lt;-</span> <span class="fu">factor</span>(test<span class="sc">$</span>glm_pred, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Down"</span>, <span class="st">"Up"</span>))</span>
-<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span>direction <span class="ot">&lt;-</span> <span class="fu">factor</span>(test<span class="sc">$</span>direction, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Down"</span>, <span class="st">"Up"</span>))</span>
-<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate test accuracy</span></span>
-<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a>confusion_matrix_test <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">glm_pred =</span> test<span class="sc">$</span>glm_pred, <span class="at">actual =</span> test<span class="sc">$</span>direction)</span>
-<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>(test<span class="sc">$</span>glm_pred <span class="sc">==</span> test<span class="sc">$</span>direction)</span>
-<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Output results</span></span>
-<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
-<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">train_accuracy =</span> accuracy,</span>
-<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">test_accuracy =</span> test_accuracy,</span>
-<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">train_confusion_matrix =</span> confusion_matrix,</span>
-<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">test_confusion_matrix =</span> confusion_matrix_test</span>
-<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict probabilities and classify directions</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>psx_clean <span class="ot">&lt;-</span> psx_clean <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">glm_probs =</span> <span class="fu">predict</span>(glm_fit, <span class="at">type =</span> <span class="st">"response"</span>),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">glm_pred =</span> <span class="fu">as.numeric</span>(glm_probs <span class="sc">&gt;</span> <span class="fl">0.5</span>)  <span class="co"># Convert to numeric 0/1</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate model accuracy</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>confusion_matrix <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">Predicted =</span> psx_clean<span class="sc">$</span>glm_pred, <span class="at">Actual =</span> psx_clean<span class="sc">$</span>direction)</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>(psx_clean<span class="sc">$</span>glm_pred <span class="sc">==</span> psx_clean<span class="sc">$</span>direction)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into train and test sets (based on date &lt; 2024)</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> psx_clean <span class="sc">%&gt;%</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">&lt;</span> <span class="fu">as.Date</span>(<span class="st">"2024-01-01"</span>))</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> psx_clean <span class="sc">%&gt;%</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">"2024-01-01"</span>))</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Train logistic regression on train data</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>glm_train <span class="ot">&lt;-</span> <span class="fu">glm</span>(direction <span class="sc">~</span> lag1 <span class="sc">+</span> lag2 <span class="sc">+</span> lag3 <span class="sc">+</span> lag4 <span class="sc">+</span> lag5 <span class="sc">+</span> vol,</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> train, <span class="at">family =</span> binomial)</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on test data</span></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">glm_probs =</span> <span class="fu">predict</span>(glm_train, <span class="at">newdata =</span> ., <span class="at">type =</span> <span class="st">"response"</span>),</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">glm_pred =</span> <span class="fu">as.numeric</span>(glm_probs <span class="sc">&gt;</span> <span class="fl">0.5</span>)  <span class="co"># Convert to numeric 0/1</span></span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate test accuracy</span></span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>confusion_matrix_test <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">Predicted =</span> test<span class="sc">$</span>glm_pred, <span class="at">Actual =</span> test<span class="sc">$</span>direction)</span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>(test<span class="sc">$</span>glm_pred <span class="sc">==</span> test<span class="sc">$</span>direction)</span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Create detailed evaluation metrics</span></span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>train_metrics <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">accuracy =</span> accuracy,</span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">sensitivity =</span> confusion_matrix[<span class="dv">2</span>,<span class="dv">2</span>] <span class="sc">/</span> <span class="fu">sum</span>(confusion_matrix[,<span class="dv">2</span>]),</span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">specificity =</span> confusion_matrix[<span class="dv">1</span>,<span class="dv">1</span>] <span class="sc">/</span> <span class="fu">sum</span>(confusion_matrix[,<span class="dv">1</span>]),</span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">confusion_matrix =</span> confusion_matrix</span>
+<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a>test_metrics <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">accuracy =</span> test_accuracy,</span>
+<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a>  <span class="at">sensitivity =</span> confusion_matrix_test[<span class="dv">2</span>,<span class="dv">2</span>] <span class="sc">/</span> <span class="fu">sum</span>(confusion_matrix_test[,<span class="dv">2</span>]),</span>
+<span id="cb31-45"><a href="#cb31-45" aria-hidden="true" tabindex="-1"></a>  <span class="at">specificity =</span> confusion_matrix_test[<span class="dv">1</span>,<span class="dv">1</span>] <span class="sc">/</span> <span class="fu">sum</span>(confusion_matrix_test[,<span class="dv">1</span>]),</span>
+<span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a>  <span class="at">confusion_matrix =</span> confusion_matrix_test</span>
+<span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Output results</span></span>
+<span id="cb31-50"><a href="#cb31-50" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
+<span id="cb31-51"><a href="#cb31-51" aria-hidden="true" tabindex="-1"></a>  <span class="at">train_metrics =</span> train_metrics,</span>
+<span id="cb31-52"><a href="#cb31-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">test_metrics =</span> test_metrics</span>
+<span id="cb31-53"><a href="#cb31-53" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>$train_accuracy
-[1] 0
+<pre><code>$train_metrics
+$train_metrics$accuracy
+[1] 0.6136114
 
-$test_accuracy
-[1] NA
+$train_metrics$sensitivity
+[1] 0.3245192
 
-$train_confusion_matrix
-        actual
-glm_pred   0   1
-    Down 848 562
-    Up   142 270
+$train_metrics$specificity
+[1] 0.8565657
 
-$test_confusion_matrix
-        actual
-glm_pred Down Up
-    Down    0  0
-    Up      0  0</code></pre>
+$train_metrics$confusion_matrix
+         Actual
+Predicted   0   1
+        0 848 562
+        1 142 270
+
+
+$test_metrics
+$test_metrics$accuracy
+[1] 0.6139535
+
+$test_metrics$sensitivity
+[1] 0.63
+
+$test_metrics$specificity
+[1] 0.6
+
+$test_metrics$confusion_matrix
+         Actual
+Predicted  0  1
+        0 69 37
+        1 46 63</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Confusion Matrix and Accuracy using caret</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>glm_cm <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(test<span class="sc">$</span>glm_pred, test<span class="sc">$</span>direction)</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract Accuracy</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>glm_accuracy <span class="ot">&lt;-</span> glm_cm<span class="sc">$</span>overall[<span class="st">'Accuracy'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Confusion Matrix and Accuracy using caret</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>glm_cm <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(test<span class="sc">$</span>glm_pred, test<span class="sc">$</span>direction)</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract Accuracy</span></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>glm_accuracy <span class="ot">&lt;-</span> glm_cm<span class="sc">$</span>overall[<span class="st">'Accuracy'</span>]</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>glm_accuracy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Accuracy 
-     NaN </code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>glm_test_accuracy <span class="ot">&lt;-</span> test_metrics<span class="sc">$</span>accuracy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="model-evaluation" class="level2">
@@ -658,16 +619,15 @@ glm_pred Down Up
 <section id="output-results" class="level2">
 <h2 class="anchored" data-anchor-id="output-results">Output results</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>( <span class="at">glm_accuracy =</span> glm_accuracy,</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">lda_accuracy =</span> lda_accuracy,</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">qda_accuracy =</span> qda_accuracy,</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">knn_accuracy =</span> knn_accuracy,</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">dt_accuracy =</span> dt_accuracy</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>( <span class="at">glm_accuracy =</span> glm_test_accuracy,</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">lda_accuracy =</span> lda_accuracy,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">qda_accuracy =</span> qda_accuracy,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">knn_accuracy =</span> knn_accuracy,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">dt_accuracy =</span> dt_accuracy</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$glm_accuracy
-Accuracy 
-     NaN 
+[1] 0.6139535
 
 $lda_accuracy
 [1] 0.6325581
@@ -676,7 +636,7 @@ $qda_accuracy
 [1] 0.6046512
 
 $knn_accuracy
-[1] 0.5488372
+[1] 0.5348837
 
 $dt_accuracy
 [1] 0.5813953</code></pre>

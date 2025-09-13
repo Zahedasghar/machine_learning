@@ -1,8 +1,0 @@
-"0","   dat_gapminder |>"
-"0","     nest(.by = continent) |>"
-"0","     mutate("
-"0","       lin_mod = map("
-"0","         data,"
-"0","         ~ lm(life_exp ~ year, data = .x)"
-"0","       )"
-"0","     )"

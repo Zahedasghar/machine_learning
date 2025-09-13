@@ -1,0 +1,139 @@
+---
+title: "Machine Learning, Big Data & AI in Economics (MS)"
+subtitle: "School of Economics — Quaid-i-Azam University, Islamabad"
+author: "Zahid Asghar"
+date: "September 13, 2025"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-location: left
+    number-sections: true
+  pdf:
+    toc: true
+    number-sections: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+## Course Description
+This course introduces **statistical learning** and **high-dimensional methods** for **prediction and decision support** in economics and public policy. We will emphasize practical pipelines, responsible use of models, and the distinction between **prediction** and **causal inference**.
+
+**Prerequisites:** Econometrics or an equivalent quantitative course.
+
+**Texts (core):**
+- James, Witten, Hastie, Tibshirani (2021) *ISLR (2e)*
+- Taddy (2019) *Business Data Science (BDS)*
+- Varian (2014) "Big Data: New Tricks for Econometrics", *JEP*
+
+**Useful references:** *DSB*, *ESL*, AEA ML/Big Data workshops (2018/2023).
+
+## Learning Outcomes
+- Build, validate, and compare predictive models in **R** and **Python**.
+- Understand **bias–variance tradeoffs**, regularization, and model selection.
+- Handle **text data** and **high-dimensional** tabular data.
+- Communicate model results to non-technical audiences (**policy memos**).
+- Recognize scope, limitations, fairness, and reproducibility concerns.
+
+## Assessment
+- **Weekly labs (best 5 of 7)** — 15%
+- **Problem Sets (2)** — 10%
+- **Midterm check (Week 8 quiz)** — 20%
+- **Capstone project** —5%
+- **Final** — 50%
+
+## Software
+- **Python**: pandas, scikit-learn, imbalanced-learn, SHAP, Dask/Spark (demo)
+- **R**: tidyverse, tidymodels, textrecipes, glmnet, ranger, xgboost
+- **Quarto** for reproducible documents and slides
+
+## Weekly Plan (15 Weeks)
+
+### Week 1 — Orientation, Prediction vs Causation, OLS as ERM
+- Loss functions, risk vs empirical risk, train/validation/test.
+- OLS baseline as MSE minimizer; evaluation metrics (MAE/MSE/R²).
+- **Lab:** Load CPI/WDI; split data; baseline OLS; reproducible folder structure.
+- **Reading:** ISLR Ch. 2–3; Varian (2014) selections.
+
+### Week 2 — Data Pipelines & “Big(ger) Data” Hygiene
+- Tidy data, joins, leakage, missingness; intro to SQL thinking.
+- **Lab:** Join CPI + fuel prices + holidays; sklearn/tidymodels `Pipeline`.
+- **Reading:** DSB Ch. 2–3; BDS Ch. 1–2.
+
+### Week 3 — Model Selection & Resampling
+- Bias–variance; cross-validation (k-fold, time-series); AIC/BIC intuition.
+- **Lab:** K-fold CV on linear baselines; pick a model defensibly.
+- **Reading:** ISLR Ch. 5.
+
+### Week 4 — Ridge Regression (ℓ2)
+- Overfitting; shrinkage; choosing λ; interpretability.
+- **Lab:** Ridge path + CV; macro nowcasting demo.
+- **Reading:** ISLR Ch. 6 (Ridge).
+
+### Week 5 — LASSO (ℓ1) & Feature Selection
+- Sparsity vs shrinkage; correlated regressors.
+- **Lab:** LASSO path; stability selection; compare to ridge.
+- **Reading:** ISLR Ch. 6 (LASSO).
+
+### Week 6 — Nonlinear Regression (Splines, k-NN, Polynomials)
+- Controlled flexibility; local vs global fits.
+- **Lab:** Splines vs linear/ridge/LASSO; select degrees of freedom.
+- **Reading:** ISLR Ch. 7–8.
+
+### Week 7 — Trees & Random Forests
+- CART; impurity; RF bagging, OOB error; pitfalls in variable importance.
+- **Lab:** Household classification (poverty proxy); PDP/ICE plots.
+- **Reading:** ISLR Ch. 8.
+
+### Week 8 — Boosting (GBM/XGBoost/LightGBM)
+- Additive modeling; learning rate, depth, early stopping; class imbalance.
+- **Lab:** Tune boosting; PR-AUC; class weights.
+- **Reading:** BDS Ch. 6–7.
+
+### Week 9 — Classification Foundations & Decision Thresholds
+- Logistic regression; calibration; cost-sensitive decisions.
+- **Lab:** Calibrate probabilities; decision curves; threshold memo.
+- **Reading:** ISLR Ch. 4; DSB Ch. 7–9.
+
+### Week 10 — Dimensionality Reduction & Clustering
+- PCA; k-means; hierarchical clustering; nearest neighbors.
+- **Lab:** PCA on firm/sector features; cluster districts; stability.
+- **Reading:** ISLR Ch. 10.
+
+### Week 11 — Text as Data I (Classical NLP)
+- Bag-of-words, TF-IDF, n-grams; sentiment; risks with media text.
+- **Lab:** Classify policy statements (English/Urdu); linear classifier.
+- **Reading:** BDS Ch. 9.
+
+### Week 12 — Text as Data II (Embeddings & Intro to LLMs)
+- Embeddings; using transformer features; ethics & privacy.
+- **Lab:** Embedding features to improve Week-11 classifier; SHAP on text.
+- **Reading:** Selected survey/tutorial excerpts.
+
+### Week 13 — Big Data at Scale
+- When to scale; partitioning, parallelism; Spark/Dask; Parquet.
+- **Lab:** Re-run a pipeline on Spark/Dask subset; profile runtime/memory.
+- **Reading:** BDS Ch. 10–12.
+
+### Week 14 — Interpretability, Fairness, Reproducibility, MLOps Lite
+- Diagnostics beyond accuracy; SHAP; fairness metrics; data/model cards; CI basics.
+- **Lab:** SHAP on boosted model; fairness audit; Quarto report.
+- **Reading:** Varian (2014) revisit; practice notes on interpretability.
+
+### Week 15 — Capstone Symposium
+- 8-minute presentations + Q&A; final repo and memo due.
+
+## Capstone Project
+Teams of 2–3 choose one:
+- Nowcasting inflation with high-frequency proxies.
+- Targeting aid/risk scoring under class imbalance + fairness.
+- Energy demand forecasting for load management.
+- Text classification of monetary/fiscal communication.
+- Revenue anomaly/outlier detection with explanations.
+
+**Deliverables:** Reproducible repo, data card, model card, fairness & interpretability analysis, **policy memo** (6–8 pages) with actionable recommendations.
+
+## Academic Integrity & AI-Tooling Policy
+Use AI tools for **boilerplate and debugging only** with attribution. You are responsible for understanding and explaining any code you submit.

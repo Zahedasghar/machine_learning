@@ -15,6 +15,11 @@ psx <- psx %>%
   mutate(date = as.Date(Date, format = "%m/%d/%Y")) %>%
   dplyr::select(-Date) # Remove original Date column
 
+
+names(psx
+      )
+
+glimpse(psx)
 # Clean column names and inspect
 psx <- psx %>%
   clean_names()
@@ -53,6 +58,9 @@ psx_clean <- psx %>% drop_na()
 # Convert direction to binary numeric values
 psx_clean <- psx_clean %>%
   mutate(direction = if_else(direction == "Up", 1, 0))
+# First ensure direction is properly encoded as numeric binary in psx_clean
+psx_clean <- psx_clean %>%
+  mutate(direction = as.numeric(direction))  # Should be 0 or 1
 
 # Logistic regression model
 glm_fit <- glm(direction ~ lag1 + lag2 + lag3 + lag4 + lag5 + vol,
@@ -61,16 +69,15 @@ glm_fit <- glm(direction ~ lag1 + lag2 + lag3 + lag4 + lag5 + vol,
 # Model summary
 summary(glm_fit)
 
-
 # Predict probabilities and classify directions
 psx_clean <- psx_clean %>%
   mutate(
     glm_probs = predict(glm_fit, type = "response"),
-    glm_pred = if_else(glm_probs > 0.5, "Up", "Down")
+    glm_pred = as.numeric(glm_probs > 0.5)  # Convert to numeric 0/1
   )
 
 # Evaluate model accuracy
-confusion_matrix <- table(glm_pred = psx_clean$glm_pred, actual = psx_clean$direction)
+confusion_matrix <- table(Predicted = psx_clean$glm_pred, Actual = psx_clean$direction)
 accuracy <- mean(psx_clean$glm_pred == psx_clean$direction)
 
 # Split data into train and test sets (based on date < 2024)
@@ -88,21 +95,33 @@ glm_train <- glm(direction ~ lag1 + lag2 + lag3 + lag4 + lag5 + vol,
 test <- test %>%
   mutate(
     glm_probs = predict(glm_train, newdata = ., type = "response"),
-    glm_pred = if_else(glm_probs > 0.5, "Up", "Down")
+    glm_pred = as.numeric(glm_probs > 0.5)  # Convert to numeric 0/1
   )
 
 # Evaluate test accuracy
-confusion_matrix_test <- table(glm_pred = test$glm_pred, actual = test$direction)
+confusion_matrix_test <- table(Predicted = test$glm_pred, Actual = test$direction)
 test_accuracy <- mean(test$glm_pred == test$direction)
+
+# Create detailed evaluation metrics
+train_metrics <- list(
+  accuracy = accuracy,
+  sensitivity = confusion_matrix[2,2] / sum(confusion_matrix[,2]),
+  specificity = confusion_matrix[1,1] / sum(confusion_matrix[,1]),
+  confusion_matrix = confusion_matrix
+)
+
+test_metrics <- list(
+  accuracy = test_accuracy,
+  sensitivity = confusion_matrix_test[2,2] / sum(confusion_matrix_test[,2]),
+  specificity = confusion_matrix_test[1,1] / sum(confusion_matrix_test[,1]),
+  confusion_matrix = confusion_matrix_test
+)
 
 # Output results
 list(
-  train_accuracy = accuracy,
-  test_accuracy = test_accuracy,
-  train_confusion_matrix = confusion_matrix,
-  test_confusion_matrix = confusion_matrix_test
+  train_metrics = train_metrics,
+  test_metrics = test_metrics
 )
-
 
 
 
@@ -213,7 +232,7 @@ glm_accuracy
 
 # Output results
 
-list( glm_accuracy = glm_accuracy,
+list(
   lda_accuracy = lda_accuracy,
   qda_accuracy = qda_accuracy,
   knn_accuracy = knn_accuracy,

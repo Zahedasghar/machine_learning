@@ -292,43 +292,12 @@ dt_accuracy <- mean(dt_pred == test_data$direction)
 1. We fit the Decision Tree (CART) model using the training data.
 2. Predictions are made on the test set, and the accuracy is calculated.
 
+## Logistic Regression
+
 ```{r}
-
-# Train logistic regression on train data
-glm_train <- glm(direction ~ lag1 + lag2 + lag3 + lag4 + lag5 + vol,
-                 data = train_data, family = binomial)
-
-# Predict on train data
-train_data <- train_data %>%
-  mutate(
-    glm_probs = predict(glm_train, newdata = train_data, type = "response"),
-    glm_pred = if_else(glm_probs > 0.5, "Up", "Down")
-  )
-
-# Calculate confusion matrix and accuracy for train data
-train_confusion_matrix <- table(glm_pred = train_data$glm_pred, actual = train_data$direction)
-glm_train_accuracy <- mean(train_data$glm_pred == train_data$direction)
-
-# Predict on test data
-test_data <- test_data %>%
-  mutate(
-    glm_probs = predict(glm_train, newdata = test_data, type = "response"),
-    glm_pred = if_else(glm_probs > 0.5, "Up", "Down")
-  )
-
-# Calculate confusion matrix and accuracy for test data
-test_confusion_matrix <- table(glm_pred = test_data$glm_pred, actual = test_data$direction)
-glm_test_accuracy <- mean(test_data$glm_pred == test_data$direction)
-
-# Display results
-list(
-  train_confusion_matrix = train_confusion_matrix,
-  glm_train_accuracy = glm_train_accuracy,
-  test_confusion_matrix = test_confusion_matrix,
-  glm_test_accuracy = glm_test_accuracy
-)
-```
-```{r}
+# First ensure direction is properly encoded as numeric binary in psx_clean
+psx_clean <- psx_clean %>%
+  mutate(direction = as.numeric(direction))  # Should be 0 or 1
 
 # Logistic regression model
 glm_fit <- glm(direction ~ lag1 + lag2 + lag3 + lag4 + lag5 + vol,
@@ -338,21 +307,21 @@ glm_fit <- glm(direction ~ lag1 + lag2 + lag3 + lag4 + lag5 + vol,
 summary(glm_fit)
 
 # Predict probabilities and classify directions
-psx_clean1 <- psx_clean %>%
+psx_clean <- psx_clean %>%
   mutate(
     glm_probs = predict(glm_fit, type = "response"),
-    glm_pred = if_else(glm_probs > 0.5, "Up", "Down")
+    glm_pred = as.numeric(glm_probs > 0.5)  # Convert to numeric 0/1
   )
 
 # Evaluate model accuracy
-confusion_matrix <- table(glm_pred = psx_clean1$glm_pred, actual = psx_clean1$direction)
-accuracy <- mean(psx_clean1$glm_pred == psx_clean1$direction)
+confusion_matrix <- table(Predicted = psx_clean$glm_pred, Actual = psx_clean$direction)
+accuracy <- mean(psx_clean$glm_pred == psx_clean$direction)
 
 # Split data into train and test sets (based on date < 2024)
-train <- psx_clean1 %>%
+train <- psx_clean %>%
   filter(date < as.Date("2024-01-01"))
 
-test <- psx_clean1 %>%
+test <- psx_clean %>%
   filter(date >= as.Date("2024-01-01"))
 
 # Train logistic regression on train data
@@ -363,42 +332,37 @@ glm_train <- glm(direction ~ lag1 + lag2 + lag3 + lag4 + lag5 + vol,
 test <- test %>%
   mutate(
     glm_probs = predict(glm_train, newdata = ., type = "response"),
-    glm_pred = if_else(glm_probs > 0.5, "Up", "Down")
+    glm_pred = as.numeric(glm_probs > 0.5)  # Convert to numeric 0/1
   )
 
-# Convert predictions and true labels to factors with the same levels
-test$glm_pred <- factor(test$glm_pred, levels = c("Down", "Up"))
-test$direction <- factor(test$direction, levels = c("Down", "Up"))
-
 # Evaluate test accuracy
-confusion_matrix_test <- table(glm_pred = test$glm_pred, actual = test$direction)
+confusion_matrix_test <- table(Predicted = test$glm_pred, Actual = test$direction)
 test_accuracy <- mean(test$glm_pred == test$direction)
+
+# Create detailed evaluation metrics
+train_metrics <- list(
+  accuracy = accuracy,
+  sensitivity = confusion_matrix[2,2] / sum(confusion_matrix[,2]),
+  specificity = confusion_matrix[1,1] / sum(confusion_matrix[,1]),
+  confusion_matrix = confusion_matrix
+)
+
+test_metrics <- list(
+  accuracy = test_accuracy,
+  sensitivity = confusion_matrix_test[2,2] / sum(confusion_matrix_test[,2]),
+  specificity = confusion_matrix_test[1,1] / sum(confusion_matrix_test[,1]),
+  confusion_matrix = confusion_matrix_test
+)
 
 # Output results
 list(
-  train_accuracy = accuracy,
-  test_accuracy = test_accuracy,
-  train_confusion_matrix = confusion_matrix,
-  test_confusion_matrix = confusion_matrix_test
+  train_metrics = train_metrics,
+  test_metrics = test_metrics
 )
-
-# Confusion Matrix and Accuracy using caret
-glm_cm <- confusionMatrix(test$glm_pred, test$direction)
-
-# Extract Accuracy
-glm_accuracy <- glm_cm$overall['Accuracy']
+glm_test_accuracy <- test_metrics$accuracy
 
 ```
 
-```{r}
-# Confusion Matrix and Accuracy using caret
-glm_cm <- confusionMatrix(test$glm_pred, test$direction)
-
-# Extract Accuracy
-glm_accuracy <- glm_cm$overall['Accuracy']
-
-glm_accuracy
-```
 
 
 
@@ -411,7 +375,7 @@ We evaluate the performance of each model using accuracy, which is the proportio
 
 ```{r}
 #| label: model-evaluation
-list( glm_accuracy = glm_accuracy,
+list( glm_accuracy = glm_test_accuracy,
   lda_accuracy = lda_accuracy,
   qda_accuracy = qda_accuracy,
   knn_accuracy = knn_accuracy,

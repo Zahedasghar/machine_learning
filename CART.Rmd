@@ -1,0 +1,224 @@
+---
+title: "CART"
+author: "Zahid Asghar"
+date: "1/21/2022"
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+#remove(list = ls())
+rticles::journals()
+library(tidyr)
+library(tidyverse)
+library(rpart)
+#install.packages("rpart.plot")
+library(rpart.plot)
+library(haven)
+#pdhs_kr<- read_dta("C:/Users/hp/OneDrive - Higher Education Commission/Research Students/Afia/final variables dta.dta")
+#pdhs_kr<-pdhs_kr %>% na.omit()
+#tree <- rpart(stunting~., data = pdhs_kr, method = 'class')
+#rpart.plot(fit, extra = 110)
+#printcp(tree)
+#rpart.plot(tree, cex=0.6,extra = 106)
+#prp(tree, faclen = 0, cex = 0.8, extra = 1)
+```
+
+
+```{r}
+dt_ict<-read_dta("data/ICT_women.dta")
+hies<-dt_ict %>% na.omit()
+
+
+hies<-as_tibble(hies) %>% filter(province!=7|province!=8)
+hies$educated<-as.integer(hies$educated)
+hies$region<-as.integer(hies$region)
+hies$employed<-as.integer(hies$employed)
+hies
+hies$province<-as.integer(hies$province)
+summary(hies$province)
+
+
+hies_kp<-hies%>% filter(province==1)
+hies_punjab<- hies%>% filter(province==2)
+hies_sind<- hies%>% filter(province==3)
+hies_balochistan<- hies%>% filter(province==4)
+
+```
+
+```{r}
+tree<-rpart(cons_index~ict+region+educated+
+              employed+Boys+Girls+age_interval,data=hies,method='class',
+            cp=0.002)
+prp(tree)
+rpart.plot(tree,main= "Classification Tree for Pakistan",cex=0.5 ,extra=101)
+prp(tree, faclen = 0, cex = 0.9, extra = 1)
+
+#hies %>% group_by(province, education) %>%
+ # table(own_mobilephone)
+#hies %>% select(own_mobilephone) %>% table()
+
+```
+
+```{r}
+tree_sind<-rpart(cons_index~ict+region+educated+
+              employed+Boys+Girls+age_interval,data=hies_sind,method='class',
+            cp=0.0025)
+prp(tree_sind)
+rpart.plot(tree_sind,main= "Classification Tree for Sindh Province",cex=0.5 ,extra=101)
+
+
+tree_balochistan<-rpart(cons_index~ict+region+educated+
+                   employed+Boys+Girls+age_interval,data=hies_balochistan,method='class',
+                 cp=0.002)
+prp(tree_balochistan)
+bal_cons<-rpart.plot(tree_balochistan,main= "Classification Tree for Balochistan Province",cex=0.5 ,extra=101)
+```
+
+
+
+
+
+```{r}
+tree<-rpart(cons_index~ict+region+educated+
+              employed+Boys+Girls+age_interval,data=hies,method='class',
+            cp=0.002)
+prp(tree)
+rpart.plot(tree,main= "Classification Tree for Pakistan",cex=0.5 ,extra=101)
+prp(tree, faclen = 0, cex = 0.9, extra = 1)
+
+#hies %>% group_by(province, education) %>%
+# table(own_mobilephone)
+#hies %>% select(own_mobilephone) %>% table()
+
+str(hies_kp)
+
+tree_sind<-rpart(cons_index~ict+region+educated+
+                   employed+Boys+Girls+age_interval,data=hies_sind,method='class',
+                 cp=0.0025)
+prp(tree_sind)
+rpart.plot(tree_sind,main= "Classification Tree for Sindh Province",cex=0.5 ,extra=101)
+
+
+tree_balochistan<-rpart(cons_index~ict+region+educated+
+                          employed+Boys+Girls+age_interval,data=hies_balochistan,method='class',
+                        cp=0.002)
+prp(tree_balochistan)
+rpart.plot(tree_balochistan,main= "Classification Tree for Balochistan Province",cex=0.5 ,extra=101)
+
+
+
+tree<-rpart(cons_index~ict+region+educated+
+              employed+Boys+Girls+age_interval,data=hies,method='class',
+            cp=0.002)
+prp(tree,main= "Classification Tree for Consumption Pakistan")
+rpart.plot(tree,main= "Classification Tree for Pakistan",cex=0.5 ,extra=101)
+prp(tree, faclen = 0, cex = 0.9, extra = 1)
+
+tree_punjab<-rpart(cons_index~ict+region+educated+
+              employed+Boys+Girls+age_interval,data=hies_punjab,method='class',
+            cp=0.001)
+prp(tree_punjab,main= "Classification Tree for Consumption Punjab")
+rpart.plot(tree_punjab,main= "Classification Tree for Consumption Index in Punjab",cex=0.5 ,extra=101)
+
+```
+
+
+```{r}
+tree_kp<-rpart(cons_index~ict+region+educated+
+                     employed+Boys+Girls+age_interval,data=hies_kp,method='class',
+                   cp=0.002)
+prp(tree_kp,main= "Classification Tree for Consumption KhyberPakhtunKhwa")
+rpart.plot(tree_kp,main= "Classification Tree for Consumption in KP",cex=0.5 ,extra=101)
+library(gridExtra)
+
+
+```
+
+
+```{r}
+
+#hies %>% group_by(province, education) %>%
+# table(own_mobilephone)
+#hies %>% select(own_mobilephone) %>% table()
+
+str(hies_kp)
+
+tree_sind<-rpart(cons_index~ict+region+educated+
+                   employed+Boys+Girls+age_interval,data=hies_sind,method='class',
+                 cp=0.0025)
+prp(tree_sind,main= "Classification Tree for Consumption Sindh")
+rpart.plot(tree_sind,main= "Classification Tree for Consumption Index in Sindh",cex=0.5 ,extra=101)
+
+
+tree_balochistan<-rpart(cons_index~ict+region+educated+
+                          employed+Boys+Girls+age_interval,data=hies_balochistan,method='class',
+                        cp=0.005)
+prp(tree_balochistan,main= "Classification Tree for Consumption Balochistan")
+rpart.plot(tree_balochistan,main= "Classification Tree for Conumption Index in Balochistan",cex=0.5 ,extra=101)
+
+
+
+
+```
+
+```{r}
+####
+##Having Child
+###############
+tree<-rpart(having_child~ict+region+educated+
+              employed+Boys+Girls+age_interval,data=hies,method='class',
+            cp=0.001)
+prp(tree,main= "Classification Tree for having child Pakistan")
+rpart.plot(tree,main= "Classification Tree for Pakistan",cex=0.5 ,extra=101)
+prp(tree, faclen = 0, cex = 0.9, extra = 1)
+
+#hies %>% group_by(province, education) %>%
+# table(own_mobilephone)
+#hies %>% select(own_mobilephone) %>% table()
+tree_punjab<-rpart(having_child~ict+region+educated+
+                   employed+Boys+Girls+age_interval,data=hies_punjab,method='class',
+                 cp=0.003)
+prp(tree_sind,main="Classification Tree for Having Child for Punjab")
+
+tree_kp<-rpart(having_child~ict+region+educated+
+                   employed+Boys+Girls+age_interval,data=hies_kp,method='class',
+                 cp=0.003)
+prp(tree_sind,main="Classification Tree for Having Child for KhyberPakhtunKhwa")
+
+tree_sind<-rpart(having_child~ict+region+educated+
+                     employed+Boys+Girls+age_interval,data=hies_sind,method='class',
+                   cp=0.003)
+prp(tree_sind,main="Classification Tree for Having Child for Sindh")
+
+
+tree_balochistan<-rpart(having_child~ict+region+educated+
+                          employed+Boys+Girls+age_interval,data=hies_balochistan,method='class',
+                        cp=0.005)
+prp(tree_balochistan,main="Classification Tree for Having Child for Balochistan")
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+

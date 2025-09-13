@@ -1,4 +1,5 @@
-library(ISLR)
+library(ISLR2)
+library(tidyverse)
 data("College")
 college<-College
 attach(college)

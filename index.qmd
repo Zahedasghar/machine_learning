@@ -1,6 +1,6 @@
 ---
 title: "Author"
-image: profile.png
+image: profile.jpg
 about:
   id: hero-heading
   template: trestles

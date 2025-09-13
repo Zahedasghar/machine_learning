@@ -1,0 +1,35 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - syllabus/syllabus.qmd
+    - templates/*
+website:
+  title: "Machine Learning in Economics (MS)"
+  navbar:
+    left:
+      - text: "Syllabus"
+        href: syllabus/syllabus.qmd
+      - text: "Templates"
+        menu:
+          - text: "Capstone Rubric"
+            href: templates/rubric_capstone.md
+          - text: "Lab Rubric"
+            href: templates/rubric_labs.md
+          - text: "Model Card"
+            href: templates/model_card.md
+          - text: "Data Card"
+            href: templates/data_card.md
+          - text: "Policy Memo"
+            href: templates/policy_memo_template.md
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: false
+  pdf:
+    documentclass: scrreprt
+    toc: true
+    number-sections: true

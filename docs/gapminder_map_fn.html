@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.29">
+<meta name="generator" content="quarto-1.6.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>السلام علیکم :) – gapminder_map_function</title>
+<title>gapminder_map_function – السلام علیکم :)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -69,10 +69,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-29e2c20b02301cfff04dc8050bf30c7e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-274c3d255ff4b40ad85bc0e900837b3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -231,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This process results in a data frame with a column that stores the fitted linear model for each continent. To extract coefficients (intercept and slope) from these models, an additional step using <code>map()</code> combined with <code>broom::tidy()</code> or <code>coef()</code> can be added:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dat_gapminder <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>(<span class="at">.by =</span> continent) <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>(<span class="at">.by =</span> country) <span class="sc">|&gt;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">lin_mod =</span> <span class="fu">map</span>(</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      data,</span>
@@ -245,14 +245,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">intercept =</span> <span class="fu">map_dbl</span>(coeffs, \(x) x[<span class="dv">1</span>])</span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 6
-  continent data               lin_mod coeffs    slope intercept
-  &lt;fct&gt;     &lt;list&gt;             &lt;list&gt;  &lt;list&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-1 Asia      &lt;tibble [396 × 5]&gt; &lt;lm&gt;    &lt;dbl [2]&gt; 0.453     -837.
-2 Europe    &lt;tibble [360 × 5]&gt; &lt;lm&gt;    &lt;dbl [2]&gt; 0.222     -367.
-3 Africa    &lt;tibble [624 × 5]&gt; &lt;lm&gt;    &lt;dbl [2]&gt; 0.290     -524.
-4 Americas  &lt;tibble [300 × 5]&gt; &lt;lm&gt;    &lt;dbl [2]&gt; 0.368     -663.
-5 Oceania   &lt;tibble [24 × 5]&gt;  &lt;lm&gt;    &lt;dbl [2]&gt; 0.210     -342.</code></pre>
+<pre><code># A tibble: 142 × 6
+   country     data              lin_mod coeffs    slope intercept
+   &lt;fct&gt;       &lt;list&gt;            &lt;list&gt;  &lt;list&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+ 1 Afghanistan &lt;tibble [12 × 5]&gt; &lt;lm&gt;    &lt;dbl [2]&gt; 0.275     -508.
+ 2 Albania     &lt;tibble [12 × 5]&gt; &lt;lm&gt;    &lt;dbl [2]&gt; 0.335     -594.
+ 3 Algeria     &lt;tibble [12 × 5]&gt; &lt;lm&gt;    &lt;dbl [2]&gt; 0.569    -1068.
+ 4 Angola      &lt;tibble [12 × 5]&gt; &lt;lm&gt;    &lt;dbl [2]&gt; 0.209     -377.
+ 5 Argentina   &lt;tibble [12 × 5]&gt; &lt;lm&gt;    &lt;dbl [2]&gt; 0.232     -390.
+ 6 Australia   &lt;tibble [12 × 5]&gt; &lt;lm&gt;    &lt;dbl [2]&gt; 0.228     -376.
+ 7 Austria     &lt;tibble [12 × 5]&gt; &lt;lm&gt;    &lt;dbl [2]&gt; 0.242     -406.
+ 8 Bahrain     &lt;tibble [12 × 5]&gt; &lt;lm&gt;    &lt;dbl [2]&gt; 0.468     -860.
+ 9 Bangladesh  &lt;tibble [12 × 5]&gt; &lt;lm&gt;    &lt;dbl [2]&gt; 0.498     -936.
+10 Belgium     &lt;tibble [12 × 5]&gt; &lt;lm&gt;    &lt;dbl [2]&gt; 0.209     -340.
+# ℹ 132 more rows</code></pre>
 </div>
 </div>
 
@@ -341,8 +347,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -453,7 +457,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

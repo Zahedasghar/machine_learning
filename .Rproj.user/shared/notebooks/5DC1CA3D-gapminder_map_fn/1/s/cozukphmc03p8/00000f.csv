@@ -1,2 +1,0 @@
-"0","   dat_gapminder <- gapminder::gapminder |>"
-"0","     janitor::clean_names()"
