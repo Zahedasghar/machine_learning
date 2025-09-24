@@ -6,7 +6,7 @@ institute: "Introduction & Foundations"
 date: today
 format:
   revealjs:
-    theme: [ custom.scss]
+    theme: [ solar,custom.scss]
     transition: slide
     background-transition: fade
     highlight-style: github

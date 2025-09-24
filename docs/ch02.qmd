@@ -1,0 +1,792 @@
+---
+title: "What is Statistical Learning?"
+subtitle: "Chapter 02 – Part I"
+date: today
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    #multiplex: true
+    preview-links: auto
+    logo: ""
+    footer: "ML in Economics | [Zahid Asghar](https://www.zahid.quarto.pub)"
+    transition: slide
+    background-transition: fade
+    highlight-style: github
+    code-fold: true
+    code-tools: true
+    menu:
+      side: left
+      width: normal
+    css: custom.scss
+execute:
+  echo: false
+  warning: false
+  freeze: auto 
+  
+---
+
+## Outline
+* What is Statistical Learning?
+* Why estimate $f$?
+* How do we estimate $f$?
+* The trade-off: prediction accuracy vs. model interpretability
+* Supervised vs. unsupervised learning
+* Regression vs. classification
+
+---
+
+## What is Statistical Learning?
+
+Think of statistical learning like **learning to predict** based on patterns in data.
+
+**Simple Example**: Predicting house prices based on size, location, age.
+
+Data: $(X_1, X_2, \dots, X_p, Y)$ for $i = 1, \dots, n$. 
+  - $X_j$ are predictors (size, location, age of house)
+  - $Y$ is the response (house price)
+
+**Key Assumption**: House price depends on at least one feature (size matters!)
+
+**Model**: $Y = f(X) + \varepsilon$ 
+- $f$ = the "true relationship" we want to learn
+- $\varepsilon$ = random noise (things we can't predict)
+
+> Statistical learning finds the best $f$ using data
+
+---
+
+## Why Do We Want to Estimate $f$?
+
+**Two main reasons:**
+
+::: {.incremental}
+1. **Prediction** 📈
+   - "What will this house sell for?"
+   - "Will this customer buy our product?"
+   - We don't care HOW the prediction works, just that it's accurate
+
+2. **Understanding** 🔍  
+   - "How does education affect wages?"
+   - "Which marketing channels work best?"
+   - We want to understand the relationship itself
+:::
+
+**Real-world example**: A bank wants to predict loan defaults (prediction) AND understand what factors cause defaults (understanding)
+
+---
+
+## Example: Wage Data
+
+::: {.panel-tabset}
+
+## R Code
+```{r}
+#| echo: true
+#| eval: false
+library(ISLR2)
+library(ggplot2)
+library(dplyr)
+
+data(Wage)
+Wage %>%
+  ggplot(aes(x = age, y = wage)) +
+  geom_point(alpha = 0.4, color = "steelblue") +
+  geom_smooth(method = "loess", se = FALSE, color = "red") +
+  labs(title = "Wage vs. Age", x = "Age", y = "Wage ($1000s)") +
+  theme_minimal()
+```
+
+## Python Code
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.datasets import fetch_openml
+
+# Load wage data (or similar dataset)
+wage_data = pd.read_csv('wage_data.csv')
+
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=wage_data, x='age', y='wage', alpha=0.4)
+sns.loess(data=wage_data, x='age', y='wage', color='red')
+plt.title('Wage vs. Age')
+plt.xlabel('Age')
+plt.ylabel('Wage ($1000s)')
+plt.show()
+```
+
+## Interpretation
+**What we see**: 
+- Wages increase with age until around 40-50
+- Then wages level off or slightly decrease
+- Lots of variation at each age (the "noise")
+
+**Business insight**: Companies should expect to pay higher wages to experienced workers, but the premium levels off
+:::
+
+```{r}
+#| echo: false
+library(ISLR2)
+library(ggplot2)
+library(dplyr)
+
+data(Wage)
+
+Wage %>%
+  ggplot(aes(x = age, y = wage)) +
+  geom_point(alpha = 0.4, color = "steelblue") +
+  geom_smooth(method = "loess", se = FALSE, color = "red", linewidth = 1.2) +
+  labs(
+    title = "Wage vs. Age with LOESS Fit",
+    x = "Age",
+    y = "Wage ($1000s)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text = element_text(size = 10),
+    axis.title = element_text(size = 11)
+  )
+```
+
+---
+
+## How Noise Affects Learning
+
+**Key Insight**: More noise = harder to learn the pattern
+
+Think of it like listening to music with background static - more static makes it harder to hear the song.
+
+::: {.panel-tabset}
+
+## R Code
+```{r}
+#| echo: true
+#| eval: false
+set.seed(123)
+x <- seq(-2, 2, length.out = 100)
+y_true <- sin(pi * x)  # True relationship
+y_low <- y_true + rnorm(100, 0, 0.2)   # Low noise
+y_high <- y_true + rnorm(100, 0, 1)    # High noise
+
+# Create comparison plots
+library(patchwork)
+p1 <- ggplot(data.frame(x=x, y=y_low), aes(x, y)) + 
+      geom_point(color="steelblue") + 
+      geom_line(aes(y=y_true), color="red") +
+      ggtitle("Low Noise - Easy to Learn")
+
+p2 <- ggplot(data.frame(x=x, y=y_high), aes(x, y)) + 
+      geom_point(color="steelblue") + 
+      geom_line(aes(y=y_true), color="red") +
+      ggtitle("High Noise - Hard to Learn")
+
+p1 + p2
+```
+
+## Python Code
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(123)
+x = np.linspace(-2, 2, 100)
+y_true = np.sin(np.pi * x)
+y_low = y_true + np.random.normal(0, 0.2, 100)
+y_high = y_true + np.random.normal(0, 1, 100)
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+
+ax1.scatter(x, y_low, alpha=0.7, color='steelblue')
+ax1.plot(x, y_true, color='red', linewidth=2)
+ax1.set_title('Low Noise - Easy to Learn')
+
+ax2.scatter(x, y_high, alpha=0.7, color='steelblue')  
+ax2.plot(x, y_true, color='red', linewidth=2)
+ax2.set_title('High Noise - Hard to Learn')
+
+plt.tight_layout()
+plt.show()
+```
+
+## Business Application
+**Real Example**: Predicting sales
+
+- **Low noise**: Luxury cars (few, predictable buyers)
+- **High noise**: Fast food (many random factors)
+
+**Strategy**: With high noise, collect MORE data or use simpler models
+:::
+
+```{r}
+#| echo: false
+library(patchwork)
+
+set.seed(123)
+x <- seq(-2, 2, length.out = 100)
+y_true <- sin(pi * x)
+y_low <- y_true + rnorm(100, 0, 0.2)
+y_high <- y_true + rnorm(100, 0, 1)
+
+df_low <- data.frame(x = x, y = y_low, y_true = y_true)
+df_high <- data.frame(x = x, y = y_high, y_true = y_true)
+
+p1 <- df_low %>%
+  ggplot(aes(x = x)) +
+  geom_point(aes(y = y), color = "steelblue", alpha = 0.7, size = 1.5) +
+  geom_line(aes(y = y_true), color = "red", linewidth = 1.2) +
+  labs(title = "Low Noise - Easy to Learn", x = "x", y = "y") +
+  theme_minimal()
+
+p2 <- df_high %>%
+  ggplot(aes(x = x)) +
+  geom_point(aes(y = y), color = "steelblue", alpha = 0.7, size = 1.5) +
+  geom_line(aes(y = y_true), color = "red", linewidth = 1.2) +
+  labs(title = "High Noise - Hard to Learn", x = "x", y = "y") +
+  theme_minimal()
+
+p1 + p2
+```
+
+---
+
+## Different Ways to Estimate $f$
+
+**Question**: Given data points, how do we draw the "best" line?
+
+**Answer**: Different methods give different results!
+
+::: {.panel-tabset}
+
+## R Code  
+```{r}
+#| echo: true
+#| eval: false
+# Method 1: Linear regression (straight line)
+linear_fit <- lm(y ~ x, data = df)
+
+# Method 2: Polynomial (curved line) 
+poly_fit <- lm(y ~ poly(x, 3), data = df)
+
+# Method 3: LOESS (flexible curve)
+df %>%
+  ggplot(aes(x, y)) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "red") +      # Linear
+  geom_smooth(method = "loess", color = "blue") +  # Flexible
+  labs(title = "Different Methods, Different Results")
+```
+
+## Python Code
+```python
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import Pipeline
+import numpy as np
+
+# Linear regression
+linear = LinearRegression()
+linear.fit(x.reshape(-1,1), y)
+
+# Polynomial regression  
+poly = Pipeline([
+    ('poly', PolynomialFeatures(degree=3)),
+    ('linear', LinearRegression())
+])
+poly.fit(x.reshape(-1,1), y)
+
+# Plot results
+plt.scatter(x, y)
+plt.plot(x, linear.predict(x.reshape(-1,1)), 'r-', label='Linear')
+plt.plot(x, poly.predict(x.reshape(-1,1)), 'b-', label='Polynomial')
+plt.legend()
+plt.show()
+```
+
+## Key Tradeoff
+**Simple models** (straight lines):
+- ✅ Easy to understand and explain
+- ❌ Might miss important patterns
+
+**Complex models** (wiggly curves):
+- ✅ Capture complex patterns  
+- ❌ Hard to interpret, might overfit
+
+**Rule of thumb**: Start simple, add complexity only if needed
+:::
+
+```{r}
+#| echo: false
+df_smooth <- data.frame(x = x, y = y_low, y_true = y_true)
+
+df_smooth %>%
+  ggplot(aes(x = x)) +
+  geom_point(aes(y = y), color = "grey60", alpha = 0.8, size = 1.5) +
+  geom_line(aes(y = y_true), color = "red", linewidth = 1.5, linetype = "solid") +
+  geom_smooth(aes(y = y), method = "loess", se = FALSE, color = "blue", linewidth = 1.2, span = 0.3) +
+  labs(
+    title = "Function Estimation with LOESS",
+    subtitle = "Red = True relationship, Blue = Our estimate",
+    x = "x", 
+    y = "y"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 13, face = "bold")
+  )
+```
+
+---
+
+## Real Example: Boston Housing Prices
+
+**Business Question**: How much should we price this house?
+
+::: {.panel-tabset}
+
+## R Code
+```{r}
+#| echo: true
+#| eval: false
+library(MASS)
+data(Boston)
+
+# Simple model: Price depends on poverty level and room count
+lm_fit <- Boston %>%
+  lm(medv ~ lstat + rm, data = .)
+
+# Look at results
+summary(lm_fit)
+
+# Interpretation:
+# - Each extra room adds ~$9,000 to house value
+# - 1% increase in poverty rate reduces value by ~$950
+```
+
+## Python Code  
+```python
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.datasets import load_boston
+
+# Load Boston housing data
+boston = load_boston()
+df = pd.DataFrame(boston.data, columns=boston.feature_names)
+df['price'] = boston.target
+
+# Fit model: Price = f(poverty_rate, avg_rooms)
+model = LinearRegression()
+X = df[['LSTAT', 'RM']]  # poverty %, avg rooms
+y = df['price']
+
+model.fit(X, y)
+
+# Print coefficients
+print(f"Room effect: ${model.coef_[1]:.2f}k per room")
+print(f"Poverty effect: -${abs(model.coef_[0]):.2f}k per 1% increase")
+```
+
+## Business Insights
+**Actionable findings**:
+
+1. **Room count matters**: Each extra room = ~$9K more value
+   - Strategy: Highlight room count in listings
+   
+2. **Location matters**: High-poverty areas have lower prices  
+   - Strategy: Different pricing strategies by neighborhood
+   
+3. **Model fit**: R² ≈ 0.67 means we explain 67% of price variation
+   - Still missing some important factors (schools, transportation?)
+:::
+
+```{r}
+#| echo: false
+library(MASS)
+library(broom)
+data(Boston)
+
+lm_fit <- Boston %>%
+  lm(medv ~ lstat + rm, data = .)
+
+# Create a nice summary table
+tidy_results <- tidy(lm_fit) %>%
+  mutate(
+    term = case_when(
+      term == "(Intercept)" ~ "Baseline Price",
+      term == "lstat" ~ "Poverty Rate Effect (%)", 
+      term == "rm" ~ "Additional Room Effect"
+    ),
+    estimate = round(estimate, 2),
+    p.value = case_when(
+      p.value < 0.001 ~ "< 0.001",
+      TRUE ~ as.character(round(p.value, 3))
+    )
+  )
+
+knitr::kable(tidy_results, 
+             col.names = c("Factor", "Effect ($1000s)", "Std Error", "t-stat", "p-value"),
+             caption = "What Affects Boston Housing Prices?")
+```
+
+---
+
+## Visualizing Housing Price Relationships
+
+**Key insight**: Relationships aren't always linear!
+
+```{r}
+#| echo: false
+library(patchwork)
+
+p1 <- Boston %>%
+  ggplot(aes(x = lstat, y = medv)) +
+  geom_point(alpha = 0.6, color = "steelblue") +
+  geom_smooth(method = "lm", se = FALSE, color = "red", linewidth = 1.2) +
+  geom_smooth(method = "loess", se = FALSE, color = "blue", linewidth = 1.2, linetype = "dashed") +
+  labs(
+    title = "Poverty Rate vs. Price",
+    subtitle = "Red = Linear fit, Blue = Flexible fit", 
+    x = "% Lower Status Population",
+    y = "Median Home Value ($1000s)"
+  ) +
+  theme_minimal()
+
+p2 <- Boston %>%
+  ggplot(aes(x = rm, y = medv)) +
+  geom_point(alpha = 0.6, color = "steelblue") +
+  geom_smooth(method = "lm", se = FALSE, color = "red", linewidth = 1.2) +
+  geom_smooth(method = "loess", se = FALSE, color = "blue", linewidth = 1.2, linetype = "dashed") +
+  labs(
+    title = "Room Count vs. Price",
+    subtitle = "Red = Linear fit, Blue = Flexible fit",
+    x = "Average Number of Rooms",
+    y = "Median Home Value ($1000s)"
+  ) +
+  theme_minimal()
+
+p1 + p2
+```
+
+**Business Implication**: The poverty-price relationship is clearly non-linear! Linear models miss this pattern.
+
+---
+
+## Supervised vs. Unsupervised Learning {.scrollable}
+
+::: {.columns}
+
+::: {.column width="50%"}
+### Supervised 👨‍🏫
+**You have the "answer key"**
+
+Examples:
+- Predict house prices (have past sales)
+- Classify emails as spam (have labeled examples)
+- Forecast sales (have historical data)
+
+**Goal**: Learn from examples to predict new cases
+:::
+
+::: {.column width="50%"}
+### Unsupervised 🔍  
+**No "answer key" - find hidden patterns**
+
+Examples:
+- Group customers by behavior
+- Find market segments
+- Detect unusual transactions
+
+**Goal**: Discover structure in data
+:::
+
+:::
+
+::: {.panel-tabset}
+
+## R Code
+```{r}
+#| echo: true  
+#| eval: false
+# Unsupervised: Find customer segments
+set.seed(2)
+customer_data <- tibble(
+  spending = c(rnorm(50, 30, 10), rnorm(50, 80, 15)),
+  frequency = c(rnorm(50, 2, 1), rnorm(50, 8, 2))
+)
+
+# K-means clustering (finds groups automatically)
+segments <- kmeans(customer_data, centers = 2)
+customer_data$segment <- segments$cluster
+
+# Plot results  
+ggplot(customer_data, aes(spending, frequency, color = factor(segment))) +
+  geom_point(size = 3) +
+  labs(title = "Customer Segments Found Automatically")
+```
+
+## Python Code
+```python
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+
+# Generate customer data
+spending = np.concatenate([np.random.normal(30, 10, 50), 
+                          np.random.normal(80, 15, 50)])
+frequency = np.concatenate([np.random.normal(2, 1, 50),
+                           np.random.normal(8, 2, 50)])
+
+# Find segments
+kmeans = KMeans(n_clusters=2)
+segments = kmeans.fit_predict(np.column_stack([spending, frequency]))
+
+# Plot
+plt.scatter(spending, frequency, c=segments, cmap='viridis')
+plt.xlabel('Average Spending')
+plt.ylabel('Purchase Frequency') 
+plt.title('Customer Segments Found Automatically')
+plt.show()
+```
+
+## Business Value
+**Unsupervised learning reveals**:
+
+1. **Customer segments** → Targeted marketing
+2. **Fraud patterns** → Risk management  
+3. **Market structure** → Competitive strategy
+
+**Key insight**: Sometimes the most valuable discoveries come from data exploration, not prediction!
+:::
+
+```{r}
+#| echo: false
+set.seed(2)
+
+cluster_data <- bind_rows(
+  tibble(spending = rnorm(50, 30, 10), frequency = rnorm(50, 2, 1)),
+  tibble(spending = rnorm(50, 80, 15), frequency = rnorm(50, 8, 2))
+)
+
+km <- kmeans(cluster_data, centers = 2, nstart = 20)
+cluster_data$segment <- factor(km$cluster, labels = c("Low Value", "High Value"))
+
+cluster_data %>%
+  ggplot(aes(x = spending, y = frequency, color = segment)) +
+  geom_point(size = 2.5, alpha = 0.8) +
+  scale_color_manual(values = c("red", "blue")) +
+  labs(
+    title = "Customer Segments Discovered Automatically",
+    subtitle = "No prior labels needed - algorithm found the groups",
+    x = "Average Spending ($)", 
+    y = "Purchase Frequency",
+    color = "Segment"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+---
+
+## Regression vs. Classification {.scrollable}
+
+**The key difference**: What type of outcome are you predicting?
+
+::: {.columns}
+::: {.column width="50%"}
+### Regression 📈
+**Predicting numbers**
+- House prices: $150K, $200K, $175K
+- Sales volume: 1,000 units, 1,500 units  
+- Temperature: 25°C, 30°C, 22°C
+- Stock returns: +5%, -2%, +8%
+:::
+
+::: {.column width="50%"}
+### Classification 🏷️
+**Predicting categories**
+- Email: Spam or Not Spam
+- Loan decision: Approve or Reject  
+- Customer: High/Medium/Low Value
+- Medical diagnosis: Disease A, B, or Healthy
+:::
+:::
+
+::: {.panel-tabset}
+
+## R Code
+```{r}
+#| echo: true
+#| eval: false
+# Classification example: High wage prediction
+Wage <- Wage %>%
+  mutate(high_wage = ifelse(wage > 250, "High", "Low"))
+
+# Logistic regression for classification
+glm_fit <- glm(high_wage == "High" ~ age + education, 
+               data = Wage, family = binomial)
+
+# Get probabilities instead of just yes/no
+pred_prob <- predict(glm_fit, type = "response")
+```
+
+## Python Code  
+```python
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import LabelEncoder
+
+# Create binary outcome
+wage_data['high_wage'] = (wage_data['wage'] > 250).astype(int)
+
+# Prepare data
+le = LabelEncoder() 
+X = pd.DataFrame({
+    'age': wage_data['age'],
+    'education': le.fit_transform(wage_data['education'])
+})
+y = wage_data['high_wage']
+
+# Fit classification model
+clf = LogisticRegression()
+clf.fit(X, y)
+
+# Get probabilities
+probabilities = clf.predict_proba(X)[:, 1]  # Prob of high wage
+```
+
+## Business Applications
+**Classification is everywhere**:
+
+- **Banking**: Loan approval (binary)
+- **Marketing**: Customer value (low/medium/high)  
+- **HR**: Resume screening (hire/reject)
+- **E-commerce**: Product categories
+
+**Key insight**: Classification gives you actionable categories, regression gives you precise numbers
+:::
+
+```{r}
+#| echo: false
+Wage <- Wage %>%
+  mutate(highwage = ifelse(wage > 250, 1, 0))
+
+glm_fit <- Wage %>%
+  glm(highwage ~ age + education, data = ., family = binomial)
+
+pred_data <- tibble(
+  age = seq(20, 70, 1),
+  education = "1. < HS Grad"
+) %>%
+  mutate(
+    prob = predict(glm_fit, newdata = ., type = "response")
+  )
+
+pred_data %>%
+  ggplot(aes(x = age, y = prob)) +
+  geom_line(color = "blue", linewidth = 1.5) +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "red") +
+  annotate("text", x = 60, y = 0.52, label = "Decision Threshold (50%)", color = "red") +
+  labs(
+    title = "Probability of High Wage by Age",
+    subtitle = "For workers with less than high school education",
+    x = "Age",
+    y = "P(High Wage)"
+  ) +
+  theme_minimal() +
+  scale_y_continuous(labels = scales::percent_format()) +
+  theme(
+    plot.title = element_text(size = 13, face = "bold")
+  )
+```
+
+---
+
+## The Big Picture: Prediction vs. Interpretation Trade-off {.scrollable}
+
+**Central tension in ML**: Accurate models are often hard to explain
+
+::: {.columns}
+::: {.column width="50%"}
+### High Interpretability 🔍
+**Simple models you can explain**
+- Linear regression
+- Decision trees (small ones)
+- Simple rules
+
+**When to use**:
+- Regulatory requirements
+- Medical decisions  
+- Policy recommendations
+- Building trust
+:::
+
+::: {.column width="50%"}
+### High Prediction Accuracy 📈
+**Complex "black box" models**
+- Deep neural networks
+- Random forests (large)
+- Ensemble methods
+
+**When to use**:
+- Image recognition
+- Recommendation systems
+- High-stakes prediction
+- When accuracy is paramount
+:::
+:::
+
+**Real-world examples**:
+- **Medical diagnosis**: Need interpretable models (doctor must explain)
+- **Netflix recommendations**: Black box is fine (just works)
+- **Credit scoring**: Regulated industry needs interpretable models
+- **Fraud detection**: Accuracy matters more than explanation
+
+---
+
+## Key Takeaways for Economics & Business Students
+
+::: {.incremental}
+1. **Start with the business question**: Do you need prediction or understanding?
+
+2. **Simple models first**: Linear regression beats fancy algorithms if you need interpretation
+
+3. **Data quality matters more than algorithm choice**: Clean data + simple model > messy data + complex model
+
+4. **Context is king**: A 90% accurate model is useless if you can't act on it
+
+5. **Validate everything**: Your model is only as good as its performance on NEW data
+:::
+
+**Next steps**: Learn to evaluate model performance and avoid common pitfalls
+
+---
+
+## What's Coming Next
+
+In future lectures, we'll cover:
+
+::: {.incremental}
+- **Model Assessment**: How do we know if our model is good?
+- **Bias-Variance Trade-off**: Why simple models sometimes win
+- **Cross-validation**: Testing models the right way  
+- **Overfitting**: When models memorize instead of learn
+- **Resampling Methods**: Making the most of limited data
+:::
+
+**Homework preview**: Apply these concepts to a real dataset from your country/region
+
+---
+
+## End
+
+**Remember**: Machine learning is a tool, not magic. Success comes from: 
+
+- Understanding your business problem 
+
+- Choosing the right approach  
+
+- Validating your results 
+
+- Communicating findings clearly
+
+*Questions?* 🤔

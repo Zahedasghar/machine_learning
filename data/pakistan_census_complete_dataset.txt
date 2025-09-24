@@ -1,0 +1,102 @@
+Table_Name,Category,Subcategory,Count,Percentage,Additional_Data_1,Additional_Data_2,Additional_Data_3,Notes
+Establishments_by_Sector,Wholesale_Retail_Trade,,3200000,45.0,,,,"Includes 2.7M retail + 188K wholesale"
+Establishments_by_Sector,Manufacturing,,696000,10.0,,,,"Includes 23K factories + 643K production units"
+Establishments_by_Sector,Services,,945000,13.0,,,,"Includes 825K service shops"
+Establishments_by_Sector,Agriculture_Forestry_Fishing,,1100000,15.0,,,,Primary sector activities
+Establishments_by_Sector,Education,,326868,5.0,,,,All educational institutions
+Establishments_by_Sector,Hotels_Hospitality,,256000,4.0,,,,Hotels and accommodation
+Establishments_by_Sector,Health,,119789,2.0,,,,Hospitals and health facilities
+Establishments_by_Sector,Religious_Institutions,,636734,9.0,,,,"600403 mosques + 36331 madrassas"
+Establishments_by_Sector,Government_Organizations,,29836,0.4,,,,Public sector establishments
+Establishments_by_Sector,Hostels,,16565,0.2,,,,Student and worker accommodation
+Establishments_by_Sector,Total,,7142941,100.0,,,,Total economic establishments
+Provincial_Distribution,Punjab,,4360000,58.0,13600000,13.6,,Highest in all categories
+Provincial_Distribution,Sindh,,1380000,20.0,5700000,5.7,64.31,Strong in commercial activities - Services share 64.31%
+Provincial_Distribution,Khyber_Pakhtunkhwa,,1071000,15.0,4000000,4.0,19.08,Highest social sector share 19.08%
+Provincial_Distribution,Balochistan,,428000,6.0,1380000,1.38,,Lowest development
+Provincial_Distribution,Islamabad,,71500,1.0,621514,0.62,70.42,Highest services concentration 70.42%
+Provincial_Distribution,Total,,7142941,100.0,25300000,25.3,,National totals
+Workforce_by_Sector,Services,,11400000,45.0,11.4,,,Dominant employment sector
+Workforce_by_Sector,Production,,5600000,22.0,5.6,,,Manufacturing and production
+Workforce_by_Sector,Social_Sector,,7600000,30.0,7.6,,,Education health and social services
+Workforce_by_Sector,Agriculture_Related,,3700000,14.6,3.7,,,Primary sector employment
+Workforce_by_Sector,Religious_Services,,2060000,8.1,2.06,,,Mosque and religious institution workers
+Workforce_by_Sector,Livestock_Rearing,,5600000,22.1,5.6,,,Part of subsistence activities
+Workforce_by_Sector,Tailoring,,419000,1.7,0.42,,,Household and small-scale
+Workforce_by_Sector,Online_Services,,93000,0.4,0.093,,,Digital and gig economy
+Workforce_by_Sector,Total,,25300000,100.0,25.3,,,Total workforce in economic establishments
+Establishment_Sizes,Micro_Small,1_to_10,6785000,95.0,4200000,,,Dominant category - micro enterprises - Punjab count 4.2M
+Establishment_Sizes,Small_Medium,1_to_50,7100504,99.5,,,,Most establishments fall in this range
+Establishment_Sizes,Medium,51_to_250,35351,0.5,,,,Mid-size enterprises
+Establishment_Sizes,Large,Over_250,7086,0.1,,,,Large enterprises - very few
+Establishment_Sizes,Total,,7142941,100.0,4360000,,,All establishment sizes - Punjab total 4.36M
+Infrastructure,Schools,Education,242616,,,,Mostly government-run,
+Infrastructure,Colleges,Education,11568,,,,Slightly higher private share,
+Infrastructure,Universities,Education,214,,,,Mixed public-private,
+Infrastructure,Total_Educational,Education,326868,,,,Aggregated total,
+Infrastructure,Madrassas,Religious_Education,36331,,,,Private/religious,
+Infrastructure,Mosques,Religious,600403,,,2060000,Community-based - employs 2.06M
+Infrastructure,Total_Religious,Religious,636734,,,,Combined religious institutions,
+Infrastructure,Hospitals,Health,119789,,,,Mixed public-private,
+Infrastructure,Health_Social_Work,Health,123973,,,,Industrial classification,
+Infrastructure,Retail_Shops,Commerce,2700000,,,,Mostly private,
+Infrastructure,Wholesale_Shops,Commerce,188000,,,,Private enterprises,
+Infrastructure,Hotels,Hospitality,256000,,,,Private sector,
+Infrastructure,Factories,Manufacturing,23000,,,,Industrial establishments,
+Infrastructure,Production_Units,Manufacturing,643000,,,,Small-scale production,
+Infrastructure,Government_Organizations,Public_Sector,29836,,,,Government entities,
+Infrastructure,Hostels,Accommodation,16565,,,,Mixed ownership,
+Trade_Breakdown,Retail_Shops,,2700000,84.4,37.8,,Individual retail establishments,Percentage of trade: 84.4% - Percentage of total: 37.8%
+Trade_Breakdown,Wholesale_Shops,,188000,5.9,2.6,,Wholesale and distribution,
+Trade_Breakdown,Motor_Vehicle_Repair,,312000,9.7,4.4,,Vehicle maintenance and repair,
+Trade_Breakdown,Total_Trade,,3200000,100.0,44.8,,All wholesale and retail trade establishments,
+Trade_Breakdown,Service_Shops,,825000,,,,General service establishments,
+Trade_Breakdown,Other_Services,,120000,,,,Miscellaneous services,
+Trade_Breakdown,Total_Services,,945000,,,,Service sector total,
+Trade_Breakdown,Manufacturing_Factories,,23000,,,,Large industrial units,
+Trade_Breakdown,Production_Units,,643000,,,,Small manufacturing units,
+Trade_Breakdown,Total_Manufacturing,,666000,,,,Manufacturing sector excluding factories,
+Trade_Breakdown,Agricultural_Business,,1100000,,,,Agriculture forestry and fishing,
+Trade_Breakdown,Total_Economic_Units,,7142941,,,,All establishments combined,
+Structures_Buildings,Total_Structures,,40000000,100.0,,,All geo-tagged structures,
+Structures_Buildings,Residential_Structures,,31760000,79.4,81.6,,Predominantly housing - KP percentage 81.6%,
+Structures_Buildings,Economic_Structures,,5360000,13.4,,,Business and commercial,
+Structures_Buildings,Mixed_Use,,2880000,7.2,,,Combined residential-commercial,
+Structures_Buildings,Multi_Story_Total,,114148,0.3,,,All multi-story buildings,
+Structures_Buildings,Multi_Story_Residential,,73551,64.4,,,Multi-story residential only,
+Structures_Buildings,Mixed_Residential_Economic,,33103,29.0,,,Combined residential-business,
+Structures_Buildings,Pure_Economic_Multi_Story,,7494,6.7,,,Pure commercial multi-story,
+Structures_Buildings,Economic_Establishments,,7142941,,,,More establishments than structures,
+Structures_Buildings,Structure_to_Establishment_Ratio,,1.13,,,,Average businesses per economic structure,
+Quality_Metrics,Census_Year,,2023,,,,First economic census since 2000,
+Quality_Metrics,Total_Establishments,,7142941,,,,All economic establishments - Official PBS data,
+Quality_Metrics,Total_Workforce,,25300000,,,,Workers in economic establishments,
+Quality_Metrics,AI_Classification_Accuracy,,80,80,,Nationwide AI model accuracy,Estimated
+Quality_Metrics,Initial_Others_Category,,52,52,,Entries initially unclassified,Before AI processing
+Quality_Metrics,Lahore_AI_Accuracy_Initial,,24.68,24.68,,Early AI testing results,
+Quality_Metrics,Karachi_AI_Accuracy_Final,,85.23,85.23,,Improved AI performance,
+Quality_Metrics,Faisalabad_AI_Accuracy_Final,,86.5,86.5,,Final AI model performance,
+Quality_Metrics,Potential_Misclassified,,1400000,,,Based on 80% accuracy rate,Estimated Count
+Quality_Metrics,SECP_Registered_Companies,,250000,,,Formally registered businesses,Count
+Quality_Metrics,Informality_Rate,,96.5,96.5,,Unregistered establishments,Calculated percentage
+Quality_Metrics,Enumerators_Deployed,,121000,,,Digital census workforce,People
+Quality_Metrics,Tablets_Used,,126000,,,NADRA provided equipment,Devices
+Quality_Metrics,Geo_Tagged_Structures,,40000000,,,GPS coordinated structures,Count
+Quality_Metrics,Cost_Savings,,7000000000,,,Saved through digital integration,Pakistani Rupees
+Quality_Metrics,Household_Miscellaneous,,40.49,40.49,,Unclassified household activities,Percentage
+Subsistence_Informal,Livestock_Rearing,Included,5600000,51.4,,,Agriculture category - Included in census
+Subsistence_Informal,Tailoring,Included,419000,3.8,,,Manufacturing category - Household based
+Subsistence_Informal,Online_Services,Included,93000,0.9,,,Digital category - Gig economy
+Subsistence_Informal,Embroidery,Included,,,,Household based - Count unknown,
+Subsistence_Informal,Poultry,Included,,,,Household based - Count unknown,
+Subsistence_Informal,Home_Tuition,Included,,,,Household based - Count unknown,
+Subsistence_Informal,Home_Food_Production,Included,,,,Household based - Count unknown,
+Subsistence_Informal,Mobile_Vendors,NOT_Included,,,,,Excluded from census
+Subsistence_Informal,Street_Stalls,NOT_Included,,,,,Excluded from census
+Subsistence_Informal,Small_Beauty_Parlors,NOT_Included,,,,,Excluded from census
+Subsistence_Informal,Freelancers,NOT_Included,,,,,Excluded from census
+Subsistence_Informal,Digital_Businesses,NOT_Included,,,,,Excluded from census
+Subsistence_Informal,Total_Subsistence_Recorded,,10900000,100.0,,,Mixed categories - Partial coverage only
+Subsistence_Informal,Household_Activities_Misc,,40.49,40.49,,,Unclassified household work percentage
+Subsistence_Informal,Formal_Establishments,,250000,,,,SECP registered
+Subsistence_Informal,Informal_Establishments,,6892941,,,,Not formally registered

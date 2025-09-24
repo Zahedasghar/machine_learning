@@ -446,5 +446,390 @@
     "title": "Machine Learning, Big Data & AI in Economics",
     "section": "Key Takeaways",
     "text": "Key Takeaways\n✅ ML revolutionizes economic analysis and decision-making\n✅ Big data provides unprecedented insights into economic behavior\n✅ AI systems increasingly drive real-world economic outcomes\n✅ This course bridges theory and practical implementation\nReady to start your ML journey in economics? 🚀"
+  },
+  {
+    "objectID": "docs/lec2.html#what-is-machine-learning",
+    "href": "docs/lec2.html#what-is-machine-learning",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "What is Machine Learning?",
+    "text": "What is Machine Learning?\n\n🤖 Machine Learning\n\nA subset of Artificial Intelligence that enables systems to learn from data without explicit programming.\n\nKey Economic Insight 💡\nML focuses on self-learning algorithms that derive knowledge from data to predict economic outcomes and inform policy decisions.\n\n\nIn economics, ML helps us understand complex relationships in economic data that traditional econometric methods might miss."
+  },
+  {
+    "objectID": "docs/lec2.html#the-ai-hierarchy-in-economics",
+    "href": "docs/lec2.html#the-ai-hierarchy-in-economics",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "The AI Hierarchy in Economics",
+    "text": "The AI Hierarchy in Economics\n\n\n🧠 Artificial Intelligence\nBroadest concept\n\nMimicking human economic decision-making\nAutomated trading systems\nPolicy recommendation engines\n\n\nEconomic Example: Central bank decision support systems\n\n\n⚙️ Machine Learning\nSubset of AI\n\nLearning from economic data\nPredicting market outcomes\nPattern recognition in behavior\n\n\nEconomic Example: Credit scoring models, GDP forecasting\n\n\n🔗 Deep Learning\nSubset of ML\n\nScalable ML for big economic data\nAutomated feature extraction\nComplex economic relationships\n\n\nEconomic Example: Analyzing satellite data for economic activity\n\n\n\nThis hierarchy is particularly important in economics where we deal with increasingly complex and high-dimensional data."
+  },
+  {
+    "objectID": "docs/lec2.html#types-of-ml-in-economics",
+    "href": "docs/lec2.html#types-of-ml-in-economics",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Types of ML in Economics",
+    "text": "Types of ML in Economics\n\n\n📊 Three Main Approaches\n\nSupervised Learning ✅ Learning from labeled economic data\nUnsupervised Learning 🧩 Discovering hidden economic patterns\n\nReinforcement Learning 🏆 Learning optimal economic policies\n\n\n\n🎯 Economic Applications Preview\n\nSupervised: Recession prediction, stock price forecasting\nUnsupervised: Market segmentation, economic clustering\nReinforcement: Optimal monetary policy, algorithmic trading"
+  },
+  {
+    "objectID": "docs/lec2.html#supervised-learning-in-economics",
+    "href": "docs/lec2.html#supervised-learning-in-economics",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Supervised Learning in Economics",
+    "text": "Supervised Learning in Economics\n\n\n\n\n\n\nDefinition\n\n\nUses labeled economic datasets to train algorithms for classification or prediction\n\n\n\n\n\n📋 Classification\nGroups economic entities into predefined categories\nEconomic Examples: - 🏦 Bank loan approval (approve/deny) - 📈 Market regime classification (bull/bear) - 🏢 Firm bankruptcy prediction - 👥 Consumer credit scoring\n\nCode Example:\n# Predicting recession probability\nfrom sklearn.ensemble import RandomForestClassifier\nmodel = RandomForestClassifier()\nmodel.fit(X_economic_indicators, y_recession_labels)\n\n\n📈 Regression\nPredicts continuous economic values\nEconomic Examples: - 💰 House price prediction - 📊 GDP growth forecasting\n- 💱 Exchange rate modeling - 🛢️ Commodity price prediction\n\nCode Example:\n# Predicting housing prices\nfrom sklearn.linear_model import LinearRegression\nmodel = LinearRegression()\nmodel.fit(X_housing_features, y_prices)\n\n\n\nSupervised learning is the most common type in economics because we often have historical labeled data."
+  },
+  {
+    "objectID": "docs/lec2.html#economic-data-in-supervised-learning",
+    "href": "docs/lec2.html#economic-data-in-supervised-learning",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Economic Data in Supervised Learning",
+    "text": "Economic Data in Supervised Learning\n\n🏦 Banking Example📈 Market Prediction🏛️ Policy Analysis\n\n\n\n\n\n\n\nflowchart LR\n    A[📊 Customer Data] --&gt; B[🤖 ML Model]\n    B --&gt; C[✅ Approve/❌ Deny]\n    \n    A1[Income] --&gt; A\n    A2[Credit History] --&gt; A  \n    A3[Employment] --&gt; A\n    A4[Debt Ratio] --&gt; A\n\n\n\n\n\n\nFeatures: Income, credit score, employment history, debt-to-income ratio\nTarget: Loan approval decision (binary classification)\n\n\n\n\n\n\n\nflowchart LR\n    A[📊 Market Data] --&gt; B[🤖 ML Model]\n    B --&gt; C[📈 Price Forecast]\n    \n    A1[Technical Indicators] --&gt; A\n    A2[Economic News] --&gt; A  \n    A3[Trading Volume] --&gt; A\n    A4[Sentiment Data] --&gt; A\n\n\n\n\n\n\nFeatures: Technical indicators, news sentiment, trading volume, economic indicators\nTarget: Future stock price (regression)\n\n\n\n\n\n\n\nflowchart LR\n    A[📊 Policy Data] --&gt; B[🤖 ML Model]\n    B --&gt; C[🎯 Policy Impact]\n    \n    A1[GDP Growth] --&gt; A\n    A2[Inflation Rate] --&gt; A  \n    A3[Interest Rates] --&gt; A\n    A4[Employment] --&gt; A\n\n\n\n\n\n\nFeatures: Macroeconomic indicators, policy variables\nTarget: Policy effectiveness score (regression/classification)"
+  },
+  {
+    "objectID": "docs/lec2.html#interactive-demo-supervised-learning",
+    "href": "docs/lec2.html#interactive-demo-supervised-learning",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Interactive Demo: Supervised Learning",
+    "text": "Interactive Demo: Supervised Learning\n\n🎮 Try It Yourself📊 Understanding the Model\n\n\n\n\n🏠 House Price Predictor\n\nAdjust the sliders to see how features affect predicted price:\n\nSquare Feet: 2000 \nBedrooms: 3 \nLocation Score: 7 \n\n\n\nPredicted Price: $450,000\n\n\n\n\n\nSimple Linear Model:\nPrice = 150 × sqft + 25,000 × bedrooms + 10,000 × location + base_price\nEconomic Interpretation: - Each additional square foot adds ~$150 to value - Each bedroom adds ~$25,000 to value\n- Location premium can add up to $100,000 - This demonstrates marginal effects in economics"
+  },
+  {
+    "objectID": "docs/lec2.html#unsupervised-learning-in-economics",
+    "href": "docs/lec2.html#unsupervised-learning-in-economics",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Unsupervised Learning in Economics",
+    "text": "Unsupervised Learning in Economics\n\n\n\n\n\n\nDefinition\n\n\nAnalyzes unlabeled economic data to discover hidden patterns without human intervention\n\n\n\n\n\n🔍 Clustering\nGroups similar economic entities into natural clusters\nEconomic Applications: - 🏪 Customer market segmentation - 🌍 Country economic development clusters\n- 📊 Industry classification - 🏙️ Regional economic similarity\n\nReal Example: World Bank uses clustering to group countries by development indicators\n\n\n↘️ Dimensionality Reduction\nReduces complexity while preserving economic information\nEconomic Applications: - 📈 Financial risk factor identification - 🏢 Principal components of economic indicators - 📊 Data visualization for policy makers - 🔄 Feature selection for economic models\n\nReal Example: Federal Reserve uses PCA to create financial stress indices\n\n\n\nUnsupervised learning is particularly valuable in economics for exploratory data analysis and discovering unknown economic relationships."
+  },
+  {
+    "objectID": "docs/lec2.html#economic-clustering-visualization",
+    "href": "docs/lec2.html#economic-clustering-visualization",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Economic Clustering Visualization",
+    "text": "Economic Clustering Visualization\n\n🌍 Country Development Clusters🏦 Bank Customer Segments📊 Economic Indicators\n\n\n\n\n\n\n\ngraph TB\n    subgraph \"🏆 Developed Countries\"\n        A1[USA 🇺🇸]\n        A2[Germany 🇩🇪] \n        A3[Japan 🇯🇵]\n    end\n    \n    subgraph \"📈 Emerging Markets\"\n        B1[China 🇨🇳]\n        B2[India 🇮🇳]\n        B3[Brazil 🇧🇷]\n    end\n    \n    subgraph \"🌱 Developing Countries\"\n        C1[Kenya 🇰🇪]\n        C2[Bangladesh 🇧🇩]\n        C3[Vietnam 🇻🇳]\n    end\n\n\n\n\n\n\nClustering Features: GDP per capita, HDI, education index, infrastructure\n\n\n\n\n\n\n\ngraph LR\n    subgraph \"💎 Premium Customers\"\n        P1[High Income]\n        P2[Multiple Products]\n        P3[Low Risk]\n    end\n    \n    subgraph \"🎯 Growing Customers\"  \n        G1[Medium Income]\n        G2[Expanding Needs]\n        G3[Medium Risk]\n    end\n    \n    subgraph \"🌱 Entry Level\"\n        E1[Lower Income]\n        E2[Basic Products] \n        E3[Higher Risk]\n    end\n\n\n\n\n\n\nBusiness Value: Targeted marketing, personalized products, risk management\n\n\nPrincipal Component Analysis Example:\n\n\n\nComponent\nInterpretation\nVariables\n\n\n\n\nPC1 (40%)\nEconomic Development\nGDP, Education, Health\n\n\nPC2 (25%)\nInnovation Capacity\nR&D, Patents, Tech\n\n\nPC3 (15%)\nFinancial Stability\nDebt, Inflation, Currency\n\n\n\nReduces 20+ indicators to 3 meaningful components"
+  },
+  {
+    "objectID": "docs/lec2.html#reinforcement-learning-in-economics",
+    "href": "docs/lec2.html#reinforcement-learning-in-economics",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Reinforcement Learning in Economics",
+    "text": "Reinforcement Learning in Economics\n\n\n\n\n\n\nDefinition\n\n\nAn agent learns optimal economic policies through trial and error, receiving rewards for good decisions and penalties for bad ones\n\n\n\n\n\n🎯 Key Economic Concepts\n\nAgent: Central bank, trader, firm\nEnvironment: Economic system, market\nActions: Policy decisions, trades, investments\n\nRewards: Economic outcomes, profits, welfare\n\n\n🔄 Learning Process\n\nTake economic action\nObserve market response\n\nReceive reward/penalty\nUpdate strategy\nRepeat until optimal\n\n\n\n💼 Economic Applications\n\n🏛️ Monetary Policy: Optimal interest rate setting\n📈 Algorithmic Trading: Automated investment strategies\n🏢 Supply Chain: Inventory and pricing optimization\n🎮 Auction Design: Optimal bidding strategies\n🌱 Climate Policy: Carbon pricing mechanisms\n\n\nReal Example: JPMorgan uses RL for optimal trade execution to minimize market impact\n\n\n\nReinforcement learning is particularly powerful for dynamic economic decision-making where the environment responds to actions."
+  },
+  {
+    "objectID": "docs/lec2.html#rl-in-monetary-policy",
+    "href": "docs/lec2.html#rl-in-monetary-policy",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "RL in Monetary Policy",
+    "text": "RL in Monetary Policy\n\n🏛️ Central Bank Agent📊 Policy Learning Process🎯 Economic Outcomes\n\n\n\n\n\n\n\nflowchart TD\n    A[🏛️ Central Bank&lt;br/&gt;Agent] --&gt; B[📊 Economic State&lt;br/&gt;Inflation, GDP, Employment]\n    B --&gt; C[🎯 Policy Action&lt;br/&gt;Interest Rate Decision]\n    C --&gt; D[📈 Economic Response&lt;br/&gt;Market Reaction]\n    D --&gt; E[🏆 Reward&lt;br/&gt;Economic Stability]\n    E --&gt; A\n    \n    style A fill:#e1f5fe\n    style E fill:#e8f5e8\n\n\n\n\n\n\n\n\nState Variables: - Current inflation rate - GDP growth rate\n- Unemployment rate - Market volatility\nActions: - Raise interest rates (+0.25%) - Lower interest rates (-0.25%)\n- Keep rates unchanged\nReward Function:\nReward = -|inflation - target|² - |unemployment - natural_rate|² - |gdp_volatility|\n\n\n\n\nTraditional Rules: - Fixed policy responses - Limited adaptability - May miss complex interactions\nExample: Taylor Rule\nRate = neutral + 1.5×(inflation - target) + 0.5×GDP_gap\n\nRL-Based Policy: - Adaptive responses - Learns from experience - Captures non-linear relationships\nAdvantage: Can handle regime changes and structural breaks automatically"
+  },
+  {
+    "objectID": "docs/lec2.html#comparing-ml-approaches-in-economics",
+    "href": "docs/lec2.html#comparing-ml-approaches-in-economics",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Comparing ML Approaches in Economics",
+    "text": "Comparing ML Approaches in Economics\n\n\n\n\n\n\n\n\n\n\n\nApproach\nData Type\nEconomic Use Case\nExample\nPros\nCons\n\n\n\n\nSupervised ✅\nLabeled historical\nPrediction & Classification\nCredit scoring, recession forecasting\nHigh accuracy, interpretable\nNeeds labeled data, may not adapt\n\n\nUnsupervised 🧩\nUnlabeled current\nPattern discovery\nMarket segmentation, anomaly detection\nNo labels needed, finds hidden patterns\nHard to validate, less precise\n\n\nReinforcement 🏆\nInteractive feedback\nDynamic optimization\nTrading algorithms, policy design\nAdapts to changes, optimal decisions\nComplex to implement, needs simulation\n\n\n\n\n🎯 Economic Insight\n\nSupervised: Best for prediction problems with historical precedent\nUnsupervised: Best for exploration of new economic phenomena\n\nReinforcement: Best for optimization in dynamic economic environments\n\n\n\nIn practice, economists often combine these approaches - using unsupervised learning for exploration, supervised learning for prediction, and reinforcement learning for policy optimization."
+  },
+  {
+    "objectID": "docs/lec2.html#real-world-economic-ml-applications",
+    "href": "docs/lec2.html#real-world-economic-ml-applications",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Real-World Economic ML Applications",
+    "text": "Real-World Economic ML Applications\n\n🏦 Financial Services🏛️ Government & Policy🏢 Business Applications\n\n\nCredit Scoring & Risk Management\n\nBanks: Wells Fargo, JPMorgan use ML for loan decisions\nFeatures: Income, credit history, spending patterns, social data\nImpact: Reduced default rates by 15-20%\n\nAlgorithmic Trading\n\nFirms: Renaissance Technologies, Two Sigma\nTechniques: Deep RL, NLP for news analysis\nAssets: Over $1 trillion managed by ML algorithms\n\n\n\nEconomic Forecasting\n\nFed: Uses ML for GDP, inflation predictions\nIMF: Nowcasting economic growth using satellite data\nWorld Bank: Poverty mapping with mobile phone data\n\nTax Compliance\n\nIRS: ML for fraud detection (98% accuracy)\nEU: VAT gap prediction using transaction data\n\n\n\nDynamic Pricing\n\nAirlines: Real-time price optimization\nRide-sharing: Uber’s surge pricing algorithm\n\nE-commerce: Amazon’s recommendation engine\n\nSupply Chain\n\nWalmart: Demand forecasting with weather data\nManufacturing: Predictive maintenance\nLogistics: Route optimization"
+  },
+  {
+    "objectID": "docs/lec2.html#economic-data-challenges-in-ml",
+    "href": "docs/lec2.html#economic-data-challenges-in-ml",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Economic Data Challenges in ML",
+    "text": "Economic Data Challenges in ML\n\n\n⚠️ Unique Challenges\n🌊 Non-stationarity - Economic relationships change over time - Structural breaks and regime changes - Models need constant updating\n📊 Limited Data\n- Macroeconomic data: quarterly/annual - Financial crises are rare events - Privacy constraints on personal data\n🔗 Endogeneity - Variables influence each other - Causation vs. correlation issues - Policy affects the data generation process\n\n✅ ML Solutions\n🔄 Online Learning - Models update with new data - Adaptive algorithms for regime changes - Ensemble methods for robustness\n📈 Transfer Learning - Use patterns from similar economies - Cross-country knowledge transfer - Synthetic data generation\n🎯 Causal ML - Treatment effect estimation - Instrumental variables in ML - Randomized controlled trials\n\n\n💡 Key Takeaway\nEconomic ML requires careful consideration of causality, temporal dynamics, and policy implications beyond standard ML metrics."
+  },
+  {
+    "objectID": "docs/lec2.html#interactive-economic-scenario",
+    "href": "docs/lec2.html#interactive-economic-scenario",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Interactive Economic Scenario",
+    "text": "Interactive Economic Scenario\n\n🎮 Central Bank Simulation📊 Learning from Decisions\n\n\n\n\n🏛️ You are the Central Bank Governor\n\n\nCurrent Economic Conditions:\n\n\n\n📈 Inflation: 4.2% Above Target (2%)\n\n\n👥 Unemployment: 6.1% Moderate\n\n\n📊 GDP Growth: 2.8% Stable\n\n\n\n\n🎯 Your Policy Decision:\n\n\n📈 Raise Rates (+0.5%)\n\n\n➡️ Maintain Rates\n\n\n📉 Lower Rates (-0.5%)\n\n\n\n\n📊 Economic Outcome:\n\n\n\n\n🔄 Try Another Scenario\n\n\n\n\n\nEconomic Trade-offs:\n\n\n\n\n\n\n\n\n\n\nDecision\nInflation Impact\nEmployment Impact\nGrowth Impact\nRisk\n\n\n\n\nRaise Rates\n⬇️ Decreases\n⬇️ May increase unemployment\n⬇️ Slows growth\nRecession risk\n\n\nMaintain\n➡️ Stable\n➡️ Stable\n➡️ Stable\nStatus quo\n\n\nLower Rates\n⬆️ May increase\n⬆️ Decreases unemployment\n⬆️ Stimulates\nBubble risk\n\n\n\nML Advantage: Can learn optimal policies across different economic scenarios and time periods."
+  },
+  {
+    "objectID": "docs/lec2.html#future-of-ml-in-economics",
+    "href": "docs/lec2.html#future-of-ml-in-economics",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Future of ML in Economics",
+    "text": "Future of ML in Economics\n\n\n🚀 Emerging Trends\n🤖 Large Language Models - Economic text analysis at scale - Policy document understanding - Automated economic research\n🛰️ Alternative Data - Satellite imagery for economic activity - Social media sentiment analysis\n- Mobile phone data for migration\n⚡ Real-time Economics - Nowcasting with high-frequency data - Flash GDP estimates - Real-time inflation tracking\n\n🎯 Key Opportunities\n🌍 Development Economics - Financial inclusion prediction - Poverty mapping and targeting - Agricultural productivity optimization\n🏛️ Policy Evaluation - Causal inference at scale - Natural experiment identification - Personalized policy recommendations\n💼 Business Intelligence - Market timing and entry strategies - Customer lifetime value prediction - Supply chain resilience\n\n\n💡 Economic Research Revolution\nML is transforming economics from a data-scarce to a data-rich field, enabling new research questions and policy insights previously impossible."
+  },
+  {
+    "objectID": "docs/lec2.html#best-practices-for-economic-ml",
+    "href": "docs/lec2.html#best-practices-for-economic-ml",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Best Practices for Economic ML",
+    "text": "Best Practices for Economic ML\n\n\n\n\n\n\nCritical Considerations\n\n\n\n\n\n\n\n\n🔍 Model Validation\n\nOut-of-sample testing with temporal splits\nCross-validation respecting time structure\n\nStress testing across economic cycles\nA/B testing for policy interventions\n\n📊 Interpretability\n\nSHAP values for feature importance\nLIME for local explanations\nPartial dependence plots for marginal effects\nEconomic theory validation of results\n\n\n⚖️ Ethical Considerations\n\nBias detection in algorithmic decisions\nFairness across demographic groups\nPrivacy protection in personal data\nTransparency in public policy applications\n\n🎯 Implementation\n\nStart simple before complex models\nDomain expertise integration essential\nContinuous monitoring of model performance\nRegulatory compliance considerations\n\n\n\n🏆 Success Factors\n\nEconomic theory + Machine learning expertise\nQuality data + Proper validation\n\nInterpretability + Actionable insights"
+  },
+  {
+    "objectID": "docs/lec2.html#conclusion-next-steps",
+    "href": "docs/lec2.html#conclusion-next-steps",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Conclusion & Next Steps",
+    "text": "Conclusion & Next Steps\n\n🎯 Key Takeaways\n\n\n🧠 Understanding ML Types\n\nSupervised: Prediction with historical economic data\nUnsupervised: Discovery of hidden economic patterns\n\nReinforcement: Optimization of economic policies\n\n\n\n💼 Economic Applications\nML is transforming finance, policy-making, and business strategy across all sectors of the economy.\n\n\n🚀 Getting Started\n\nLearn fundamentals: Statistics, programming (Python/R)\nPractice projects: Start with public economic datasets\nDomain knowledge: Combine ML with economic theory\nStay updated: Follow latest research and applications\n\n\n\n📚 Resources\n\nVideo Source: IBM Technology - What is Machine Learning?\nAdvanced: Stanford’s CS229 Machine Learning Course\nEconomics: “Big Data and Economics” by Liran Einav and Jonathan Levin"
+  },
+  {
+    "objectID": "docs/lec2.html#thank-you",
+    "href": "docs/lec2.html#thank-you",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Thank You!",
+    "text": "Thank You!\n\n🎓 Questions & Discussion\n\n\n🤝 Let’s Connect\n\nExplore economic datasets together\nDiscuss ML applications in your field\nShare implementation experiences\n\n\n\n💡 Remember\n“The best machine learning model is only as good as the economic theory and data quality behind it.”\n\n\nHappy Learning! 🚀"
+  },
+  {
+    "objectID": "docs/lec2.html#conclusion-next-steps-.center",
+    "href": "docs/lec2.html#conclusion-next-steps-.center",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Conclusion & Next Steps {.center}",
+    "text": "Conclusion & Next Steps {.center}\n\n🎯 Key Takeaways\n\n\n🧠 Understanding ML Types\n\nSupervised: Prediction with historical economic data\nUnsupervised: Discovery of hidden economic patterns\n\nReinforcement: Optimization of economic policies\n\n\n\n💼 Economic Applications\nML is transforming finance, policy-making, and business strategy across all sectors of the economy.\n\n\n🚀 Getting Started\n\nLearn fundamentals: Statistics, programming (Python/R)\nPractice projects: Start with public economic datasets\nDomain knowledge: Combine ML with economic theory\nStay updated: Follow latest research and applications\n\n\n\n📚 Resources\n\nVideo Source: IBM Technology - What is Machine Learning?\nAdvanced: Stanford’s CS229 Machine Learning Course\nEconomics: “Big Data and Economics” by Liran Einav and Jonathan Levin"
+  },
+  {
+    "objectID": "docs/lec2.html#comparing-ml-approaches-in-economics-.smaller",
+    "href": "docs/lec2.html#comparing-ml-approaches-in-economics-.smaller",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Comparing ML Approaches in Economics {.smaller}",
+    "text": "Comparing ML Approaches in Economics {.smaller}\n\n\n\n\n\n\n\n\n\n\n\nApproach\nData Type\nEconomic Use Case\nExample\nPros\nCons\n\n\n\n\nSupervised ✅\nLabeled historical\nPrediction & Classification\nCredit scoring, recession forecasting\nHigh accuracy, interpretable\nNeeds labeled data, may not adapt\n\n\nUnsupervised 🧩\nUnlabeled current\nPattern discovery\nMarket segmentation, anomaly detection\nNo labels needed, finds hidden patterns\nHard to validate, less precise\n\n\nReinforcement 🏆\nInteractive feedback\nDynamic optimization\nTrading algorithms, policy design\nAdapts to changes, optimal decisions\nComplex to implement, needs simulation\n\n\n\n\n🎯 Economic Insight\n\nSupervised: Best for prediction problems with historical precedent\nUnsupervised: Best for exploration of new economic phenomena\n\nReinforcement: Best for optimization in dynamic economic environments\n\n\n\nIn practice, economists often combine these approaches - using unsupervised learning for exploration, supervised learning for prediction, and reinforcement learning for policy optimization."
+  },
+  {
+    "objectID": "docs/ch02.html#outline",
+    "href": "docs/ch02.html#outline",
+    "title": "What is Statistical Learning?",
+    "section": "Outline",
+    "text": "Outline\n\nWhat is Statistical Learning?\nWhy estimate \\(f\\)?\nHow do we estimate \\(f\\)?\nThe trade-off: prediction accuracy vs. model interpretability\nSupervised vs. unsupervised learning\nRegression vs. classification"
+  },
+  {
+    "objectID": "docs/ch02.html#what-is-statistical-learning",
+    "href": "docs/ch02.html#what-is-statistical-learning",
+    "title": "What is Statistical Learning?",
+    "section": "What is Statistical Learning?",
+    "text": "What is Statistical Learning?\nThink of statistical learning like learning to predict based on patterns in data.\nSimple Example: Predicting house prices based on size, location, age.\nData: \\((X_1, X_2, \\dots, X_p, Y)\\) for \\(i = 1, \\dots, n\\). - \\(X_j\\) are predictors (size, location, age of house) - \\(Y\\) is the response (house price)\nKey Assumption: House price depends on at least one feature (size matters!)\nModel: \\(Y = f(X) + \\varepsilon\\) - \\(f\\) = the “true relationship” we want to learn - \\(\\varepsilon\\) = random noise (things we can’t predict)\n\nStatistical learning finds the best \\(f\\) using data"
+  },
+  {
+    "objectID": "docs/ch02.html#example-wage-data",
+    "href": "docs/ch02.html#example-wage-data",
+    "title": "What is Statistical Learning?",
+    "section": "Example: Wage Data",
+    "text": "Example: Wage Data\n\nR CodePython CodeInterpretation\n\n\n\n\nCode\nlibrary(ISLR2)\nlibrary(ggplot2)\nlibrary(dplyr)\n\ndata(Wage)\nWage %&gt;%\n  ggplot(aes(x = age, y = wage)) +\n  geom_point(alpha = 0.4, color = \"steelblue\") +\n  geom_smooth(method = \"loess\", se = FALSE, color = \"red\") +\n  labs(title = \"Wage vs. Age\", x = \"Age\", y = \"Wage ($1000s)\") +\n  theme_minimal()\n\n\n\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.datasets import fetch_openml\n\n# Load wage data (or similar dataset)\nwage_data = pd.read_csv('wage_data.csv')\n\nplt.figure(figsize=(10, 6))\nsns.scatterplot(data=wage_data, x='age', y='wage', alpha=0.4)\nsns.loess(data=wage_data, x='age', y='wage', color='red')\nplt.title('Wage vs. Age')\nplt.xlabel('Age')\nplt.ylabel('Wage ($1000s)')\nplt.show()\n\n\nWhat we see: - Wages increase with age until around 40-50 - Then wages level off or slightly decrease - Lots of variation at each age (the “noise”)\nBusiness insight: Companies should expect to pay higher wages to experienced workers, but the premium levels off"
+  },
+  {
+    "objectID": "docs/ch02.html#different-standard-deviations",
+    "href": "docs/ch02.html#different-standard-deviations",
+    "title": "What is Statistical Learning?",
+    "section": "Different Standard Deviations",
+    "text": "Different Standard Deviations\n\nThe difficulty of estimating \\(f\\) depends on the noise level."
+  },
+  {
+    "objectID": "docs/ch02.html#different-estimates-for-f",
+    "href": "docs/ch02.html#different-estimates-for-f",
+    "title": "What is Statistical Learning?",
+    "section": "Different Estimates for \\(f\\)",
+    "text": "Different Estimates for \\(f\\)"
+  },
+  {
+    "objectID": "docs/ch02.html#example-housing-prices-boston",
+    "href": "docs/ch02.html#example-housing-prices-boston",
+    "title": "What is Statistical Learning?",
+    "section": "Example: Housing Prices (Boston)",
+    "text": "Example: Housing Prices (Boston)\n\n\nCode\nlibrary(MASS)\ndata(Boston)\n\n# Fit linear model using modern approach\nlm_fit &lt;- Boston %&gt;%\n  lm(medv ~ lstat + rm, data = .)\n\nsummary(lm_fit)\n\n\n\nCall:\nlm(formula = medv ~ lstat + rm, data = .)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-18.076  -3.516  -1.010   1.909  28.131 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -1.35827    3.17283  -0.428    0.669    \nlstat       -0.64236    0.04373 -14.689   &lt;2e-16 ***\nrm           5.09479    0.44447  11.463   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 5.54 on 503 degrees of freedom\nMultiple R-squared:  0.6386,    Adjusted R-squared:  0.6371 \nF-statistic: 444.3 on 2 and 503 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "docs/ch02.html#housing-prices-visualization",
+    "href": "docs/ch02.html#housing-prices-visualization",
+    "title": "What is Statistical Learning?",
+    "section": "Housing Prices: Visualization",
+    "text": "Housing Prices: Visualization\n\nPredictors: % lower status (lstat), average rooms (rm).\nResponse: median home value (medv)."
+  },
+  {
+    "objectID": "docs/ch02.html#supervised-vs.-unsupervised-example",
+    "href": "docs/ch02.html#supervised-vs.-unsupervised-example",
+    "title": "What is Statistical Learning?",
+    "section": "Supervised vs. Unsupervised Example",
+    "text": "Supervised vs. Unsupervised Example"
+  },
+  {
+    "objectID": "docs/ch02.html#regression-vs.-classification-example",
+    "href": "docs/ch02.html#regression-vs.-classification-example",
+    "title": "What is Statistical Learning?",
+    "section": "Regression vs. Classification Example",
+    "text": "Regression vs. Classification Example\n\n\nCode\n# Create binary outcome using dplyr\nWage &lt;- Wage %&gt;%\n  mutate(highwage = ifelse(wage &gt; 250, 1, 0))\n\n# Fit logistic regression\nglm_fit &lt;- Wage %&gt;%\n  glm(highwage ~ age + education, data = ., family = binomial)\n\nsummary(glm_fit)\n\n\n\nCall:\nglm(formula = highwage ~ age + education, family = binomial, \n    data = .)\n\nCoefficients:\n                             Estimate Std. Error z value Pr(&gt;|z|)  \n(Intercept)                 -20.73275  652.23660  -0.032   0.9746  \nage                           0.02686    0.01078   2.491   0.0128 *\neducation2. HS Grad          14.28330  652.23657   0.022   0.9825  \neducation3. Some College     15.06687  652.23652   0.023   0.9816  \neducation4. College Grad     16.13787  652.23645   0.025   0.9803  \neducation5. Advanced Degree  17.35777  652.23643   0.027   0.9788  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 730.53  on 2999  degrees of freedom\nResidual deviance: 615.78  on 2994  degrees of freedom\nAIC: 627.78\n\nNumber of Fisher Scoring iterations: 18"
+  },
+  {
+    "objectID": "docs/ch02.html#classification-predicted-probabilities",
+    "href": "docs/ch02.html#classification-predicted-probabilities",
+    "title": "What is Statistical Learning?",
+    "section": "Classification: Predicted Probabilities",
+    "text": "Classification: Predicted Probabilities"
+  },
+  {
+    "objectID": "docs/ch02.html#end",
+    "href": "docs/ch02.html#end",
+    "title": "What is Statistical Learning?",
+    "section": "End",
+    "text": "End\nRemember: Machine learning is a tool, not magic. Success comes from:\n\nUnderstanding your business problem\nChoosing the right approach\nValidating your results\nCommunicating findings clearly\n\nQuestions? 🤔"
+  },
+  {
+    "objectID": "docs/ch02.html#why-do-we-want-to-estimate-f",
+    "href": "docs/ch02.html#why-do-we-want-to-estimate-f",
+    "title": "What is Statistical Learning?",
+    "section": "Why Do We Want to Estimate \\(f\\)?",
+    "text": "Why Do We Want to Estimate \\(f\\)?\nTwo main reasons:\n\nPrediction 📈\n\n“What will this house sell for?”\n“Will this customer buy our product?”\nWe don’t care HOW the prediction works, just that it’s accurate\n\nUnderstanding 🔍\n\n“How does education affect wages?”\n“Which marketing channels work best?”\nWe want to understand the relationship itself\n\n\nReal-world example: A bank wants to predict loan defaults (prediction) AND understand what factors cause defaults (understanding)"
+  },
+  {
+    "objectID": "docs/ch02.html#how-noise-affects-learning",
+    "href": "docs/ch02.html#how-noise-affects-learning",
+    "title": "What is Statistical Learning?",
+    "section": "How Noise Affects Learning",
+    "text": "How Noise Affects Learning\nKey Insight: More noise = harder to learn the pattern\nThink of it like listening to music with background static - more static makes it harder to hear the song.\n\nR CodePython CodeBusiness Application\n\n\n\n\nCode\nset.seed(123)\nx &lt;- seq(-2, 2, length.out = 100)\ny_true &lt;- sin(pi * x)  # True relationship\ny_low &lt;- y_true + rnorm(100, 0, 0.2)   # Low noise\ny_high &lt;- y_true + rnorm(100, 0, 1)    # High noise\n\n# Create comparison plots\nlibrary(patchwork)\np1 &lt;- ggplot(data.frame(x=x, y=y_low), aes(x, y)) + \n      geom_point(color=\"steelblue\") + \n      geom_line(aes(y=y_true), color=\"red\") +\n      ggtitle(\"Low Noise - Easy to Learn\")\n\np2 &lt;- ggplot(data.frame(x=x, y=y_high), aes(x, y)) + \n      geom_point(color=\"steelblue\") + \n      geom_line(aes(y=y_true), color=\"red\") +\n      ggtitle(\"High Noise - Hard to Learn\")\n\np1 + p2\n\n\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nnp.random.seed(123)\nx = np.linspace(-2, 2, 100)\ny_true = np.sin(np.pi * x)\ny_low = y_true + np.random.normal(0, 0.2, 100)\ny_high = y_true + np.random.normal(0, 1, 100)\n\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))\n\nax1.scatter(x, y_low, alpha=0.7, color='steelblue')\nax1.plot(x, y_true, color='red', linewidth=2)\nax1.set_title('Low Noise - Easy to Learn')\n\nax2.scatter(x, y_high, alpha=0.7, color='steelblue')  \nax2.plot(x, y_true, color='red', linewidth=2)\nax2.set_title('High Noise - Hard to Learn')\n\nplt.tight_layout()\nplt.show()\n\n\nReal Example: Predicting sales\n\nLow noise: Luxury cars (few, predictable buyers)\nHigh noise: Fast food (many random factors)\n\nStrategy: With high noise, collect MORE data or use simpler models"
+  },
+  {
+    "objectID": "docs/ch02.html#different-ways-to-estimate-f",
+    "href": "docs/ch02.html#different-ways-to-estimate-f",
+    "title": "What is Statistical Learning?",
+    "section": "Different Ways to Estimate \\(f\\)",
+    "text": "Different Ways to Estimate \\(f\\)\nQuestion: Given data points, how do we draw the “best” line?\nAnswer: Different methods give different results!\n\nR CodePython CodeKey Tradeoff\n\n\n\n\nCode\n# Method 1: Linear regression (straight line)\nlinear_fit &lt;- lm(y ~ x, data = df)\n\n# Method 2: Polynomial (curved line) \npoly_fit &lt;- lm(y ~ poly(x, 3), data = df)\n\n# Method 3: LOESS (flexible curve)\ndf %&gt;%\n  ggplot(aes(x, y)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", color = \"red\") +      # Linear\n  geom_smooth(method = \"loess\", color = \"blue\") +  # Flexible\n  labs(title = \"Different Methods, Different Results\")\n\n\n\n\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.preprocessing import PolynomialFeatures\nfrom sklearn.pipeline import Pipeline\nimport numpy as np\n\n# Linear regression\nlinear = LinearRegression()\nlinear.fit(x.reshape(-1,1), y)\n\n# Polynomial regression  \npoly = Pipeline([\n    ('poly', PolynomialFeatures(degree=3)),\n    ('linear', LinearRegression())\n])\npoly.fit(x.reshape(-1,1), y)\n\n# Plot results\nplt.scatter(x, y)\nplt.plot(x, linear.predict(x.reshape(-1,1)), 'r-', label='Linear')\nplt.plot(x, poly.predict(x.reshape(-1,1)), 'b-', label='Polynomial')\nplt.legend()\nplt.show()\n\n\nSimple models (straight lines): - ✅ Easy to understand and explain - ❌ Might miss important patterns\nComplex models (wiggly curves): - ✅ Capture complex patterns\n- ❌ Hard to interpret, might overfit\nRule of thumb: Start simple, add complexity only if needed"
+  },
+  {
+    "objectID": "docs/ch02.html#real-example-boston-housing-prices",
+    "href": "docs/ch02.html#real-example-boston-housing-prices",
+    "title": "What is Statistical Learning?",
+    "section": "Real Example: Boston Housing Prices",
+    "text": "Real Example: Boston Housing Prices\nBusiness Question: How much should we price this house?\n\nR CodePython CodeBusiness Insights\n\n\n\n\nCode\nlibrary(MASS)\ndata(Boston)\n\n# Simple model: Price depends on poverty level and room count\nlm_fit &lt;- Boston %&gt;%\n  lm(medv ~ lstat + rm, data = .)\n\n# Look at results\nsummary(lm_fit)\n\n# Interpretation:\n# - Each extra room adds ~$9,000 to house value\n# - 1% increase in poverty rate reduces value by ~$950\n\n\n\n\nimport pandas as pd\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.datasets import load_boston\n\n# Load Boston housing data\nboston = load_boston()\ndf = pd.DataFrame(boston.data, columns=boston.feature_names)\ndf['price'] = boston.target\n\n# Fit model: Price = f(poverty_rate, avg_rooms)\nmodel = LinearRegression()\nX = df[['LSTAT', 'RM']]  # poverty %, avg rooms\ny = df['price']\n\nmodel.fit(X, y)\n\n# Print coefficients\nprint(f\"Room effect: ${model.coef_[1]:.2f}k per room\")\nprint(f\"Poverty effect: -${abs(model.coef_[0]):.2f}k per 1% increase\")\n\n\nActionable findings:\n\nRoom count matters: Each extra room = ~$9K more value\n\nStrategy: Highlight room count in listings\n\nLocation matters: High-poverty areas have lower prices\n\nStrategy: Different pricing strategies by neighborhood\n\nModel fit: R² ≈ 0.67 means we explain 67% of price variation\n\nStill missing some important factors (schools, transportation?)\n\n\n\n\n\n\n\n\nWhat Affects Boston Housing Prices?\n\n\n\n\n\n\n\n\n\nFactor\nEffect ($1000s)\nStd Error\nt-stat\np-value\n\n\n\n\nBaseline Price\n-1.36\n3.1728278\n-0.4280953\n0.669\n\n\nPoverty Rate Effect (%)\n-0.64\n0.0437315\n-14.6886992\n&lt; 0.001\n\n\nAdditional Room Effect\n5.09\n0.4444655\n11.4627299\n&lt; 0.001"
+  },
+  {
+    "objectID": "docs/ch02.html#visualizing-housing-price-relationships",
+    "href": "docs/ch02.html#visualizing-housing-price-relationships",
+    "title": "What is Statistical Learning?",
+    "section": "Visualizing Housing Price Relationships",
+    "text": "Visualizing Housing Price Relationships\nKey insight: Relationships aren’t always linear!\n\nBusiness Implication: The poverty-price relationship is clearly non-linear! Linear models miss this pattern."
+  },
+  {
+    "objectID": "docs/ch02.html#supervised-vs.-unsupervised-learning",
+    "href": "docs/ch02.html#supervised-vs.-unsupervised-learning",
+    "title": "What is Statistical Learning?",
+    "section": "Supervised vs. Unsupervised Learning",
+    "text": "Supervised vs. Unsupervised Learning\n\n\nSupervised 👨‍🏫\nYou have the “answer key”\nExamples: - Predict house prices (have past sales) - Classify emails as spam (have labeled examples) - Forecast sales (have historical data)\nGoal: Learn from examples to predict new cases\n\nUnsupervised 🔍\nNo “answer key” - find hidden patterns\nExamples: - Group customers by behavior - Find market segments - Detect unusual transactions\nGoal: Discover structure in data\n\n\nR CodePython CodeBusiness Value\n\n\n\n\nCode\n# Unsupervised: Find customer segments\nset.seed(2)\ncustomer_data &lt;- tibble(\n  spending = c(rnorm(50, 30, 10), rnorm(50, 80, 15)),\n  frequency = c(rnorm(50, 2, 1), rnorm(50, 8, 2))\n)\n\n# K-means clustering (finds groups automatically)\nsegments &lt;- kmeans(customer_data, centers = 2)\ncustomer_data$segment &lt;- segments$cluster\n\n# Plot results  \nggplot(customer_data, aes(spending, frequency, color = factor(segment))) +\n  geom_point(size = 3) +\n  labs(title = \"Customer Segments Found Automatically\")\n\n\n\n\nfrom sklearn.cluster import KMeans\nimport matplotlib.pyplot as plt\n\n# Generate customer data\nspending = np.concatenate([np.random.normal(30, 10, 50), \n                          np.random.normal(80, 15, 50)])\nfrequency = np.concatenate([np.random.normal(2, 1, 50),\n                           np.random.normal(8, 2, 50)])\n\n# Find segments\nkmeans = KMeans(n_clusters=2)\nsegments = kmeans.fit_predict(np.column_stack([spending, frequency]))\n\n# Plot\nplt.scatter(spending, frequency, c=segments, cmap='viridis')\nplt.xlabel('Average Spending')\nplt.ylabel('Purchase Frequency') \nplt.title('Customer Segments Found Automatically')\nplt.show()\n\n\nUnsupervised learning reveals:\n\nCustomer segments → Targeted marketing\nFraud patterns → Risk management\n\nMarket structure → Competitive strategy\n\nKey insight: Sometimes the most valuable discoveries come from data exploration, not prediction!"
+  },
+  {
+    "objectID": "docs/ch02.html#regression-vs.-classification",
+    "href": "docs/ch02.html#regression-vs.-classification",
+    "title": "What is Statistical Learning?",
+    "section": "Regression vs. Classification",
+    "text": "Regression vs. Classification\nThe key difference: What type of outcome are you predicting?\n\n\nRegression 📈\nPredicting numbers - House prices: $150K, $200K, $175K - Sales volume: 1,000 units, 1,500 units\n- Temperature: 25°C, 30°C, 22°C - Stock returns: +5%, -2%, +8%\n\nClassification 🏷️\nPredicting categories - Email: Spam or Not Spam - Loan decision: Approve or Reject\n- Customer: High/Medium/Low Value - Medical diagnosis: Disease A, B, or Healthy\n\n\nR CodePython CodeBusiness Applications\n\n\n\n\nCode\n# Classification example: High wage prediction\nWage &lt;- Wage %&gt;%\n  mutate(high_wage = ifelse(wage &gt; 250, \"High\", \"Low\"))\n\n# Logistic regression for classification\nglm_fit &lt;- glm(high_wage == \"High\" ~ age + education, \n               data = Wage, family = binomial)\n\n# Get probabilities instead of just yes/no\npred_prob &lt;- predict(glm_fit, type = \"response\")\n\n\n\n\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.preprocessing import LabelEncoder\n\n# Create binary outcome\nwage_data['high_wage'] = (wage_data['wage'] &gt; 250).astype(int)\n\n# Prepare data\nle = LabelEncoder() \nX = pd.DataFrame({\n    'age': wage_data['age'],\n    'education': le.fit_transform(wage_data['education'])\n})\ny = wage_data['high_wage']\n\n# Fit classification model\nclf = LogisticRegression()\nclf.fit(X, y)\n\n# Get probabilities\nprobabilities = clf.predict_proba(X)[:, 1]  # Prob of high wage\n\n\nClassification is everywhere:\n\nBanking: Loan approval (binary)\nMarketing: Customer value (low/medium/high)\n\nHR: Resume screening (hire/reject)\nE-commerce: Product categories\n\nKey insight: Classification gives you actionable categories, regression gives you precise numbers"
+  },
+  {
+    "objectID": "docs/ch02.html#the-big-picture-prediction-vs.-interpretation-trade-off",
+    "href": "docs/ch02.html#the-big-picture-prediction-vs.-interpretation-trade-off",
+    "title": "What is Statistical Learning?",
+    "section": "The Big Picture: Prediction vs. Interpretation Trade-off",
+    "text": "The Big Picture: Prediction vs. Interpretation Trade-off\nCentral tension in ML: Accurate models are often hard to explain\n\n\nHigh Interpretability 🔍\nSimple models you can explain - Linear regression - Decision trees (small ones) - Simple rules\nWhen to use: - Regulatory requirements - Medical decisions\n- Policy recommendations - Building trust\n\nHigh Prediction Accuracy 📈\nComplex “black box” models - Deep neural networks - Random forests (large) - Ensemble methods\nWhen to use: - Image recognition - Recommendation systems - High-stakes prediction - When accuracy is paramount\n\nReal-world examples: - Medical diagnosis: Need interpretable models (doctor must explain) - Netflix recommendations: Black box is fine (just works) - Credit scoring: Regulated industry needs interpretable models - Fraud detection: Accuracy matters more than explanation"
+  },
+  {
+    "objectID": "docs/ch02.html#key-takeaways-for-economics-business-students",
+    "href": "docs/ch02.html#key-takeaways-for-economics-business-students",
+    "title": "What is Statistical Learning?",
+    "section": "Key Takeaways for Economics & Business Students",
+    "text": "Key Takeaways for Economics & Business Students\n\nStart with the business question: Do you need prediction or understanding?\nSimple models first: Linear regression beats fancy algorithms if you need interpretation\nData quality matters more than algorithm choice: Clean data + simple model &gt; messy data + complex model\nContext is king: A 90% accurate model is useless if you can’t act on it\nValidate everything: Your model is only as good as its performance on NEW data\n\nNext steps: Learn to evaluate model performance and avoid common pitfalls"
+  },
+  {
+    "objectID": "docs/ch02.html#whats-coming-next",
+    "href": "docs/ch02.html#whats-coming-next",
+    "title": "What is Statistical Learning?",
+    "section": "What’s Coming Next",
+    "text": "What’s Coming Next\nIn future lectures, we’ll cover:\n\nModel Assessment: How do we know if our model is good?\nBias-Variance Trade-off: Why simple models sometimes win\nCross-validation: Testing models the right way\n\nOverfitting: When models memorize instead of learn\nResampling Methods: Making the most of limited data\n\nHomework preview: Apply these concepts to a real dataset from your country/region"
+  },
+  {
+    "objectID": "docs/lec02.html#outline",
+    "href": "docs/lec02.html#outline",
+    "title": "Machine Learning?",
+    "section": "Outline",
+    "text": "Outline\n\nWhat is Machine Learning?\nWhy estimate \\(f\\)?\nHow do we estimate \\(f\\)?\nThe trade-off: prediction accuracy vs. model interpretability\nSupervised vs. unsupervised learning\nRegression vs. classification"
+  },
+  {
+    "objectID": "docs/lec02.html#what-is-statistical-learning",
+    "href": "docs/lec02.html#what-is-statistical-learning",
+    "title": "Machine Learning?",
+    "section": "What is Statistical Learning?",
+    "text": "What is Statistical Learning?\nThink of statistical learning like learning to predict based on patterns in data.\nSimple Example: Predicting house prices based on size, location, age.\nData: \\((X_1, X_2, \\dots, X_p, Y)\\) for \\(i = 1, \\dots, n\\). - \\(X_j\\) are predictors (size, location, age of house) - \\(Y\\) is the response (house price)\nKey Assumption: House price depends on at least one feature (size matters!)\nModel: \\(Y = f(X) + \\varepsilon\\)\n\n\\(f\\) = the “true relationship” we want to learn\n\\(\\varepsilon\\) = random noise (things we can’t predict)\n\n\nMachine learning finds the best \\(f\\) using data"
+  },
+  {
+    "objectID": "docs/lec02.html#why-do-we-want-to-estimate-f",
+    "href": "docs/lec02.html#why-do-we-want-to-estimate-f",
+    "title": "Machine Learning?",
+    "section": "Why Do We Want to Estimate \\(f\\)?",
+    "text": "Why Do We Want to Estimate \\(f\\)?\nTwo main reasons:\n\nPrediction 📈\n\n“What will this house sell for?”\n“Will this customer buy our product?”\nWe don’t care HOW the prediction works, just that it’s accurate\n\nUnderstanding 🔍\n\n“How does education affect wages?”\n“Which marketing channels work best?”\nWe want to understand the relationship itself\n\n\nReal-world example: A bank wants to predict loan defaults (prediction) AND understand what factors cause defaults (understanding)"
+  },
+  {
+    "objectID": "docs/lec02.html#example-wage-data",
+    "href": "docs/lec02.html#example-wage-data",
+    "title": "Machine Learning?",
+    "section": "Example: Wage Data",
+    "text": "Example: Wage Data\n\nR CodePython CodeInterpretation\n\n\n\n\nCode\nlibrary(ISLR2)\nlibrary(ggplot2)\nlibrary(dplyr)\n\ndata(Wage)\nWage %&gt;%\n  ggplot(aes(x = age, y = wage)) +\n  geom_point(alpha = 0.4, color = \"steelblue\") +\n  geom_smooth(method = \"loess\", se = FALSE, color = \"red\") +\n  labs(title = \"Wage vs. Age\", x = \"Age\", y = \"Wage ($1000s)\") +\n  theme_minimal()\n\n\n\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.datasets import fetch_openml\n\n# Load wage data (or similar dataset)\nwage_data = pd.read_csv('wage_data.csv')\n\nplt.figure(figsize=(10, 6))\nsns.scatterplot(data=wage_data, x='age', y='wage', alpha=0.4)\nsns.loess(data=wage_data, x='age', y='wage', color='red')\nplt.title('Wage vs. Age')\nplt.xlabel('Age')\nplt.ylabel('Wage ($1000s)')\nplt.show()\n\n\nWhat we see: - Wages increase with age until around 40-50 - Then wages level off or slightly decrease - Lots of variation at each age (the “noise”)\nBusiness insight: Companies should expect to pay higher wages to experienced workers, but the premium levels off"
+  },
+  {
+    "objectID": "docs/lec02.html#how-noise-affects-learning",
+    "href": "docs/lec02.html#how-noise-affects-learning",
+    "title": "Machine Learning?",
+    "section": "How Noise Affects Learning",
+    "text": "How Noise Affects Learning\nKey Insight: More noise = harder to learn the pattern\nThink of it like listening to music with background static - more static makes it harder to hear the song.\n\nR CodePython CodeBusiness Application\n\n\n\n\nCode\nset.seed(123)\nx &lt;- seq(-2, 2, length.out = 100)\ny_true &lt;- sin(pi * x)  # True relationship\ny_low &lt;- y_true + rnorm(100, 0, 0.2)   # Low noise\ny_high &lt;- y_true + rnorm(100, 0, 1)    # High noise\n\n# Create comparison plots\nlibrary(patchwork)\np1 &lt;- ggplot(data.frame(x=x, y=y_low), aes(x, y)) + \n      geom_point(color=\"steelblue\") + \n      geom_line(aes(y=y_true), color=\"red\") +\n      ggtitle(\"Low Noise - Easy to Learn\")\n\np2 &lt;- ggplot(data.frame(x=x, y=y_high), aes(x, y)) + \n      geom_point(color=\"steelblue\") + \n      geom_line(aes(y=y_true), color=\"red\") +\n      ggtitle(\"High Noise - Hard to Learn\")\n\np1 + p2\n\n\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nnp.random.seed(123)\nx = np.linspace(-2, 2, 100)\ny_true = np.sin(np.pi * x)\ny_low = y_true + np.random.normal(0, 0.2, 100)\ny_high = y_true + np.random.normal(0, 1, 100)\n\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))\n\nax1.scatter(x, y_low, alpha=0.7, color='steelblue')\nax1.plot(x, y_true, color='red', linewidth=2)\nax1.set_title('Low Noise - Easy to Learn')\n\nax2.scatter(x, y_high, alpha=0.7, color='steelblue')  \nax2.plot(x, y_true, color='red', linewidth=2)\nax2.set_title('High Noise - Hard to Learn')\n\nplt.tight_layout()\nplt.show()\n\n\nReal Example: Predicting sales\n\nLow noise: Luxury cars (few, predictable buyers)\nHigh noise: Fast food (many random factors)\n\nStrategy: With high noise, collect MORE data or use simpler models"
+  },
+  {
+    "objectID": "docs/lec02.html#different-ways-to-estimate-f",
+    "href": "docs/lec02.html#different-ways-to-estimate-f",
+    "title": "Machine Learning?",
+    "section": "Different Ways to Estimate \\(f\\)",
+    "text": "Different Ways to Estimate \\(f\\)\nQuestion: Given data points, how do we draw the “best” line?\nAnswer: Different methods give different results!\n\nR CodePython CodeKey Tradeoff\n\n\n\n\nCode\n# Method 1: Linear regression (straight line)\nlinear_fit &lt;- lm(y ~ x, data = df)\n\n# Method 2: Polynomial (curved line) \npoly_fit &lt;- lm(y ~ poly(x, 3), data = df)\n\n# Method 3: LOESS (flexible curve)\ndf %&gt;%\n  ggplot(aes(x, y)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", color = \"red\") +      # Linear\n  geom_smooth(method = \"loess\", color = \"blue\") +  # Flexible\n  labs(title = \"Different Methods, Different Results\")\n\n\n\n\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.preprocessing import PolynomialFeatures\nfrom sklearn.pipeline import Pipeline\nimport numpy as np\n\n# Linear regression\nlinear = LinearRegression()\nlinear.fit(x.reshape(-1,1), y)\n\n# Polynomial regression  \npoly = Pipeline([\n    ('poly', PolynomialFeatures(degree=3)),\n    ('linear', LinearRegression())\n])\npoly.fit(x.reshape(-1,1), y)\n\n# Plot results\nplt.scatter(x, y)\nplt.plot(x, linear.predict(x.reshape(-1,1)), 'r-', label='Linear')\nplt.plot(x, poly.predict(x.reshape(-1,1)), 'b-', label='Polynomial')\nplt.legend()\nplt.show()\n\n\nSimple models (straight lines): - ✅ Easy to understand and explain - ❌ Might miss important patterns\nComplex models (wiggly curves): - ✅ Capture complex patterns\n- ❌ Hard to interpret, might overfit\nRule of thumb: Start simple, add complexity only if needed"
+  },
+  {
+    "objectID": "docs/lec02.html#real-example-boston-housing-prices",
+    "href": "docs/lec02.html#real-example-boston-housing-prices",
+    "title": "Machine Learning?",
+    "section": "Real Example: Boston Housing Prices",
+    "text": "Real Example: Boston Housing Prices\nBusiness Question: How much should we price this house?\n\nR CodePython CodeBusiness Insights\n\n\n\n\nCode\nlibrary(MASS)\ndata(Boston)\n\n# Simple model: Price depends on poverty level and room count\nlm_fit &lt;- Boston %&gt;%\n  lm(medv ~ lstat + rm, data = .)\n\n# Look at results\nsummary(lm_fit)\n\n# Interpretation:\n# - Each extra room adds ~$9,000 to house value\n# - 1% increase in poverty rate reduces value by ~$950\n\n\n\n\nimport pandas as pd\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.datasets import load_boston\n\n# Load Boston housing data\nboston = load_boston()\ndf = pd.DataFrame(boston.data, columns=boston.feature_names)\ndf['price'] = boston.target\n\n# Fit model: Price = f(poverty_rate, avg_rooms)\nmodel = LinearRegression()\nX = df[['LSTAT', 'RM']]  # poverty %, avg rooms\ny = df['price']\n\nmodel.fit(X, y)\n\n# Print coefficients\nprint(f\"Room effect: ${model.coef_[1]:.2f}k per room\")\nprint(f\"Poverty effect: -${abs(model.coef_[0]):.2f}k per 1% increase\")\n\n\nActionable findings:\n\nRoom count matters: Each extra room = ~$9K more value\n\nStrategy: Highlight room count in listings\n\nLocation matters: High-poverty areas have lower prices\n\nStrategy: Different pricing strategies by neighborhood\n\nModel fit: R² ≈ 0.67 means we explain 67% of price variation\n\nStill missing some important factors (schools, transportation?)\n\n\n\n\n\n\n\n\nWhat Affects Boston Housing Prices?\n\n\n\n\n\n\n\n\n\nFactor\nEffect ($1000s)\nStd Error\nt-stat\np-value\n\n\n\n\nBaseline Price\n-1.36\n3.1728278\n-0.4280953\n0.669\n\n\nPoverty Rate Effect (%)\n-0.64\n0.0437315\n-14.6886992\n&lt; 0.001\n\n\nAdditional Room Effect\n5.09\n0.4444655\n11.4627299\n&lt; 0.001"
+  },
+  {
+    "objectID": "docs/lec02.html#visualizing-housing-price-relationships",
+    "href": "docs/lec02.html#visualizing-housing-price-relationships",
+    "title": "Machine Learning?",
+    "section": "Visualizing Housing Price Relationships",
+    "text": "Visualizing Housing Price Relationships\nKey insight: Relationships aren’t always linear!\n\nBusiness Implication: The poverty-price relationship is clearly non-linear! Linear models miss this pattern."
+  },
+  {
+    "objectID": "docs/lec02.html#supervised-vs.-unsupervised-learning",
+    "href": "docs/lec02.html#supervised-vs.-unsupervised-learning",
+    "title": "Machine Learning?",
+    "section": "Supervised vs. Unsupervised Learning",
+    "text": "Supervised vs. Unsupervised Learning\n\n\nSupervised 👨‍🏫\nYou have the “answer key”\nExamples: - Predict house prices (have past sales) - Classify emails as spam (have labeled examples) - Forecast sales (have historical data)\nGoal: Learn from examples to predict new cases\n\nUnsupervised 🔍\nNo “answer key” - find hidden patterns\nExamples: - Group customers by behavior - Find market segments - Detect unusual transactions\nGoal: Discover structure in data\n\n\nR CodePython CodeBusiness Value\n\n\n\n\nCode\n# Unsupervised: Find customer segments\nset.seed(2)\ncustomer_data &lt;- tibble(\n  spending = c(rnorm(50, 30, 10), rnorm(50, 80, 15)),\n  frequency = c(rnorm(50, 2, 1), rnorm(50, 8, 2))\n)\n\n# K-means clustering (finds groups automatically)\nsegments &lt;- kmeans(customer_data, centers = 2)\ncustomer_data$segment &lt;- segments$cluster\n\n# Plot results  \nggplot(customer_data, aes(spending, frequency, color = factor(segment))) +\n  geom_point(size = 3) +\n  labs(title = \"Customer Segments Found Automatically\")\n\n\n\n\nfrom sklearn.cluster import KMeans\nimport matplotlib.pyplot as plt\n\n# Generate customer data\nspending = np.concatenate([np.random.normal(30, 10, 50), \n                          np.random.normal(80, 15, 50)])\nfrequency = np.concatenate([np.random.normal(2, 1, 50),\n                           np.random.normal(8, 2, 50)])\n\n# Find segments\nkmeans = KMeans(n_clusters=2)\nsegments = kmeans.fit_predict(np.column_stack([spending, frequency]))\n\n# Plot\nplt.scatter(spending, frequency, c=segments, cmap='viridis')\nplt.xlabel('Average Spending')\nplt.ylabel('Purchase Frequency') \nplt.title('Customer Segments Found Automatically')\nplt.show()\n\n\nUnsupervised learning reveals:\n\nCustomer segments → Targeted marketing\nFraud patterns → Risk management\n\nMarket structure → Competitive strategy\n\nKey insight: Sometimes the most valuable discoveries come from data exploration, not prediction!"
+  },
+  {
+    "objectID": "docs/lec02.html#regression-vs.-classification",
+    "href": "docs/lec02.html#regression-vs.-classification",
+    "title": "Machine Learning?",
+    "section": "Regression vs. Classification",
+    "text": "Regression vs. Classification\nThe key difference: What type of outcome are you predicting?\n\n\nRegression 📈\nPredicting numbers - House prices: $150K, $200K, $175K - Sales volume: 1,000 units, 1,500 units\n- Temperature: 25°C, 30°C, 22°C - Stock returns: +5%, -2%, +8%\n\nClassification 🏷️\nPredicting categories - Email: Spam or Not Spam - Loan decision: Approve or Reject\n- Customer: High/Medium/Low Value - Medical diagnosis: Disease A, B, or Healthy\n\n\nR CodePython CodeBusiness Applications\n\n\n\n\nCode\n# Classification example: High wage prediction\nWage &lt;- Wage %&gt;%\n  mutate(high_wage = ifelse(wage &gt; 250, \"High\", \"Low\"))\n\n# Logistic regression for classification\nglm_fit &lt;- glm(high_wage == \"High\" ~ age + education, \n               data = Wage, family = binomial)\n\n# Get probabilities instead of just yes/no\npred_prob &lt;- predict(glm_fit, type = \"response\")\n\n\n\n\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.preprocessing import LabelEncoder\n\n# Create binary outcome\nwage_data['high_wage'] = (wage_data['wage'] &gt; 250).astype(int)\n\n# Prepare data\nle = LabelEncoder() \nX = pd.DataFrame({\n    'age': wage_data['age'],\n    'education': le.fit_transform(wage_data['education'])\n})\ny = wage_data['high_wage']\n\n# Fit classification model\nclf = LogisticRegression()\nclf.fit(X, y)\n\n# Get probabilities\nprobabilities = clf.predict_proba(X)[:, 1]  # Prob of high wage\n\n\nClassification is everywhere:\n\nBanking: Loan approval (binary)\nMarketing: Customer value (low/medium/high)\n\nHR: Resume screening (hire/reject)\nE-commerce: Product categories\n\nKey insight: Classification gives you actionable categories, regression gives you precise numbers"
+  },
+  {
+    "objectID": "docs/lec02.html#the-big-picture-prediction-vs.-interpretation-trade-off",
+    "href": "docs/lec02.html#the-big-picture-prediction-vs.-interpretation-trade-off",
+    "title": "Machine Learning?",
+    "section": "The Big Picture: Prediction vs. Interpretation Trade-off",
+    "text": "The Big Picture: Prediction vs. Interpretation Trade-off\nCentral tension in ML: Accurate models are often hard to explain\n\n\nHigh Interpretability 🔍\nSimple models you can explain - Linear regression - Decision trees (small ones) - Simple rules\nWhen to use: - Regulatory requirements - Medical decisions\n- Policy recommendations - Building trust\n\nHigh Prediction Accuracy 📈\nComplex “black box” models - Deep neural networks - Random forests (large) - Ensemble methods\nWhen to use: - Image recognition - Recommendation systems - High-stakes prediction - When accuracy is paramount\n\nReal-world examples: - Medical diagnosis: Need interpretable models (doctor must explain) - Netflix recommendations: Black box is fine (just works) - Credit scoring: Regulated industry needs interpretable models - Fraud detection: Accuracy matters more than explanation"
+  },
+  {
+    "objectID": "docs/lec02.html#key-takeaways-for-economics-business-students",
+    "href": "docs/lec02.html#key-takeaways-for-economics-business-students",
+    "title": "Machine Learning?",
+    "section": "Key Takeaways for Economics & Business Students",
+    "text": "Key Takeaways for Economics & Business Students\n\nStart with the business question: Do you need prediction or understanding?\nSimple models first: Linear regression beats fancy algorithms if you need interpretation\nData quality matters more than algorithm choice: Clean data + simple model &gt; messy data + complex model\nContext is king: A 90% accurate model is useless if you can’t act on it\nValidate everything: Your model is only as good as its performance on NEW data\n\nNext steps: Learn to evaluate model performance and avoid common pitfalls"
+  },
+  {
+    "objectID": "docs/lec02.html#whats-coming-next",
+    "href": "docs/lec02.html#whats-coming-next",
+    "title": "Machine Learning?",
+    "section": "What’s Coming Next",
+    "text": "What’s Coming Next\nIn future lectures, we’ll cover:\n\nModel Assessment: How do we know if our model is good?\nBias-Variance Trade-off: Why simple models sometimes win\nCross-validation: Testing models the right way\n\nOverfitting: When models memorize instead of learn\nResampling Methods: Making the most of limited data\n\nHomework preview: Apply these concepts to a real dataset from your country/region"
+  },
+  {
+    "objectID": "docs/lec02.html#end",
+    "href": "docs/lec02.html#end",
+    "title": "Machine Learning?",
+    "section": "End",
+    "text": "End\nRemember: Machine learning is a tool, not magic. Success comes from:\n\nUnderstanding your business problem\nChoosing the right approach\nValidating your results\nCommunicating findings clearly\n\nQuestions? 🤔"
   }
 ]

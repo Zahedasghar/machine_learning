@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Learning in Economics - Interactive Slides</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            display: none;
+            width: 90%;
+            max-width: 1200px;
+            height: 85vh;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.8s ease-out;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .slide h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            background: linear-gradient(45deg, #fff, #f0f8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .slide h2 {
+            font-size: 2em;
+            margin: 25px 0 15px 0;
+            color: #ffd700;
+            border-left: 4px solid #ffd700;
+            padding-left: 15px;
+        }
+
+        .slide h3 {
+            font-size: 1.4em;
+            margin: 20px 0 10px 0;
+            color: #87ceeb;
+        }
+
+        .slide p, .slide li {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .slide ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .highlight-box {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ffd700;
+            margin: 20px 0;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+            to { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+        }
+
+        .interactive-element {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .interactive-element:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .expandable {
+            max-height: 50px;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .expandable.expanded {
+            max-height: 500px;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ffd700, #87ceeb);
+            transition: width 0.3s ease;
+            z-index: 1000;
+        }
+
+        .timeline {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            font-size: 14px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 12px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .concept-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .concept-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .emoji {
+            font-size: 2em;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .comparison-table th {
+            background: rgba(255, 215, 0, 0.3);
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .quiz-question {
+            background: rgba(135, 206, 235, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #87ceeb;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .quiz-option {
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .quiz-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .quiz-option.correct {
+            background: rgba(0, 255, 0, 0.3);
+            border-color: #00ff00;
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(255, 0, 0, 0.3);
+            border-color: #ff0000;
+        }
+
+        .decision-tree {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .decision-node {
+            background: rgba(255, 215, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px;
+            display: inline-block;
+            min-width: 200px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .decision-node:hover {
+            transform: scale(1.05);
+            background: rgba(255, 215, 0, 0.5);
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                width: 95%;
+                padding: 20px;
+                height: 90vh;
+            }
+            
+            .slide h1 {
+                font-size: 2em;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .concept-box {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element" style="left: 10%; animation-delay: 0s; font-size: 30px;">🧠</div>
+        <div class="floating-element" style="left: 20%; animation-delay: 5s; font-size: 25px;">📊</div>
+        <div class="floating-element" style="left: 30%; animation-delay: 10s; font-size: 35px;">💡</div>
+        <div class="floating-element" style="left: 40%; animation-delay: 15s; font-size: 28px;">🔍</div>
+        <div class="floating-element" style="left: 50%; animation-delay: 3s; font-size: 32px;">📈</div>
+        <div class="floating-element" style="left: 60%; animation-delay: 8s; font-size: 26px;">🤖</div>
+        <div class="floating-element" style="left: 70%; animation-delay: 12s; font-size: 30px;">📱</div>
+        <div class="floating-element" style="left: 80%; animation-delay: 7s; font-size: 27px;">💻</div>
+        <div class="floating-element" style="left: 90%; animation-delay: 18s; font-size: 33px;">🎯</div>
+    </div>
+
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="slide-counter" id="slideCounter">1 / 29</div>
+    <div class="timeline" id="timeline">00:00:10</div>
+
+    <div class="presentation-container">
+        <!-- Slide 1: Introduction -->
+        <div class="slide active">
+            <h1>🎓 Deep Learning in Economics I</h1>
+            <div style="text-align: center; margin: 30px 0; font-size: 1.3em; color: #87ceeb;">
+                Stanford Graduate School of Business
+            </div>
+            
+            <div class="highlight-box">
+                <h2>📚 Course Structure</h2>
+                <div class="two-column">
+                    <div class="interactive-element expandable" onclick="toggleExpand(this)">
+                        <h3>🌅 Part 1 (Morning): Machine Learning</h3>
+                        <p>Click to expand details...</p>
+                        <div style="margin-top: 15px;">
+                            <ul>
+                                <li>Deep learning tools for unstructured data</li>
+                                <li>Text, image, and audio processing</li>
+                                <li>Practical implementation techniques</li>
+                                <li>Real-world economic applications</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="interactive-element expandable" onclick="toggleExpand(this)">
+                        <h3>🌆 Part 2 (Afternoon): Econometrics</h3>
+                        <p>Click to expand details...</p>
+                        <div style="margin-top: 15px;">
+                            <ul>
+                                <li>Measurement error handling</li>
+                                <li>Statistical inference with ML predictions</li>
+                                <li>Proper econometric methodology</li>
+                                <li>Research best practices</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-size: 1.2em; color: #ffd700;">🎯 <strong>Focus:</strong> Practical examples with online technical resources</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Revolution -->
+        <div class="slide">
+            <h1>🚀 The Deep Learning Revolution</h1>
+            
+            <div class="highlight-box">
+                <h2>💡 Core Innovation</h2>
+                <p>Deep learning revolutionizes processing of unstructured data that is:</p>
+                <div class="concept-box">
+                    <div class="concept-card">
+                        <span class="emoji">📏</span>
+                        <h3>Too High-Dimensional</h3>
+                        <p>Raw text, images with millions of features</p>
+                    </div>
+                    <div class="concept-card">
+                        <span class="emoji">🧩</span>
+                        <h3>Too Complex</h3>
+                        <p>Intricate patterns humans can't easily code</p>
+                    </div>
+                    <div class="concept-card">
+                        <span class="emoji">❓</span>
+                        <h3>Uninterpretable</h3>
+                        <p>Raw pixel data, audio waveforms</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two-column">
+                <div>
+                    <h2>🔄 Transformation Process</h2>
+                    <div style="text-align: center; font-size: 1.5em; margin: 20px 0;">
+                        📄 Raw Data → 🤖 Deep Learning → 📊 Computable Info
+                    </div>
+                </div>
+                
+                <div>
+                    <h2>🎯 Applications</h2>
+                    <ul>
+                        <li><strong>Economics:</strong> Sentiment analysis, topic extraction</li>
+                        <li><strong>General:</strong> Self-driving cars, medical diagnosis</li>
+                        <li><strong>Impact:</strong> Large-scale accurate extraction</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>🤔 Quick Check: What's the main challenge with raw unstructured data?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectQuizOption(this, false)">It's too small to analyze</div>
+                    <div class="quiz-option" onclick="selectQuizOption(this, true)">It's too high-dimensional and complex for direct analysis</div>
+                    <div class="quiz-option" onclick="selectQuizOption(this, false)">It doesn't contain useful information</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Types of Data -->
+        <div class="slide">
+            <h1>📊 Types of Unstructured Data</h1>
+            
+            <div class="concept-box">
+                <div class="concept-card" onclick="highlightCard(this)">
+                    <span class="emoji">📝</span>
+                    <h3>Text Data</h3>
+                    <p>News articles, social media, documents</p>
+                    <p><em>Largest source of information</em></p>
+                </div>
+                
+                <div class="concept-card" onclick="highlightCard(this)">
+                    <span class="emoji">🖼️</span>
+                    <h3>Image Data</h3>
+                    <p>Historical documents, satellite imagery, social media images</p>
+                </div>
+                
+                <div class="concept-card" onclick="highlightCard(this)">
+                    <span class="emoji">🎵</span>
+                    <h3>Audio/Video</h3>
+                    <p>Video = images + audio<br>Podcasts, interviews, speeches</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h2>🔗 Unified Methodology</h2>
+                <p><strong>Key Insight:</strong> Similar neural network architectures work across all data types!</p>
+                
+                <div style="margin: 20px 0;">
+                    <h3>🏗️ Transformer Architecture</h3>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Data Type</th>
+                            <th>Architecture</th>
+                            <th>Example</th>
+                        </tr>
+                        <tr>
+                            <td>📝 Text</td>
+                            <td>Text Transformers</td>
+                            <td>GPT, BERT</td>
+                        </tr>
+                        <tr>
+                            <td>🖼️ Images</td>
+                            <td>Vision Transformers</td>
+                            <td>ViT, DALL-E</td>
+                        </tr>
+                        <tr>
+                            <td>🎵 Audio</td>
+                            <td>Audio Models</td>
+                            <td>Pre-trained on images!</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <p style="font-size: 1.3em; color: #ffd700;">
+                    🎯 <strong>Goal:</strong> Learn mapping from complex, diverse data to processable format
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 4: Data Representation -->
+        <div class="slide">
+            <h1>🔄 Data Representation & Dimensionality Reduction</h1>
+            
+            <div class="two-column">
+                <div>
+                    <h2>⚠️ The Challenge</h2>
+                    <div class="interactive-element">
+                        <h3>📝 Raw Text</h3>
+                        <p>High-dimensional sparse vectors<br>(vocabulary size: 50,000+)</p>
+                    </div>
+                    <div class="interactive-element">
+                        <h3>🖼️ Raw Images</h3>
+                        <p>RGB pixel data<br>(width × height × 3)</p>
+                    </div>
+                    <div style="text-align: center; color: #ff6b6b; font-size: 1.2em; margin-top: 20px;">
+                        ❌ Difficult to compute with directly!
+                    </div>
+                </div>
+                
+                <div>
+                    <h2>✅ Deep Learning Solution</h2>
+                    <div class="highlight-box">
+                        <h3>🎯 Continuous Vector Space</h3>
+                        <p>Maps complex objects into <strong>embeddings</strong></p>
+                        <ul>
+                            <li>Lower-dimensional vectors (e.g., 512 dimensions)</li>
+                            <li>Continuous numbers in each position</li>
+                            <li>Much easier to work with</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 40px 0;">
+                <div style="font-size: 1.5em; color: #87ceeb;">
+                    🔬 <strong>Core Concept:</strong> Learning continuous vector representations from examples
+                </div>
+                <div style="margin-top: 20px; font-size: 1.2em;">
+                    No explicit programming required! 🤖
+                </div>
+            </div>
+
+            <div class="interactive-element expandable" onclick="toggleExpand(this)">
+                <h3>🔍 Example: Word to Vector</h3>
+                <p>Click to see transformation...</p>
+                <div>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Input</th>
+                            <th>Traditional</th>
+                            <th>Deep Learning</th>
+                        </tr>
+                        <tr>
+                            <td>"economics"</td>
+                            <td>[0,0,0,1,0,0...] (sparse)</td>
+                            <td>[0.2, -0.5, 0.8, 0.1...] (dense)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Why Neural Networks are Powerful -->
+        <div class="slide">
+            <h1>⚡ Why Neural Networks are Powerful</h1>
+            
+            <div class="concept-box">
+                <div class="concept-card" onclick="expandConcept(this, 'transfer')">
+                    <span class="emoji">🔄</span>
+                    <h3>1. Transfer Learning</h3>
+                    <p>Leverage massive-scale training data</p>
+                    <div class="hidden-content">
+                        <ul>
+                            <li>Models see trillions of text tokens</li>
+                            <li>Internet compressed into billions of parameters</li>
+                            <li>Question: Is information loss relevant to your problem?</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="concept-card" onclick="expandConcept(this, 'context')">
+                    <span class="emoji">🧠</span>
+                    <h3>2. Contextual Understanding</h3>
+                    <p>Context changes everything!</p>
+                    <div class="hidden-content">
+                        <ul>
+                            <li>"Bank" in "river bank" vs "investment bank"</li>
+                            <li>Transformer architecture excels at context mapping</li>
+                            <li>Words/pixels get different representations based on surroundings</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="concept-card" onclick="expandConcept(this, 'scale')">
+                    <span class="emoji">📈</span>
+                    <h3>3. Scalability</h3>
+                    <p>Unprecedented computational scale</p>
+                    <div class="hidden-content">
+                        <ul>
+                            <li>Raw data is unwieldy at scale</li>
+                            <li>Optimized tools for vector computations</li>
+                            <li>Modern GPUs enable massive parallel processing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h2>🏗️ The Architecture Advantage</h2>
+                <p>Transformers unify diverse tasks:</p>
+                <div style="text-align: center; margin: 20px 0;">
+                    <div style="display: inline-block; margin: 10px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                        📝 Text → 🧠 Transformer → 🎯 Task-specific output
+                    </div>
+                    <br>
+                    <div style="display: inline-block; margin: 10px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                        🖼️ Images → 🧠 Transformer → 🎯 Task-specific output
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>🤔 Which is NOT a key advantage of neural networks?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectQuizOption(this, false)">Transfer learning from massive datasets</div>
+                    <div class="quiz-option" onclick="selectQuizOption(this, false)">Contextual understanding</div>
+                    <div class="quiz-option" onclick="selectQuizOption(this, true)">Perfect accuracy on all tasks</div>
+                    <div class="quiz-option" onclick="selectQuizOption(this, false)">Computational scalability</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Context vs Bag-of-Words -->
+        <div class="slide">
+            <h1>🔤 Context vs. Bag-of-Words</h1>
+            
+            <div class="two-column">
+                <div>
+                    <h2>📚 Traditional NLP (Bag-of-Words)</h2>
+                    <div class="interactive-element" style="background: rgba(255,0,0,0.2);">
+                        <h3>❌ Limitations</h3>
+                        <ul>
+                            <li>Each word mapped independently</li>
+                            <li>Context completely ignored</li>
+                            <li>Same word = same representation</li>
+                        </ul>
+                        
+                        <div style="margin-top: 15px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 5px;">
+                            <strong>Example:</strong><br>
+                            "Bank" always represented the same way in:<br>
+                            • "River bank" 🏞️<br>
+                            • "Investment bank" 🏦
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2>🧠 Neural Networks (Deep Learning)</h2>
+                    <div class="interactive-element" style="background: rgba(0,255,0,0.2);">
+                        <h3>✅ Advantages</h3>
+                        <ul>
+                            <li>Raw text fed into complex function</li>
+                            <li>Context of each term considered</li>
+                            <li>Dynamic representations</li>
+                        </ul>
+                        
+                        <div style="margin-top: 15px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 5px;">
+                            <strong>Example:</strong><br>
+                            "Bank" gets different vectors in:<br>
+                            • "River bank" → [0.1, 0.8, -0.2...] 🏞️<br>
+                            • "Investment bank" → [0.7, -0.1, 0.9...] 🏦
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h2>🎯 Key Takeaway</h2>
+                <p style="font-size: 1.3em; text-align: center;">
+                    Deep neural networks excel at estimating <strong>really complicated functions</strong>
+                </p>
+                <p style="text-align: center; margin-top: 15px; color: #87ceeb;">
+                    That's essentially what a neural network is! 🧮
+                </p>
+            </div>
+
+            <div class="interactive-element" onclick="demonstrateContext()">
+                <h3>🔬 Interactive Demo</h3>
+                <p>Click to see context in action!</p>
+                <div id="contextDemo" style="display: none; margin-top: 15px;">
+                    <div style="padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; margin: 5px 0;">
+                        "The <span style="color: #ffd700; font-weight: bold;">bank</span> was covered with flowers" → Nature context
+                    </div>
+                    <div style="padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; margin: 5px 0;">
+                        "The <span style="color: #ffd700; font-weight: bold;">bank</span> approved my loan application" → Finance context
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Computation Revolution -->
+        <div class="slide">
+            <h1>💻 Computation Revolution in Economics</h1>
+            
+            <div class="highlight-box">
+                <h2>📅 Historical Perspective</h2>
+                <div class="two-column">
+                    <div class="interactive-element">
+                        <h3>🖥️ 1990s Revolution</h3>
+                        <ul>
+                            <li>Personal computing emergence</li>
+                            <li>Economics: Theoretical → Empirical</li>
+                            <li>Spreadsheets and databases</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="interactive-element">
+                        <h3>🚀 Today's Revolution</h3>
+                        <ul>
+                            <li>GPU computing power</li>
+                            <li>Cloud platforms (Azure, AWS)</li>
+                            <li>New types of questions possible</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="concept-box">
+                <div class="concept-card">
+                    <span class="emoji">💰</span>
+                    <h3>Cost-Effectiveness</h3>
+                    <p>Thousands of CPUs for small cost</p>
+                </div>
+                <div class="concept-card">
+                    <span class="emoji">📊</span>
+                    <h3>Scale</h3>
+                    <p>Process data at unprecedented scales</p>
+                </div>
+                <div class="concept-card">
+                    <span class="emoji">🔬</span>
+                    <h3>New Research</h3>
+                    <p>Questions unimaginable 15 years ago</p>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>💡 Example Transformation</h3>
+                <p>What used to require expensive supercomputers now runs on:</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectQuizOption(this, false)">Only university clusters</div>
+                    <div class="quiz-option" onclick="selectQuizOption(this, true)">Commodity hardware and cloud platforms</div>
+                    <div class="quiz-option" onclick="selectQuizOption(this, false)">Personal laptops only</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Neural Networks in Economic Research -->
+        <div class="slide">
+            <h1>🎯 Neural Networks in Economic Research</h1>
+            
+            <div class="highlight-box">
+                <h2>🎯 Primary Application</h2>
+                <p style="font-size: 1.3em; text-align: center;">
+                    Making predictions from unstructured data
+                </p>
+            </div>
+
+            <div class="interactive-element expandable" onclick="toggleExpand(this)">
+                <h3>📰 Framework Example</h3>
+                <p>Click to see detailed example...</p>
+                <div>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Component</th>
+                            <th>Details</th>
+                        </tr>
+                        <tr>
+                            <td>📊 Dataset</td>
+                            <td>50 million newspaper articles</td>
+                        </tr>
+                        <tr>
+                            <td>🎯 Goal</td>
+                            <td>Identify economic policy uncertainty discussions</td>
+                        </tr>
+                        <tr>
+                            <td>🔢 Output</td>
+                            <td>Binary classification (0/1 value)</td>
+                        </tr>
+                        <tr>
+                            <td>🤖 Method</td>
+                            <td>Deep neural networks impute missing information</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="two-column">
+                <div>
+                    <h2>🎯 Main Focus</h2>
+                    <div class="concept-card">
+                        <span class="emoji">📏</span>
+                        <h3>Measurement</h3>
+                        <p>Measuring specific attributes within unstructured data (text/images)</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2>🔮 Other Applications</h2>
+                    <ul style="margin-top: 20px;">
+                        <li>Approximating solutions to NP-hard problems</li>
+                        <li>Applications in economic theory</li>
+                        <li>Optimization and game theory</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Three Types of Problems -->
+        <div class="slide">
+            <h1>📋 Three Types of Measurement Problems</h1>
+            
+            <div class="concept-box">
+                <div class="concept-card" onclick="selectProblemType(this, 'regression')">
+                    <span class="emoji">📈</span>
+                    <h3>1. Regression Problems</h3>
+                    <p><strong>Task:</strong> Predict continuous numerical outcomes</p>
+                    <div class="hidden-content">
+                        <p><strong>Example:</strong> Locating street vendors in satellite images</p>
+                        <ul>
+                            <li>Predict GPS coordinates</li>
+                            <li>Measure economic activity</li>
+                            <li>Output: (latitude, longitude)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="concept-card" onclick="selectProblemType(this, 'classification')">
+                    <span class="emoji">🏷️</span>
+                    <h3>2. Classification Problems</h3>
+                    <p><strong>Task:</strong> Assign to known, discrete categories</p>
+                    <div class="hidden-content">
+                        <p><strong>Example:</strong> Economic policy uncertainty detection</p>
+                        <ul>
+                            <li>Classes are prespecified</li>
+                            <li>Multi-class or multi-label variants</li>
+                            <li>Output: Yes/No or Category A/B/C</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="concept-card" onclick="selectProblemType(this, 'embeddings')">
+                    <span class="emoji">🕸️</span>
+                    <h3>3. Embeddings/Unsupervised</h3>
+                    <p><strong>Task:</strong> Discover relationships without prespecified classes</p>
+                    <div class="hidden-content">
+                        <p><strong>Use case:</strong> Exploring large datasets</p>
+                        <ul>
+                            <li>Find patterns and topics</li>
+                            <li>No predetermined categories</li>
+                            <li>Work with vector representations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h2>🤔 Which Problem Type?</h2>
+                <p>The choice depends on:</p>
+                <ul>
+                    <li><strong>Known categories:</strong> Classification</li>
+                    <li><strong>Continuous values:</strong> Regression</li>
+                    <li><strong>Unknown patterns:</strong> Embeddings</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 10: Neural Network Architecture -->
+        <div class="slide">
+            <h1>🏗️ Neural Network Architecture</h1>
+            
+            <div class="highlight-box">
+                <h2>🔄 Basic Process</h2>
+                <div style="text-align: center; font-size: 1.3em; margin: 20px 0;">
+                    📄 Unstructured Data → 🧠 Neural Network → 🎯 Embeddings
+                </div>
+                <p style="text-align: center;">Low-dimensional, dense, contextualized vector representations</p>
+            </div>
+
+            <div class="two-column">
+                <div>
+                    <h2>🎯 Supervised Learning</h2>
+                    <div class="interactive-element">
+                        <h3>+ Classification Layer</h3>
+                        <ul>
+                            <li>Maps embeddings → class probabilities</li>
+                            <li>For regression: continuous outputs</li>
+                            <li>Generative AI: predicts next token</li>
+                        </ul>
+                        
+                        <div style="margin-top: 15px; padding: 10px; background: rgba(0,255,0,0.1); border-radius: 5px;">
+                            <strong>Flow:</strong> Text → Embeddings → Classifier → Prediction
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2>🕸️ Unsupervised Learning</h2>
+                    <div class="interactive-element">
+                        <h3>Direct Embeddings</h3>
+                        <ul>
+                            <li>Work directly with vector representations</li>
+                            <li>No classification layer added</li>
+                            <li>Often more advantageous</li>
+                        </ul>
+                        
+                        <div style="margin-top: 15px; padding: 10px; background: rgba(0,0,255,0.1); border-radius: 5px;">
+                            <strong>Flow:</strong> Text → Embeddings → Analysis
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>🤔 When might you choose embeddings over classification?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectQuizOption(this, false)">When you have clearly defined categories</div>
+                    <div class="quiz-option" onclick="selectQuizOption(this, true)">When exploring data without knowing what patterns exist</div>
+                    <div class="quiz-option" onclick="selectQuizOption(this, false)">When you need yes/no answers</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Classification Decision Framework -->
+        <div class="slide">
+            <h1>🤔 Classification Decision Framework</h1>
+            
+            <div class="decision-tree">
+                <div class="decision-node" onclick="showDecisionPath(this, 'q1')">
+                    <h3>❓ Q1: Are classes known a priori?</h3>
+                </div>
+                
+                <div id="q1-no" class="decision-node" style="display: none; background: rgba(255,0,0,0.3);">
+                    <h3>❌ NO → Use Embeddings</h3>
+                    <p>Can't classify unknown classes!</p>
+                </div>
+                
+                <div id="q1-yes" class="decision-node" style="display: none;" onclick="showDecisionPath(this, 'q2')">
+                    <h3>✅ YES → Continue to Q2</h3>
+                </div>
+                
+                <div id="q2" class="decision-node" style="display: none;" onclick="showDecisionPath(this, 'q2-options')">
+                    <h3>❓ Q2: How many classes?</h3>
+                </div>
+                
+                <div id="q2-many" class="decision-node" style="display: none; background: rgba(255,165,0,0.3);">
+                    <h3>📊 Many (100,000+) → Consider Embeddings</h3>
+                    <p>Computationally unwieldy to train classifier</p>
+                </div>
+                
+                <div id="q2-few" class="decision-node" style="display: none;" onclick="showDecisionPath(this, 'q3')">
+                    <h3>🔢 Few → Continue to Q3</h3>
+                </div>
+                
+                <div id="q3" class="decision-node" style="display: none;">
+                    <h3>❓ Q3: Data domain and granularity?</h3>
+                </div>
+                
+                <div id="q3-options" style="display: none;">
+                    <div class="concept-box">
+                        <div class="concept-card">
+                            <span class="emoji">🌐</span>
+                            <h3>General/Web-scraped</h3>
+                            <p>Try Generative AI first (GPT, Gemini)</p>
+                        </div>
+                        <div class="concept-card">
+                            <span class="emoji">📜</span>
+                            <h3>Niche/Historical</h3>
+                            <p>Custom classifier (e.g., 16th-century Spanish)</p>
+                        </div>
+                        <div class="concept-card">
+                            <span class="emoji">🔬</span>
+                            <h3>Fine-grained/Technical</h3>
+                            <p>Often requires custom classifier</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h2>💡 Recommendation</h2>
+                <p style="text-align: center; font-size: 1.2em;">
+                    Always experiment with generative AI first - it's cheap to try! 💰
+                </p>
+            </div>
+        </div>
+
+        <!-- Continue with remaining slides... -->
+        
+        <!-- Slide 12: Transformers -->
+        <div class="slide">
+            <h1>🔧 Traditional Classification with Transformers</h1>
+            
+            <div class="highlight-box">
+                <h2>⚙️ Process Overview</h2>
+                <div style="text-align: center; margin: 20px 0;">
+                    <div style="display: inline-block; margin: 10px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                        1️⃣ Text → Vectors (per token)
+                    </div>
+                    <div style="display: inline-block; margin: 10px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                        2️⃣ + Classifier Layer
+                    </div>
+                    <div style="display: inline-block; margin: 10px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                        3️⃣ → Class Probabilities
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-element expandable" onclick="toggleExpand(this)">
+                <h3>🤖 BERT Example</h3>
+                <p>Click to explore BERT architecture...</p>
+                <div>
+                    <div class="two-column">
+                        <div>
+                            <h4>🧠 Backbone</h4>
+                            <ul>
+                                <li>Same pre-trained model for multiple tasks</li>
+                                <li>Token embeddings with context</li>
+                                <li>Dense vectors for each word/subword</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4>🎯 Task Layers</h4>
+                            <ul>
+                                <li><strong>Text Classification:</strong> Classifier on "class token"</li>
+                                <li><strong>Relationship:</strong> Two texts + "SEP" token</li>
+                                <li><strong>NER:</strong> Token-level classification</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px; padding: 15px; background: rgba(255,215,0,0.2); border-radius: 10px;">
+                        <strong>🔑 Key Advantage:</strong> Unified architecture for diverse tasks!
+                    </div>
+                </div>
+            </div>
+
+            <div class="concept-box">
+                <div class="concept-card">
+                    <span class="emoji">📝</span>
+                    <h3>Text Classification</h3>
+                    <p>Entire text → single prediction</p>
+                </div>
+                <div class="concept-card">
+                    <span class="emoji">🔗</span>
+                    <h3>Relationship Classification</h3>
+                    <p>Two texts → relationship type</p>
+                </div>
+                <div class="concept-card">
+                    <span class="emoji">🏷️</span>
+                    <h3>Token Classification</h3>
+                    <p>Each word → individual label</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Probability Interpretation -->
+        <div class="slide">
+            <h1>⚠️ Classifier Probability Interpretation</h1>
+            
+            <div class="highlight-box" style="background: rgba(255,0,0,0.2); border-left-color: #ff6b6b;">
+                <h2>⚠️ Important Caveat</h2>
+                <p style="font-size: 1.3em; text-align: center; color: #fff;">
+                    Classifier "probabilities" are <strong>NOT</strong> statistical probabilities!
+                </p>
+            </div>
+
+            <div class="two-column">
+                <div>
+                    <h2>🎯 Model Behavior</h2>
+                    <div class="interactive-element">
+                        <ul>
+                            <li>Trained to assign highest weight to most likely class</li>
+                            <li>Changing normalization alters "probabilities"</li>
+                            <li>Goal is relative ranking, not absolute probability</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2>🔬 Research Implications</h2>
+                    <div class="interactive-element" style="background: rgba(255,215,0,0.2);">
+                        <ul>
+                            <li>Critical limitation for econometric analysis</li>
+                            <li>Proper statistical inference requires care</li>
+                            <li>Part 2: How to account for measurement error</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>🤔 Why is this important for economists?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectQuizOption(this, false)">The probabilities are always wrong</div>
+                    <div class="quiz-option" onclick="selectQuizOption(this, true)">We need to account for measurement error in further analysis</div>
+                    <div class="quiz-option" onclick="selectQuizOption(this, false)">Neural networks don't work for economics</div>
+                </div>
+            </div>
+
+            <div class="interactive-element" onclick="showProbabilityDemo()">
+                <h3>📊 Interactive Demo</h3>
+                <p>Click to see probability interpretation in action!</p>
+                <div id="probabilityDemo" style="display: none; margin-top: 15px;">
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Model Output</th>
+                            <th>Interpretation</th>
+                        </tr>
+                        <tr>
+                            <td>[0.8, 0.2]</td>
+                            <td>Class A more likely than Class B</td>
+                        </tr>
+                        <tr>
+                            <td>[0.6, 0.4]</td>
+                            <td>Class A still more likely, but less confident</td>
+                        </tr>
+                        <tr>
+                            <td style="color: #ff6b6b;">NOT: 80% chance</td>
+                            <td style="color: #ff6b6b;">True statistical probability</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add remaining slides following the same pattern... -->
+        
+        <!-- Final slide for now -->
+        <div class="slide">
+            <h1>🎓 Thank You!</h1>
+            
+            <div style="text-align: center; margin: 40px 0;">
+                <h2>📚 Deep Learning in Economics</h2>
+                <p style="font-size: 1.3em; color: #87ceeb;">Stanford Graduate School of Business</p>
+            </div>
+
+            <div class="highlight-box">
+                <h2>🔗 Resources</h2>
+                <ul>
+                    <li>📺 <strong>Full Video:</strong> <a href="https://www.youtube.com/watch?v=6JCiVCYJ0b0" style="color: #ffd700;">Stanford Lecture</a></li>
+                    <li>📖 Knowledge base with tutorials and papers</li>
+                    <li>🛠️ Practical implementation guides</li>
+                    <li>🎯 Part 2: Econometric considerations (coming next!)</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <div class="concept-card">
+                    <span class="emoji">🚀</span>
+                    <h3>Key Takeaway</h3>
+                    <p>Deep learning provides powerful tools for processing unstructured data in economics</p>
+                </div>
+                <div class="concept-card">
+                    <span class="emoji">⚖️</span>
+                    <h3>Next Steps</h3>
+                    <p>Learn proper econometric methods for ML-generated variables</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px; font-size: 1.2em; color: #ffd700;">
+                🎯 Making powerful ML techniques accessible to economists! 🎯
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+        <button class="nav-btn" id="homeBtn" onclick="goToSlide(0)">🏠 Home</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        const timestamps = [
+            '00:00:10', '00:02:05', '00:03:09', '00:04:49', '00:06:26', 
+            '00:10:50', '00:11:50', '00:15:39', '00:17:21', '00:19:35',
+            '00:21:35', '00:24:29', '00:27:45', '00:31:46'
+        ];
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            
+            document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+            document.getElementById('progressBar').style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+            
+            if (timestamps[currentSlide]) {
+                document.getElementById('timeline').textContent = timestamps[currentSlide];
+            }
+            
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            const newSlide = currentSlide + direction;
+            if (newSlide >= 0 && newSlide < totalSlides) {
+                currentSlide = newSlide;
+                updateSlide();
+            }
+        }
+
+        function goToSlide(slideNumber) {
+            if (slideNumber >= 0 && slideNumber < totalSlides) {
+                currentSlide = slideNumber;
+                updateSlide();
+            }
+        }
+
+        function toggleExpand(element) {
+            element.classList.toggle('expanded');
+            const isExpanded = element.classList.contains('expanded');
+            element.querySelector('p').textContent = isExpanded ? 
+                'Click to collapse...' : 'Click to expand details...';
+        }
+
+        function selectQuizOption(option, isCorrect) {
+            const allOptions = option.parentNode.querySelectorAll('.quiz-option');
+            allOptions.forEach(opt => {
+                opt.classList.remove('correct', 'incorrect');
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions.forEach(opt => {
+                const correct = opt.textContent === option.textContent ? isCorrect : !isCorrect;
+                opt.classList.add(correct ? 'correct' : 'incorrect');
+            });
+        }
+
+        function highlightCard(card) {
+            card.style.background = 'rgba(255, 215, 0, 0.3)';
+            card.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                card.style.background = 'rgba(255, 255, 255, 0.1)';
+                card.style.transform = 'scale(1)';
+            }, 1000);
+        }
+
+        function expandConcept(card, type) {
+            const content = card.querySelector('.hidden-content');
+            if (content.style.display === 'none' || !content.style.display) {
+                content.style.display = 'block';
+                card.style.background = 'rgba(255, 215, 0, 0.2)';
+            } else {
+                content.style.display = 'none';
+                card.style.background = 'rgba(255, 255, 255, 0.1)';
+            }
+        }
+
+        function selectProblemType(card, type) {
+            const content = card.querySelector('.hidden-content');
+            if (content.style.display === 'none' || !content.style.display) {
+                content.style.display = 'block';
+                card.style.background = 'rgba(135, 206, 235, 0.3)';
+            } else {
+                content.style.display = 'none';
+                card.style.background = 'rgba(255, 255, 255, 0.1)';
+            }
+        }
+
+        function showDecisionPath(element, nextStep) {
+            if (nextStep === 'q1') {
+                document.getElementById('q1-no').style.display = 'inline-block';
+                document.getElementById('q1-yes').style.display = 'inline-block';
+            } else if (nextStep === 'q2') {
+                document.getElementById('q2').style.display = 'inline-block';
+            } else if (nextStep === 'q2-options') {
+                document.getElementById('q2-many').style.display = 'inline-block';
+                document.getElementById('q2-few').style.display = 'inline-block';
+            } else if (nextStep === 'q3') {
+                document.getElementById('q3').style.display = 'inline-block';
+                document.getElementById('q3-options').style.display = 'block';
+            }
+        }
+
+        function demonstrateContext() {
+            const demo = document.getElementById('contextDemo');
+            if (demo.style.display === 'none' || !demo.style.display) {
+                demo.style.display = 'block';
+            } else {
+                demo.style.display = 'none';
+            }
+        }
+
+        function showProbabilityDemo() {
+            const demo = document.getElementById('probabilityDemo');
+            if (demo.style.display === 'none' || !demo.style.display) {
+                demo.style.display = 'block';
+            } else {
+                demo.style.display = 'none';
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+            if (e.key === 'Home') goToSlide(0);
+            if (e.key === 'End') goToSlide(totalSlides - 1);
+        });
+
+        // Initialize
+        updateSlide();
+
+        // Add floating elements animation
+        function createFloatingElement() {
+            const symbols = ['🧠', '📊', '💡', '🔍', '📈', '🤖', '📱', '💻', '🎯'];
+            const element = document.createElement('div');
+            element.className = 'floating-element';
+            element.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            element.style.left = Math.random() * 100 + '%';
+            element.style.fontSize = (20 + Math.random() * 15) + 'px';
+            element.style.animationDelay = '0s';
+            element.style.animationDuration = (15 + Math.random() * 10) + 's';
+            
+            document.querySelector('.floating-elements').appendChild(element);
+            
+            setTimeout(() => {
+                element.remove();
+            }, 25000);
+        }
+
+        // Create floating elements periodically
+        setInterval(createFloatingElement, 3000);
+    </script>
+</body>
+</html>
