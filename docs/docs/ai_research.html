@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Economics of Transformative AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            overflow: hidden;
+        }
+
+        .container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            max-width: 900px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            text-align: center;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fff, #f0f8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: #f0f8ff;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #e6f3ff;
+        }
+
+        p, li {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .definition {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid gold;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .challenge-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .challenge-card:hover {
+            transform: scale(1.05);
+        }
+
+        .methodology-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .method-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .author-info {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1>A Research Agenda for the Economics of Transformative AI</h1>
+            <div class="author-info">
+                <p><strong>Authors:</strong> Erik Brynjolfsson, Anton Korinek, Ajay K. Agrawal</p>
+                <p><strong>Publication:</strong> NBER Working Paper No. 34256, September 2025</p>
+            </div>
+            <div class="highlight">
+                <p>As AI capabilities advance rapidly, our economic institutions struggle to keep pace. This research agenda identifies nine Grand Challenges to help navigate AI's transformative economic implications.</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Urgency -->
+        <div class="slide">
+            <h2>Why This Matters Now</h2>
+            <ul>
+                <li><strong>Accelerating Timelines:</strong> Median prediction for general AI moved from 2062 (in 2020) to 2033 today</li>
+                <li><strong>Current Impact:</strong> Generative AI already affects 19% of US workers significantly</li>
+                <li><strong>Future Potential:</strong> Productivity growth rates could double in coming years</li>
+                <li><strong>The Gap:</strong> Technology evolves faster than institutions, creating both risks and opportunities</li>
+            </ul>
+            <div class="highlight">
+                <p>"Organizations and processes evolve far more slowly than technology itself—which makes our work all the more urgent."</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Defining TAI -->
+        <div class="slide">
+            <h2>What is Transformative AI?</h2>
+            <div class="definition">
+                <h3>Economic Definition</h3>
+                <p>AI that enables a sustained increase in total factor productivity growth of at least 3-5x historical averages</p>
+            </div>
+            <div class="highlight">
+                <h3>Example: "Powerful AI"</h3>
+                <p>"A country of geniuses in a datacenter" - Dario Amodei</p>
+                <ul>
+                    <li>Intelligence surpassing most capable humans across multiple fields</li>
+                    <li>Autonomous complex task performance</li>
+                    <li>Still constrained by physical bottlenecks and computational limits</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 4: Nine Grand Challenges -->
+        <div class="slide">
+            <h2>Nine Grand Challenges</h2>
+            <div class="challenge-grid">
+                <div class="challenge-card">
+                    <h3>1. Economic Growth</h3>
+                    <p>How will TAI change growth rates and bottlenecks?</p>
+                </div>
+                <div class="challenge-card">
+                    <h3>2. Innovation</h3>
+                    <p>Which processes will TAI transform first?</p>
+                </div>
+                <div class="challenge-card">
+                    <h3>3. Income Distribution</h3>
+                    <p>Will TAI reduce or increase inequality?</p>
+                </div>
+                <div class="challenge-card">
+                    <h3>4. Decision-Making Power</h3>
+                    <p>How will economic and political power concentrate?</p>
+                </div>
+                <div class="challenge-card">
+                    <h3>5. Geoeconomics</h3>
+                    <p>How will TAI reshape international relations?</p>
+                </div>
+                <div class="challenge-card">
+                    <h3>6. Information Flows</h3>
+                    <p>Truth vs. misinformation in AI-mediated world</p>
+                </div>
+                <div class="challenge-card">
+                    <h3>7. AI Safety</h3>
+                    <p>Balancing benefits with catastrophic risks</p>
+                </div>
+                <div class="challenge-card">
+                    <h3>8. Human Well-being</h3>
+                    <p>Meaning and purpose in post-work society</p>
+                </div>
+                <div class="challenge-card">
+                    <h3>9. Transition Dynamics</h3>
+                    <p>Managing the shift to TAI economy</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Economic Growth Challenge -->
+        <div class="slide">
+            <h2>Challenge 1: Economic Growth</h2>
+            <h3>Key Questions:</h3>
+            <ul>
+                <li>How can we detect early signs of an AI-driven "growth explosion"?</li>
+                <li>What new bottlenecks will emerge? (Energy, compute, raw materials)</li>
+                <li>How will human capital's role evolve?</li>
+                <li>Which skills remain valuable as AI capabilities grow?</li>
+            </ul>
+            <div class="highlight">
+                <p><strong>Current Constraints:</strong> Limited workers, human capital, physical capital</p>
+                <p><strong>Future Constraints:</strong> Energy availability, computational resources, ecological limits</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Innovation Challenge -->
+        <div class="slide">
+            <h2>Challenge 2: Innovation & Discovery</h2>
+            <h3>Transformative Potential:</h3>
+            <ul>
+                <li><strong>Automation of Science:</strong> Reduced costs and time for experimentation</li>
+                <li><strong>Cross-disciplinary Innovation:</strong> Breaking down traditional academic silos</li>
+                <li><strong>Democratized Innovation:</strong> Small firms accessing sophisticated R&D capabilities</li>
+                <li><strong>Global vs. Local Discoveries:</strong> Moving beyond disciplinary constraints</li>
+            </ul>
+            <div class="highlight">
+                <p>"Many transformative innovations emerge from integrating knowledge across distinct fields, yet human cognitive limitations often prevent experts from identifying novel connections."</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: Income Distribution -->
+        <div class="slide">
+            <h2>Challenge 3: Income Distribution</h2>
+            <h3>Labor Market Implications:</h3>
+            <ul>
+                <li><strong>Job Displacement vs. Creation:</strong> Will TAI displace more jobs than it creates?</li>
+                <li><strong>Wage Effects:</strong> If machines substitute for workers, wages may fall to machine costs</li>
+                <li><strong>Remaining Jobs:</strong> Focus on human-centered, intrinsic value work</li>
+                <li><strong>Social Safety Nets:</strong> Current systems designed around labor income</li>
+            </ul>
+            <div class="definition">
+                <p><strong>Key Concern:</strong> If TAI purveyors capture most gains, will this increase inequality or will a growing economy "lift all boats"?</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Power & Geoeconomics -->
+        <div class="slide">
+            <h2>Challenges 4 & 5: Power & Geoeconomics</h2>
+            <h3>Economic Concentration:</h3>
+            <ul>
+                <li>Will TAI be dominated by few systems or many?</li>
+                <li>How will TAI affect competition in other industries?</li>
+                <li>Could centrally-planned economies gain advantages?</li>
+            </ul>
+            <h3>Global Implications:</h3>
+            <ul>
+                <li><strong>Military Applications:</strong> Impact on global security balance</li>
+                <li><strong>Economic Power Shifts:</strong> Uneven productivity gains across nations</li>
+                <li><strong>Regulatory Challenges:</strong> Preventing regulatory arbitrage between countries</li>
+            </ul>
+        </div>
+
+        <!-- Slide 9: Information & Safety -->
+        <div class="slide">
+            <h2>Challenges 6 & 7: Information & Safety</h2>
+            <h3>Information Quality:</h3>
+            <ul>
+                <li>How will AI-mediated systems affect truth vs. misinformation?</li>
+                <li>Can AI content overwhelm human-produced information?</li>
+                <li>Impact on democratic governance and social cohesion</li>
+            </ul>
+            <h3>AI Safety & Alignment:</h3>
+            <ul>
+                <li><strong>Cost-Benefit Analysis:</strong> Safety investments vs. economic benefits</li>
+                <li><strong>Race Dynamics:</strong> Pressure to prioritize speed over safety</li>
+                <li><strong>Existential Risks:</strong> When to slow or halt AI progress?</li>
+            </ul>
+        </div>
+
+        <!-- Slide 10: Well-being & Transitions -->
+        <div class="slide">
+            <h2>Challenges 8 & 9: Well-being & Transitions</h2>
+            <h3>Human Meaning:</h3>
+            <ul>
+                <li>How do people find purpose if "the economic problem is solved"?</li>
+                <li>Difference between voluntary retirement vs. involuntary unemployment</li>
+                <li>Designing policies for post-work fulfillment</li>
+            </ul>
+            <h3>Managing Transitions:</h3>
+            <ul>
+                <li><strong>Speed Mismatch:</strong> Fast AI development vs. slow institutional change</li>
+                <li><strong>Complementary Factors:</strong> Skills, regulations, organizations adapting slowly</li>
+                <li><strong>Crisis Prevention:</strong> Avoiding mass unemployment and system failures</li>
+            </ul>
+        </div>
+
+        <!-- Slide 11: Research Methodologies -->
+        <div class="slide">
+            <h2>Research Methodologies</h2>
+            <div class="methodology-list">
+                <div class="method-item">
+                    <h3>Theoretical Approaches</h3>
+                    <p>Growth models, micro-to-macro frameworks, welfare theorems for unprecedented scenarios</p>
+                </div>
+                <div class="method-item">
+                    <h3>TAI Dashboard</h3>
+                    <p>Economic indicators tracking substitution of labor for capital, productivity measures</p>
+                </div>
+                <div class="method-item">
+                    <h3>New Welfare Metrics</h3>
+                    <p>Measuring value of zero-marginal-cost goods, massive online choice experiments</p>
+                </div>
+                <div class="method-item">
+                    <h3>Task-Level Analysis</h3>
+                    <p>Fine-grained analysis using job postings and résumés rather than broad occupational categories</p>
+                </div>
+                <div class="method-item">
+                    <h3>AI Agent Simulations</h3>
+                    <p>LLM-based agents simulating economic behavior at scale</p>
+                </div>
+                <div class="method-item">
+                    <h3>Scenario Planning</h3>
+                    <p>Structured approach for multiple plausible futures given high uncertainty</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Key Indicators -->
+        <div class="slide">
+            <h2>Economic Indicators for TAI</h2>
+            <h3>What to Watch:</h3>
+            <ul>
+                <li><strong>Factor Inputs:</strong> Compute, energy, labor devoted to AI development</li>
+                <li><strong>Technological:</strong> AI capabilities, robot performance, labor substitutability</li>
+                <li><strong>Production/Output:</strong> Total factor productivity, labor demand changes</li>
+                <li><strong>Financial Markets:</strong> AI company valuations, VC investments, energy prices</li>
+                <li><strong>Industry-Level:</strong> New AI-enabled industries, market concentration changes</li>
+                <li><strong>Distribution:</strong> Labor vs. capital share, Gini coefficient trends</li>
+                <li><strong>International:</strong> Global trade patterns, cross-country GDP gaps</li>
+            </ul>
+        </div>
+
+        <!-- Slide 13: Policy Implications -->
+        <div class="slide">
+            <h2>Policy Domains Affected</h2>
+            <ul>
+                <li><strong>Labor Laws:</strong> Adapting to TAI-driven employment changes</li>
+                <li><strong>Taxation Systems:</strong> Distributing TAI-generated wealth</li>
+                <li><strong>Education:</strong> Preparing workers for AI-augmented economy</li>
+                <li><strong>Social Insurance:</strong> New income distribution mechanisms</li>
+                <li><strong>Antitrust:</strong> Managing TAI-driven market concentration</li>
+                <li><strong>Intellectual Property:</strong> Innovation incentives in AI age</li>
+                <li><strong>Environmental Policy:</strong> Managing TAI's ecological footprint</li>
+                <li><strong>International Coordination:</strong> Global governance of TAI development</li>
+            </ul>
+        </div>
+
+        <!-- Slide 14: Conclusion -->
+        <div class="slide">
+            <h2>The Path Forward</h2>
+            <div class="highlight">
+                <h3>Two Scenarios:</h3>
+                <p><strong>Positive:</strong> Vastly enhanced wealth, improved welfare, fairly distributed benefits</p>
+                <p><strong>Negative:</strong> Increased inequality, mass unemployment, social instability, catastrophic risks</p>
+            </div>
+            <h3>Urgent Need:</h3>
+            <ul>
+                <li>Proactive research agenda before TAI arrives</li>
+                <li>Interdisciplinary collaboration (economics, computer science, policy)</li>
+                <li>More investment in understanding economic implications</li>
+                <li>Building institutional capacity for research and policy response</li>
+            </ul>
+            <div class="definition">
+                <p><strong>Goal:</strong> Navigate toward broadly shared prosperity and human flourishing as transformative AI unfolds</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">14</span>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prev-btn" onclick="changeSlide(-1)">Previous</button>
+        <button class="nav-btn" id="next-btn" onclick="changeSlide(1)">Next</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+            
+            // Update navigation buttons
+            document.getElementById('prev-btn').disabled = currentSlide === 0;
+            document.getElementById('next-btn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            if (direction === 1 && currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            } else if (direction === -1 && currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight') changeSlide(1);
+            if (event.key === 'ArrowLeft') changeSlide(-1);
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
