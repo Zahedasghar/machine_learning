@@ -831,5 +831,26 @@
     "title": "Machine Learning?",
     "section": "End",
     "text": "End\nRemember: Machine learning is a tool, not magic. Success comes from:\n\nUnderstanding your business problem\nChoosing the right approach\nValidating your results\nCommunicating findings clearly\n\nQuestions? 🤔"
+  },
+  {
+    "objectID": "docs/lec2.html#reinforcement-learning-in-economics-.smaller",
+    "href": "docs/lec2.html#reinforcement-learning-in-economics-.smaller",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Reinforcement Learning in Economics {.smaller}",
+    "text": "Reinforcement Learning in Economics {.smaller}\n\n\n\n\n\n\nDefinition\n\n\nAn agent learns optimal economic policies through trial and error, receiving rewards for good decisions and penalties for bad ones\n\n\n\n\n\n🎯 Key Economic Concepts\n\nAgent: Central bank, trader, firm\nEnvironment: Economic system, market\nActions: Policy decisions, trades, investments\n\nRewards: Economic outcomes, profits, welfare\n\n\n🔄 Learning Process\n\nTake economic action\nObserve market response\n\nReceive reward/penalty\nUpdate strategy\nRepeat until optimal\n\n\n\n💼 Economic Applications\n\n🏛️ Monetary Policy: Optimal interest rate setting\n📈 Algorithmic Trading: Automated investment strategies\n🏢 Supply Chain: Inventory and pricing optimization\n🎮 Auction Design: Optimal bidding strategies\n🌱 Climate Policy: Carbon pricing mechanisms\n\n\nReal Example: JPMorgan uses RL for optimal trade execution to minimize market impact\n\n\n\nReinforcement learning is particularly powerful for dynamic economic decision-making where the environment responds to actions."
+  },
+  {
+    "objectID": "docs/lec2.html#rl-in-monetary-policy-.smaller",
+    "href": "docs/lec2.html#rl-in-monetary-policy-.smaller",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "RL in Monetary Policy {.smaller}",
+    "text": "RL in Monetary Policy {.smaller}\n\n🏛️ Central Bank Agent📊 Policy Learning Process🎯 Economic Outcomes\n\n\n\n\n\n\n\nflowchart TD\n    A[🏛️ Central Bank&lt;br/&gt;Agent] --&gt; B[📊 Economic State&lt;br/&gt;Inflation, GDP, Employment]\n    B --&gt; C[🎯 Policy Action&lt;br/&gt;Interest Rate Decision]\n    C --&gt; D[📈 Economic Response&lt;br/&gt;Market Reaction]\n    D --&gt; E[🏆 Reward&lt;br/&gt;Economic Stability]\n    E --&gt; A\n    \n    style A fill:#e1f5fe\n    style E fill:#e8f5e8\n\n\n\n\n\n\n\n\nState Variables: - Current inflation rate - GDP growth rate\n- Unemployment rate - Market volatility\nActions: - Raise interest rates (+0.25%) - Lower interest rates (-0.25%)\n- Keep rates unchanged\nReward Function:\nReward = -|inflation - target|² - |unemployment - natural_rate|² - |gdp_volatility|\n\n\n\n\nTraditional Rules: - Fixed policy responses - Limited adaptability - May miss complex interactions\nExample: Taylor Rule\nRate = neutral + 1.5×(inflation - target) + 0.5×GDP_gap\n\nRL-Based Policy: - Adaptive responses - Learns from experience - Captures non-linear relationships\nAdvantage: Can handle regime changes and structural breaks automatically"
+  },
+  {
+    "objectID": "docs/lec2.html#real-world-economic-ml-applications-.smaller",
+    "href": "docs/lec2.html#real-world-economic-ml-applications-.smaller",
+    "title": "Machine Learning in Economics & Social Sciences",
+    "section": "Real-World Economic ML Applications {.smaller}",
+    "text": "Real-World Economic ML Applications {.smaller}\n\n🏦 Financial Services🏛️ Government & Policy🏢 Business Applications\n\n\nCredit Scoring & Risk Management\n\nBanks: Wells Fargo, JPMorgan use ML for loan decisions\nFeatures: Income, credit history, spending patterns, social data\nImpact: Reduced default rates by 15-20%\n\nAlgorithmic Trading\n\nFirms: Renaissance Technologies, Two Sigma\nTechniques: Deep RL, NLP for news analysis\nAssets: Over $1 trillion managed by ML algorithms\n\n\n\nEconomic Forecasting\n\nFed: Uses ML for GDP, inflation predictions\nIMF: Nowcasting economic growth using satellite data\nWorld Bank: Poverty mapping with mobile phone data\n\nTax Compliance\n\nIRS: ML for fraud detection (98% accuracy)\nEU: VAT gap prediction using transaction data\n\n\n\nDynamic Pricing\n\nAirlines: Real-time price optimization\nRide-sharing: Uber’s surge pricing algorithm\n\nE-commerce: Amazon’s recommendation engine\n\nSupply Chain\n\nWalmart: Demand forecasting with weather data\nManufacturing: Predictive maintenance\nLogistics: Route optimization"
   }
 ]

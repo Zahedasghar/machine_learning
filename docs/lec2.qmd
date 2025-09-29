@@ -438,7 +438,7 @@ graph LR
 
 ---
 
-## Reinforcement Learning in Economics {.smaller}
+## Reinforcement Learning in Economics {.smaller} {.scrollable}
 
 :::{.callout-important icon="🏆"}
 ## Definition
@@ -485,7 +485,7 @@ Reinforcement learning is particularly powerful for dynamic economic decision-ma
 
 ---
 
-## RL in Monetary Policy {.smaller}
+## RL in Monetary Policy {.smaller} {.scrollable}
 
 :::{.panel-tabset}
 ## 🏛️ Central Bank Agent
@@ -569,7 +569,7 @@ In practice, economists often combine these approaches - using unsupervised lear
 
 ---
 
-## Real-World Economic ML Applications {.smaller}
+## Real-World Economic ML Applications {.smaller} {.scrollable}
 
 :::{.panel-tabset}
 ## 🏦 Financial Services
