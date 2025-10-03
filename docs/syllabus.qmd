@@ -2,7 +2,7 @@
 title: "Machine Learning, Big Data & AI in Economics (MS)"
 subtitle: "School of Economics — Quaid-i-Azam University, Islamabad"
 author: "Zahid Asghar"
-date: "September 13, 2025"
+date: "September 13, 23025"
 format:
   html:
     theme: cosmo

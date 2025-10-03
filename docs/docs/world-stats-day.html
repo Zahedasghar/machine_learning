@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورلڈ اسٹیٹسٹکس ڈے 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Jameel Noori Nastaleeq', 'Noto Nastalikh Urdu', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0f4c29 0%, #1a5f3f 50%, #2d7a52 100%);
+            color: #fff;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInDown 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .theme {
+            font-size: 1.3em;
+            color: #90EE90;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        .header .date {
+            font-size: 1.1em;
+            color: #e0e0e0;
+            margin-top: 10px;
+        }
+
+        .opening-quotes {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 40px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            animation: fadeIn 1.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .quote-box {
+            background: rgba(255, 215, 0, 0.15);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-right: 5px solid #ffd700;
+            transition: all 0.3s ease;
+        }
+
+        .quote-box:hover {
+            transform: translateX(-5px);
+            background: rgba(255, 215, 0, 0.25);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .main-quote {
+            font-size: 1.3em;
+            color: #ffd700;
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+
+        .urdu-quote {
+            font-size: 1.4em;
+            color: #fff;
+            line-height: 2;
+            margin-top: 10px;
+        }
+
+        .quote-highlight {
+            background: linear-gradient(135deg, rgba(144, 238, 144, 0.2), rgba(144, 238, 144, 0.1));
+            padding: 30px;
+            border-radius: 15px;
+            border-right: 5px solid #90EE90;
+            margin-top: 20px;
+        }
+
+        .quote-highlight p {
+            font-size: 1.5em;
+            color: #90EE90;
+            font-weight: bold;
+            line-height: 2;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .closing-quote {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            margin: 20px 0;
+        }
+
+        .final-message {
+            background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.2));
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 40px;
+            border: 3px solid #ffd700;
+            animation: pulse 3s infinite;
+        }
+
+        .final-message p {
+            margin: 15px 0;
+        }
+
+        .stats-banner {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        .stats-banner h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-right: 5px solid #ffd700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .section-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: #ffd700;
+            color: #0f4c29;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-left: 15px;
+            float: right;
+        }
+
+        .section h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #ffd700;
+            clear: both;
+        }
+
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .section.active .section-content {
+            max-height: 2000px;
+        }
+
+        .section p {
+            font-size: 1.15em;
+            margin-bottom: 15px;
+            line-height: 2;
+        }
+
+        .example-box {
+            background: rgba(144, 238, 144, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-right: 3px solid #90EE90;
+        }
+
+        .example-box h4 {
+            color: #90EE90;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .conversation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .host {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-right: 4px solid #ffd700;
+        }
+
+        .guest {
+            background: rgba(144, 238, 144, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-right: 4px solid #90EE90;
+        }
+
+        .speaker-label {
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .guest .speaker-label {
+            color: #90EE90;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+        }
+
+        .footer h2 {
+            font-size: 2em;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .toggle-btn {
+            background: #ffd700;
+            color: #0f4c29;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .toggle-btn:hover {
+            background: #ffed4e;
+            transform: scale(1.05);
+        }
+
+        .highlight {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: rgba(255, 215, 0, 0.3);
+            border: 2px solid #ffd700;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .nav-btn:hover {
+            background: #ffd700;
+            color: #0f4c29;
+            transform: translateY(-3px);
+        }
+
+        .nav-btn.active {
+            background: #ffd700;
+            color: #0f4c29;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .section h2 {
+                font-size: 1.4em;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌍 ورلڈ اسٹیٹسٹکس ڈے 2025</h1>
+            <div class="theme">Quality Statistics and Data for Everyone</div>
+            <div class="theme">معیاری شمارات اور ڈیٹا سب کے لیے</div>
+            <div class="date">20 اکتوبر 2025 | پاکستان کے تناظر میں</div>
+        </div>
+
+        <div class="opening-quotes">
+            <div class="quote-box">
+                <p class="main-quote">"Numbers alone cannot explain the world, but the world cannot be explained without numbers."</p>
+                <p class="urdu-quote">اعداد تنہا دنیا کی تشریح نہیں کر سکتے، لیکن اعداد کے بغیر دنیا کی تشریح ممکن نہیں۔</p>
+            </div>
+            <div class="quote-box">
+                <p class="main-quote">"It's not just numbers—it's the numbers that matter."</p>
+                <p class="urdu-quote">یہ محض نمبر نہیں—یہ وہ نمبر ہیں جو اہم ہیں۔</p>
+            </div>
+            <div class="quote-highlight">
+                <p>اعداد و شمار محض نمبر نہیں—یہ پاکستان کی ترقی کی دھڑکن ہیں۔</p>
+                <p>ہر نمبر ایک کہانی ہے—بچے کے خواب، خاندان کی جدوجہد، نوجوان کے موقع کی کہانی۔</p>
+            </div>
+        </div>
+
+        <div class="stats-banner">
+            <h2>⚠️ پاکستان کی حقیقت</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-number">2.7 کروڑ</div>
+                    <div>سکول سے باہر بچے</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">بلند</div>
+                    <div>بچوں کی اموات کی شرح</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">زیادہ</div>
+                    <div>غربت کی سطح</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="showAllSections()">تمام نکات دیکھیں</button>
+            <button class="nav-btn" onclick="showConversation()">مکالمہ دیکھیں</button>
+        </div>
+
+        <div id="main-sections">
+            <div class="section" onclick="toggleSection(this)">
+                <span class="section-number">1</span>
+                <h2>🎯 روزمرہ زندگی میں معیاری شمارات</h2>
+                <button class="toggle-btn">تفصیل دیکھیں ▼</button>
+                <div class="section-content">
+                    <p>ہم سب روزانہ ڈیٹا پر انحصار کرتے ہیں—چاہے وہ موسم کی پیشن گوئی ہو، مہنگائی کے اعداد ہوں، یا ویکسینیشن کی تفصیلات۔ یہ صرف سرکاری رپورٹیں نہیں، بلکہ ہماری زندگی کے فیصلے ہیں۔</p>
+                    
+                    <div class="example-box">
+                        <h4>✅ مثالیں:</h4>
+                        <p><strong>موسم کی پیشن گوئی:</strong> آپ نے صبح موسم دیکھا اور چھتری لے کر نکلے—یہ معیاری ڈیٹا پر اعتماد ہے</p>
+                        <p><strong>COVID-19:</strong> قابل اعتماد ڈیٹا نے بتایا کہ کہاں کیسز زیادہ ہیں، کہاں وسائل بھیجنے ہیں</p>
+                        <p><strong>سود کی شرح:</strong> مہنگائی کے درست اعداد پر منحصر ہے</p>
+                    </div>
+
+                    <p><span class="highlight">جب معیاری شمارات نہ ہوں تو غلط معلومات پھیلتی ہے، اور فیصلے اندازوں پر ہوتے ہیں۔</span></p>
+                </div>
+            </div>
+
+            <div class="section" onclick="toggleSection(this)">
+                <span class="section-number">2</span>
+                <h2>👥 سب کے لیے - کوئی پیچھے نہ رہے</h2>
+                <button class="toggle-btn">تفصیل دیکھیں ▼</button>
+                <div class="section-content">
+                    <p>یہ ضروری ہے کہ اعداد سب کی نمائندگی کریں۔ پاکستان میں 2.7 کروڑ بچے سکول سے باہر ہیں۔ لیکن سوال یہ ہے:</p>
+                    
+                    <div class="example-box">
+                        <h4>🤔 اہم سوالات:</h4>
+                        <p>• یہ بچے کون ہیں؟ کہاں ہیں؟</p>
+                        <p>• کیا یہ زیادہ تر بچیاں ہیں؟</p>
+                        <p>• یا معذور بچے؟</p>
+                        <p>• یا دور دراز دیہات کے بچے؟</p>
+                        <p>• یا محنت کرنے والے بچے؟</p>
+                    </div>
+
+                    <p><span class="highlight">اگر ہم disaggregated data نہ لیں تو پالیسی generic بنے گی اور مسئلہ جوں کا توں رہے گا۔</span></p>
+
+                    <div class="example-box">
+                        <h4>📊 مثال:</h4>
+                        <p>اگر اسلام آباد میں 95% سکول کا داخلہ ہے لیکن تھرپارکر میں 40%، تو قومی اوسط اس بحران کو چھپا دیتی ہے۔</p>
+                        <p><strong>بچوں کی اموات:</strong> شہری لاہور میں پیدا ہونے والے بچے کے مقابلے میں دور دراز بلوچستان میں پیدا ہونے والے بچے کی بقا کے امکانات بالکل مختلف ہیں۔</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" onclick="toggleSection(this)">
+                <span class="section-number">3</span>
+                <h2>🔒 اعتماد اور شفافیت - غلط معلومات سے لڑنا</h2>
+                <button class="toggle-btn">تفصیل دیکھیں ▼</button>
+                <div class="section-content">
+                    <p class="highlight">آج کے دور میں کہا جاتا ہے: "We are drowning in data but starving for trust"</p>
+                    
+                    <p>پاکستان میں ہم نے دیکھا کہ مردم شماری پر تنازعات ہوتے ہیں، یا مختلف ادارے متضاد اعداد دیتے ہیں۔ جب عوام کو یقین نہ ہو تو اعتماد ٹوٹتا ہے۔</p>
+
+                    <div class="example-box">
+                        <h4>✅ معیاری ڈیٹا کی خصوصیات:</h4>
+                        <p><strong>آزاد:</strong> سیاسی مداخلت سے پاک</p>
+                        <p><strong>شفاف طریقہ کار:</strong> واضح methodology</p>
+                        <p><strong>پیشہ ورانہ اخلاقیات:</strong> بین الاقوامی معیارات</p>
+                    </div>
+
+                    <div class="example-box">
+                        <h4>📌 مثالیں:</h4>
+                        <p><strong>پولیو کا خاتمہ:</strong> real-time، شفاف ڈیٹا نے اعتماد پیدا کیا</p>
+                        <p><strong>COVID-19:</strong> جب سرکاری اعداد حقیقت سے میل نہیں کھاتے تھے، لوگوں نے یقین کرنا چھوڑ دیا</p>
+                    </div>
+
+                    <p><span class="highlight">جب عوام کو یقین ہو کہ شمارات حقیقت ہیں، تب ہی یہ ترقی کی بنیاد بنتے ہیں۔</span></p>
+                </div>
+            </div>
+
+            <div class="section" onclick="toggleSection(this)">
+                <span class="section-number">4</span>
+                <h2>📱 رسائی اور سمجھ - شہریوں کے لیے ڈیٹا</h2>
+                <button class="toggle-btn">تفصیل دیکھیں ▼</button>
+                <div class="section-content">
+                    <p>"سب کے لیے" کا مطلب ہے صرف ڈیٹا جمع کرنا نہیں بلکہ اسے عام آدمی تک قابل فہم بنانا۔</p>
+
+                    <div class="example-box">
+                        <h4>🎯 ضروری اقدامات:</h4>
+                        <p>• Open data portals</p>
+                        <p>• Visual dashboards - نقشے، گراف، سادہ چارٹ</p>
+                        <p>• اردو میں موبائل ایپس</p>
+                        <p>• Data literacy programs</p>
+                    </div>
+
+                    <p><span class="highlight">ہر شہری کو PhD کی ضرورت نہیں کہ وہ سمجھ سکے کہ اس کے ضلع میں غربت کتنی ہے یا سکول کا داخلہ کتنا ہے۔</span></p>
+
+                    <div class="example-box">
+                        <h4>✅ کامیاب مثال:</h4>
+                        <p><strong>BISP (بے نظیر انکم سپورٹ پروگرام):</strong> poverty scorecards کے ذریعے درست targeting کی گئی اور لوگ سمجھ سکے کہ وہ کہاں کھڑے ہیں۔</p>
+                    </div>
+
+                    <p>ایک ماں سوات میں اپنے علاقے میں ویکسینیشن کی شرح دیکھ سکے، کراچی میں ایک دکاندار مہنگائی کے ڈیٹا کو سمجھ سکے، ملتان میں ایک استاد اپنے ضلع کے تعلیمی اعداد تک رسائی حاصل کر سکے۔</p>
+                </div>
+            </div>
+
+            <div class="section" onclick="toggleSection(this)">
+                <span class="section-number">5</span>
+                <h2>🌍 بڑے چیلنجز - موسمیاتی تبدیلی، صحت، SDGs</h2>
+                <button class="toggle-btn">تفصیل دیکھیں ▼</button>
+                <div class="section-content">
+                    <p>دنیا کے بڑے مسائل—موسمیاتی تبدیلی، وبائیں، اور پائیدار ترقی کے اہداف—ان سب کی پیمائش صرف معیاری ڈیٹا سے ممکن ہے۔</p>
+
+                    <div class="example-box">
+                        <h4>🌊 سیلاب اور آفات:</h4>
+                        <p>2022 میں تباہ کن سیلاب۔ معیاری ڈیٹا بتاتا ہے کہ کون سے اضلاع سب سے زیادہ خطرے میں ہیں، کون سے راستے منقطع ہوتے ہیں، بے گھر لوگ کہاں منتقل ہوتے ہیں۔ یہ وسائل کی پہلے سے تیاری، ابتدائی انتباہی نظام، بہتر انخلاء کی منصوبہ بندی کی اجازت دیتا ہے۔</p>
+                    </div>
+
+                    <div class="example-box">
+                        <h4>💉 صحت کی ہنگامی صورتحال:</h4>
+                        <p><strong>پولیو کا خاتمہ:</strong> ہر بچے کی محتاط ڈیٹا ٹریکنگ کی وجہ سے ممکن ہوا</p>
+                        <p><strong>COVID-19:</strong> ہمارے صحت کے ڈیٹا سسٹم کی کمزوری ظاہر ہوئی</p>
+                    </div>
+
+                    <div class="example-box">
+                        <h4>📋 جوابدہی:</h4>
+                        <p><strong>آئین کا آرٹیکل 25-A:</strong> ہر بچے کو تعلیم کی ضمانت</p>
+                        <p><strong>SDGs:</strong> غربت کے خاتمے کا عہد</p>
+                        <p><span class="highlight">لیکن یہ جاننے کے لیے قابل اعتماد ڈیٹا چاہیے کہ کتنے بچے واقعی سکول جا رہے ہیں، کیا غربت واقعی کم ہو رہی ہے۔</span></p>
+                    </div>
+
+                    <p>معیاری شمارات ہمیں یہ طاقت دیتے ہیں کہ ہم وعدوں بمقابلہ پیش رفت کو ٹریک کریں۔</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="conversation-section" style="display:none;">
+            <h2 style="text-align:center; color:#ffd700; font-size:2em; margin:30px 0;">🎬 ٹی وی پروگرام کا مکالمہ</h2>
+            
+            <div class="conversation">
+                <div class="host">
+                    <div class="speaker-label">میزبان:</div>
+                    <p>السلام علیکم اور Rising Pakistan میں خوش آمدید۔ آج ورلڈ اسٹیٹسٹکس ڈے ہے، اور ہمارے ساتھ ایک ماہر شماریات موجود ہیں۔ خوش آمدید!</p>
+                </div>
+
+                <div class="guest">
+                    <div class="speaker-label">آپ (مہمان):</div>
+                    <p>السلام علیکم! مجھے یہاں بلانے کا شکریہ۔ اس اہم دن پر یہاں آنا خوشی کی بات ہے۔</p>
+                </div>
+
+                <div class="host">
+                    <div class="speaker-label">میزبان:</div>
+                    <p>تو، ورلڈ اسٹیٹسٹکس ڈے... میں ایمانداری سے کہوں تو جب زیادہ تر لوگ "شمارات" سنتے ہیں تو ان کی آنکھیں بوجھل ہو جاتی ہیں۔ نمبر، چارٹ، بورنگ رپورٹیں۔ عام پاکستانی ناظرین کو اس کی کیوں پرواہ کرنی چاہیے؟</p>
+                </div>
+
+                <div class="guest">
+                    <div class="speaker-label">آپ (مہمان):</div>
+                    <p><em>[مسکراتے ہوئے]</em> یہی رد عمل ہمیں بدلنا ہے! میں آپ سے ایک سوال پوچھتا ہوں—کیا آپ نے آج صبح اسٹوڈیو آنے سے پہلے موسم کی پیشن گوئی دیکھی؟</p>
+                </div>
+
+                <div class="host">
+                    <div class="speaker-label">میزبان:</div>
+                    <p>بالکل! اس میں بارش کا امکان تھا، تو میں چھتری لے آیا۔</p>
+                </div>
+
+                <div class="guest">
+                    <div class="speaker-label">آپ (مہمان):</div>
+                    <p>بہترین مثال! وہ پیشن گوئی معیاری شمارات پر مبنی ہے—ہر منٹ جمع کیا جانے والا موسمیاتی ڈیٹا۔ آپ نے اس پر بھروسہ کیا اور فیصلہ کیا۔ اب تصور کریں—اگر آپ اندرون سندھ میں ایک کسان ہیں جو یہ فیصلہ کر رہے ہیں کہ فصل کب لگائیں؟ یا ایک ماں جو فیصلہ کر رہی ہے کہ اپنے بچے کو ویکسین لگوائے یا نہیں؟ یا ایک خاندان جو سوچ رہا ہے کہ مہنگائی کے ڈیٹا کی بنیاد پر وہ اس مہینے آٹا خرید سکتے ہیں یا نہیں؟ معیاری شمارات ہمارے ہر فیصلے کو متاثر کرتے ہیں۔</p>
+                </div>
+
+                <div class="host">
+                    <div class="speaker-label">میزبان:</div>
+                    <p>دلچسپ! لیکن آئیے پاکستان کی حقیقت کے بارے میں بات کرتے ہیں۔ ہمارے 2.7 کروڑ بچے سکول سے باہر ہیں—یہ ایک شماریہ ہے جو ہر کوئی جانتا ہے۔ مسئلہ کیا ہے؟</p>
+                </div>
+
+                <div class="guest">
+                    <div class="speaker-label">آپ (مہمان):</div>
+                    <p>دیکھیں، یہ بالکل وہی جگہ ہے جہاں "معیاری شمارات اور ڈیٹا سب کے لیے" آتا ہے۔ ہاں، 2.7 کروڑ حیران کن ہے۔ لیکن یہاں وہ چیز ہے جو یہ نمبر ہمیں نہیں بتاتا: <strong>یہ بچے کون ہیں؟ کہاں ہیں؟ کیوں سکول سے باہر ہیں؟</strong></p>
+                </div>
+
+                <div class="host">
+                    <div class="speaker-label">میزبان:</div>
+                    <p>آپ کا کیا مطلب ہے؟</p>
+                </div>
+
+                <div class="guest">
+                    <div class="speaker-label">آپ (مہمان):</div>
+                    <p>کیا یہ زیادہ تر دیہی بلوچستان کی لڑکیاں ہیں جو سکولوں تک رسائی نہیں رکھتیں؟ کیا یہ شہری فیکٹریوں میں محنت کرنے والے بچے ہیں؟ کیا یہ معذور بچے ہیں جن کے پاس کوئی جامع سکول نہیں ہے؟ کیا یہ ان اضلاع میں ہیں جہاں سکول موجود ہیں لیکن کوئی استاد نہیں ہے? disaggregated، معیاری ڈیٹا کے بغیر، ہم اندھیرے میں تیر چلا رہے ہیں۔</p>
+                </div>
+
+                <div class="host">
+                    <div class="speaker-label">میزبان:</div>
+                    <p>تو آپ کہہ رہے ہیں کہ ایک نمبر کافی نہیں ہے؟</p>
+                </div>
+
+                <div class="guest">
+                    <div class="speaker-label">آپ (مہمان):</div>
+                    <p>بالکل! جب ہم کہتے ہیں "سب کے لیے"، تو ہمارا مطلب ہے کہ شمارات کو ہر کسی کی حقیقت کو پکڑنا چاہیے۔ اگر اسلام آباد میں 95% سکول کا اندراج ہے لیکن دیہی تھرپارکر میں 40% ہے، تو قومی اوسط اس بحران کو چھپا دیتی ہے۔ معیاری ڈیٹا اسے توڑ دیتا ہے—ضلع بہ ضلع، صنف بہ صنف، آمدنی کی سطح بہ آمدنی کی سطح۔ صرف تب ہی ہم ھدف شدہ حل ڈیزائن کر سکتے ہیں۔</p>
+                </div>
+
+                <div class="host">
+                    <div class="speaker-label">میزبان:</div>
+                    <p>یہ سمجھ آتا ہے۔ لیکن آپ نے بچوں کی اموات کا بھی ذکر کیا۔ یہ وہاں کیسے لاگو ہوتا ہے؟</p>
+                </div>
+
+                <div class="guest">
+                    <div class="speaker-label">آپ (مہمان):</div>
+                    <p>بہترین مثال۔ پاکستان کی قومی بچوں کی اموات کی شرح کاغذ پر بہتری دکھا سکتی ہے۔ لیکن اگر ہم معیاری شمارات کے ساتھ گہرائی سے کھودیں، تو ہمیں بڑے فرق ملتے ہیں۔ ایک تعلیم یافتہ، متوسط طبقے کے خاندان میں شہری لاہور میں پیدا ہونے والے بچے کے مقابلے میں ایک ایسی ماں کے لیے دور دراز بلوچستان میں پیدا ہونے والے بچے کی بقا کے امکانات بالکل مختلف ہیں جس کی صحت کی دیکھ بھال تک رسائی نہیں ہے۔</p>
+                </div>
+
+                <div class="host">
+                    <div class="speaker-label">میزبان:</div>
+                    <p>یہ دل دہلا دینے والا ہے...</p>
+                </div>
+
+                <div class="guest">
+                    <div class="speaker-label">آپ (مہمان):</div>
+                    <p>یہ ہے۔ اور یہاں بات ہے—granular ڈیٹا کے بغیر، ہمیں معلوم نہیں ہوگا کہ کن مخصوص اضلاع کو موبائل صحت کی اکائیوں کی ضرورت ہے، کن علاقوں کو تربیت یافتہ دائیوں کی ضرورت ہے، کن برادریوں کو زچگی کی تعلیم کی ضرورت ہے۔ وسائل ہر جگہ پتلے پھیلے ہوئے ہیں بجائے اس کے کہ جہاں بحران سب سے گہرا ہے۔ یہی وجہ ہے کہ "سب کے لیے ڈیٹا" کا مطلب ہے کہ کوئی کمیونٹی، کوئی بچہ ہمارے نمبروں میں غائب نہیں ہے۔</p>
+                </div>
+
+                <div class="host">
+                    <div class="speaker-label">میزبان:</div>
+                    <p>اب، مجھے پوچھنا ہے—اور یہ وہی ہے جو بہت سے پاکستانی سوچتے ہیں—کیا ہم واقعی اپنے شمارات پر بھروسہ کر سکتے ہیں؟ ہم نے مردم شماری کے اعداد پر تنازعات دیکھے ہیں، حکومت کے مختلف محکمے مختلف نمبر دیتے ہیں...</p>
+                </div>
+
+                <div class="guest">
+                    <div class="speaker-label">آپ (مہمان):</div>
+                    <p><em>[سنجیدگی سے سر ہلاتے ہوئے]</em> آپ نے سب سے اہم مسئلے کو چھوا ہے۔ ابھی، ہم ڈیٹا میں ڈوب رہے ہیں لیکن اعتماد کے لیے بھوک رہے ہیں۔ اور آپ صحیح کہہ رہے ہیں—مردم شماری کے تنازعات، اعداد کی سیاسی ہیرا پھیری، مختلف ذرائع سے متضاد رپورٹیں۔ یہ عوامی اعتماد کو ختم کر دیتا ہے۔</p>
+                </div>
+
+                <div class="host">
+                    <div class="speaker-label">میزبان:</div>
+                    <p>تو ہم اسے کیسے ٹھیک کریں؟</p>
+                </div>
+
+                <div class="guest">
+                    <div class="speaker-label">آپ (مہمان):</div>
+                    <p>معیاری شمارات کو تین چیزوں کی ضرورت ہے: پہلی، <strong>آزادی</strong>۔ پاکستان بیورو آف اسٹیٹسٹکس کو سیاسی مداخلت کے بغیر کام کرنا چاہیے۔ دوسری، <strong>شفافیت</strong>۔ ہمیں اپنا طریقہ کار، اپنے ذرائع، اپنی حدود دکھائیں۔ صرف ایک نمبر نہ دیں—ہمیں دکھائیں کہ آپ وہاں کیسے پہنچے۔ تیسری، <strong>مستقل مزاجی</strong>۔ بین الاقوامی معیارات، پیشہ ورانہ اخلاقیات، ہم مرتبہ جائزہ استعمال کریں۔</p>
+                </div>
+
+                <div class="host">
+                    <div class="speaker-label">میزبان:</div>
+                    <p>بہترین! اب ہم ختم کرتے ہوئے، سیاست دانوں کے لیے آپ کا کیا پیغام ہے؟</p>
+                </div>
+
+                <div class="guest">
+                    <div class="speaker-label">آپ (مہمان):</div>
+                    <p>پاکستان بیورو آف اسٹیٹسٹکس میں سرمایہ کاری کریں۔ سول رجسٹریشن کو مضبوط کریں۔ باقاعدگی سے، معیاری گھریلو سروے کریں۔ ڈیٹا کے پیشہ ور افراد کو تربیت دیں۔ شماریاتی آزادی کو سیاسی دباؤ سے محفوظ رکھیں۔ ڈیٹا کو کھلا اور قابل رسائی بنائیں۔</p>
+                </div>
+
+                <div class="host">
+                    <div class="speaker-label">میزبان:</div>
+                    <p>اور عام شہریوں کے لیے؟</p>
+                </div>
+
+                <div class="guest">
+                    <div class="speaker-label">آپ (مہمان):</div>
+                    <p>ڈیٹا کا مطالبہ کریں! اپنے ایم این اے سے پوچھیں: ہمارے حلقے کے تعلیمی شمارات کیا ہیں؟ اپنے محکمہ صحت سے پوچھیں: ہمارے ضلع میں بچوں کی اموات کی شرح کیا ہے؟ شفافیت کا مطالبہ کریں۔ ڈیٹا آپ کا حق ہے—یہ آپ کو لیڈروں کو جوابدہ ٹھہرانے اور اپنے خاندان کے لیے باخبر فیصلے کرنے کی طاقت دیتا ہے۔</p>
+                </div>
+
+                <div class="host">
+                    <div class="speaker-label">میزبان:</div>
+                    <p>آخری خیالات؟</p>
+                </div>
+
+                <div class="guest">
+                    <div class="speaker-label">آپ (مہمان):</div>
+                    <p><em>[براہ راست کیمرے کو دیکھتے ہوئے]</em> پاکستان 2.7 کروڑ بچوں کو پیچھے چھوڑنے کی استطاعت نہیں رکھتا۔ ہم قابل علاج بچوں کی اموات کو قبول نہیں کر سکتے۔ ہم مسلسل غربت کو نظر انداز نہیں کر سکتے۔ لیکن ہم ان مسائل کو آنکھیں بند کر کے بھی ٹھیک نہیں کر سکتے۔</p>
+                    <p><strong>"Quality statistics and data for everyone"</strong> کا مطلب ہے پاکستان کو وہ واضح نظر دینا جس کی اسے بہتر مستقبل بنانے کی ضرورت ہے—خاص طور پر سب سے زیادہ کمزور لوگوں کے لیے۔</p>
+                    <p class="highlight">جب ہم اپنے مستقبل کو ڈیٹا اور حقیقت کی روشنی میں ناپتے ہیں، تو پاکستان صرف اُٹھتا نہیں—پاکستان روشن ہوتا ہے۔ پاکستان زندہ باد!</p>
+                </div>
+
+                <div class="host">
+                    <div class="speaker-label">میزبان:</div>
+                    <p>پاکستان زندہ باد! بہت شکریہ اس روشن خیال گفتگو کے لیے!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <h2>💡 حتمی پیغام</h2>
+            
+            <div class="closing-quote">
+                <p style="font-size:1.5em; color:#ffd700; font-weight:bold; margin-bottom:20px;">
+                    "جب ہم ناپتے ہیں تو بہتر کرتے ہیں—اور جب بہتر کرتے ہیں تو پاکستان ایک ساتھ آگے بڑھتا ہے۔"
+                </p>
+            </div>
+
+            <p style="font-size:1.3em; line-height:2;">پاکستان billions روپے تعلیم اور صحت پر خرچ کرتا ہے۔ لیکن اگر ہمیں پتا ہی نہ ہو کہ dropout کہاں زیادہ ہے، یا infant mortality کہاں concentrate ہے، تو یہ resources ضائع ہو جاتے ہیں۔</p>
+            
+            <p style="font-size:1.4em; margin-top:20px; color:#ffd700; font-weight:bold;">Quality statistics کوئی luxury نہیں، یہ development infrastructure ہیں۔</p>
+            
+            <div class="closing-quote" style="margin-top:30px;">
+                <p style="font-size:1.4em; line-height:2;">
+                    <strong>"Numbers alone cannot explain the world, but the world cannot be explained without numbers."</strong>
+                </p>
+                <p style="font-size:1.3em; color:#90EE90; margin-top:15px;">
+                    اعداد تنہا دنیا کی تشریح نہیں کر سکتے، لیکن اعداد کے بغیر دنیا کی تشریح ممکن نہیں۔
+                </p>
+            </div>
+
+            <p style="font-size:1.5em; margin-top:30px; line-height:2;">
+                <strong>"Pakistan cannot afford to leave 27 million children behind. We cannot fix problems blindfolded. Quality statistics and data for everyone means giving Pakistan the clear vision it needs to build a better future for all."</strong>
+            </p>
+            
+            <div class="final-message">
+                <p style="font-size:1.6em; color:#90EE90; font-weight:bold;">
+                    ہر نمبر ایک کہانی ہے—بچے کے خواب، خاندان کی جدوجہد، نوجوان کے موقع کی کہانی۔
+                </p>
+                <p style="font-size:1.7em; margin-top:20px; color:#ffd700; font-weight:bold;">
+                    اعداد و شمار محض نمبر نہیں—یہ پاکستان کی ترقی کی دھڑکن ہیں۔
+                </p>
+                <p style="font-size:1.8em; margin-top:30px; color:#fff; font-weight:bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+                    جب ہم اپنے مستقبل کو ڈیٹا اور حقیقت کی روشنی میں ناپتے ہیں،<br>
+                    تو پاکستان صرف اُٹھتا نہیں—پاکستان روشن ہوتا ہے۔<br>
+                    🇵🇰 پاکستان زندہ باد! 🇵🇰
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(element) {
+            const isActive = element.classList.contains('active');
+            
+            // Close all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+                section.querySelector('.toggle-btn').textContent = 'تفصیل دیکھیں ▼';
+            });
+            
+            // If the clicked section wasn't active, open it
+            if (!isActive) {
+                element.classList.add('active');
+                element.querySelector('.toggle-btn').textContent = 'بند کریں ▲';
+            }
+        }
+
+        function showAllSections() {
+            document.getElementById('main-sections').style.display = 'block';
+            document.getElementById('conversation-section').style.display = 'none';
+            
+            // Update button states
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-btn')[0].classList.add('active');
+        }
+
+        function showConversation() {
+            document.getElementById('main-sections').style.display = 'none';
+            document.getElementById('conversation-section').style.display = 'block';
+            
+            // Update button states
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-btn')[1].classList.add('active');
+        }
+
+        // Add animation delays to sections
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>
