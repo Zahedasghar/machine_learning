@@ -5,7 +5,7 @@ library(tidyverse)
 
 # Get the data
 
-psx <- read_csv("data/psx.csv")
+psx <- read_csv("data/psx_102025.csv")
 
 dim(psx)
 

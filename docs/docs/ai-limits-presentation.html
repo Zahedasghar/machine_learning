@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Capabilities & Limitations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 90%;
+            max-width: 1200px;
+            height: 85vh;
+            padding: 60px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            animation: slideIn 0.5s ease-out;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 14px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #764ba2;
+            margin: 20px 0 15px 0;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #764ba2;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            font-size: 1.2em;
+            padding: 15px;
+            margin: 10px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf5 100%);
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .pyramid-level {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: transform 0.3s ease;
+        }
+
+        .pyramid-level:hover {
+            transform: scale(1.05);
+        }
+
+        .level-wisdom {
+            width: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .level-knowledge {
+            width: 300px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .level-information {
+            width: 400px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .level-data {
+            width: 500px;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .card {
+            padding: 25px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf5 100%);
+            border-radius: 15px;
+            border: 2px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .achieved {
+            background: #43e97b;
+            color: white;
+        }
+
+        .in-progress {
+            background: #f5af19;
+            color: white;
+        }
+
+        .future {
+            background: #667eea;
+            color: white;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+            z-index: 1000;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.3em;
+            color: #764ba2;
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 30%, #ff9a9e 100%);
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1>🤖 AI Capabilities & Limitations</h1>
+            <p class="subtitle">Understanding the Present and Future of Artificial Intelligence</p>
+            <div class="quote">
+                "Don't bet against AI, unless of course you want to be wrong."
+            </div>
+        </div>
+
+        <!-- Slide 2: Introduction -->
+        <div class="slide">
+            <div class="slide-number">2 / 16</div>
+            <h2>AI is Everywhere</h2>
+            <ul>
+                <li><span class="emoji">📱</span> In your phone</li>
+                <li><span class="emoji">🚗</span> In your car</li>
+                <li><span class="emoji">✉️</span> Writing emails for you</li>
+                <li><span class="emoji">🏠</span> Managing your home</li>
+            </ul>
+            <p style="margin-top: 40px; font-size: 1.3em; text-align: center;">
+                <strong>The Question:</strong> Are there actually any limits to what AI can do?
+            </p>
+        </div>
+
+        <!-- Slide 3: Past Predictions -->
+        <div class="slide">
+            <div class="slide-number">3 / 16</div>
+            <h2>History of Predictions</h2>
+            <p>Over decades, experts confidently stated:</p>
+            <div class="quote">
+                "AI will never be able to [fill in the blank]"
+            </div>
+            <h3 style="text-align: center; margin-top: 40px; color: #f5576c;">
+                What do most predictions have in common?
+            </h3>
+            <p style="text-align: center; font-size: 2em; color: #f5576c; margin-top: 20px;">
+                <strong>They were WRONG</strong>
+            </p>
+        </div>
+
+        <!-- Slide 4: Knowledge Pyramid -->
+        <div class="slide">
+            <div class="slide-number">4 / 16</div>
+            <h2>The Knowledge Pyramid</h2>
+            <div class="pyramid">
+                <div class="pyramid-level level-wisdom">WISDOM<br>Applied Knowledge</div>
+                <div class="pyramid-level level-knowledge">KNOWLEDGE<br>Interpreted Information</div>
+                <div class="pyramid-level level-information">INFORMATION<br>Contextualized Data</div>
+                <div class="pyramid-level level-data">DATA<br>Raw Facts</div>
+            </div>
+            <p style="margin-top: 30px;"><strong>Example:</strong> Ages (10, 6, 42, 8) → People in a room → Most under 21 → Plan age-appropriate activities</p>
+        </div>
+
+        <!-- Slide 5: Conquered Limitations 1 -->
+        <div class="slide">
+            <div class="slide-number">5 / 16</div>
+            <h2>Limitations Conquered: Reasoning</h2>
+            <span class="status-badge achieved">✓ ACHIEVED</span>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>The Challenge</h3>
+                    <p>Complex problem-solving and reasoning were thought to be uniquely human capabilities</p>
+                </div>
+                <div class="card">
+                    <h3>The Breakthrough</h3>
+                    <p><strong>IBM Deep Blue (1997)</strong> defeated chess grandmaster Gary Kasparov</p>
+                    <p style="margin-top: 15px;">This required massive amounts of strategic reasoning and problem-solving</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Conquered Limitations 2 -->
+        <div class="slide">
+            <div class="slide-number">6 / 16</div>
+            <h2>Limitations Conquered: Natural Language</h2>
+            <span class="status-badge achieved">✓ ACHIEVED</span>
+            <h3>The Complexity of Human Language</h3>
+            <ul>
+                <li>Nuance and context</li>
+                <li>Idioms ("raining cats and dogs")</li>
+                <li>Humor and sarcasm</li>
+                <li>Figurative vs. literal meaning</li>
+            </ul>
+            <div class="grid-2" style="margin-top: 30px;">
+                <div class="card">
+                    <strong>ELIZA (1965)</strong><br>First chatbot - basic conversations
+                </div>
+                <div class="card">
+                    <strong>IBM Watson (2011)</strong><br>Won Jeopardy! - understood puns and wordplay
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Conquered Limitations 3 -->
+        <div class="slide">
+            <div class="slide-number">7 / 16</div>
+            <h2>Limitations Conquered: Creativity</h2>
+            <span class="status-badge achieved">✓ ACHIEVED</span>
+            <p>AI can now create:</p>
+            <ul>
+                <li><span class="emoji">🎨</span> Original artwork</li>
+                <li><span class="emoji">🎵</span> New musical compositions</li>
+                <li><span class="emoji">✍️</span> Written content</li>
+                <li><span class="emoji">🎬</span> Video and animations</li>
+            </ul>
+            <div class="quote" style="margin-top: 30px;">
+                "Just like humans, AI builds on past influences to create something new"
+            </div>
+        </div>
+
+        <!-- Slide 8: Conquered Limitations 4 -->
+        <div class="slide">
+            <div class="slide-number">8 / 16</div>
+            <h2>Limitations Conquered: Real-Time Perception</h2>
+            <span class="status-badge achieved">✓ ACHIEVED</span>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>🚗 Self-Driving Cars</h3>
+                    <p>Real-time environment perception</p>
+                    <p>Predict movement of objects</p>
+                    <p>Make split-second decisions</p>
+                </div>
+                <div class="card">
+                    <h3>🤖 Robots</h3>
+                    <p>Navigate complex environments</p>
+                    <p>Interact with physical objects</p>
+                    <p>Adapt to changing conditions</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Partial Solutions -->
+        <div class="slide">
+            <div class="slide-number">9 / 16</div>
+            <h2>Work in Progress</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <span class="status-badge in-progress">⚡ IN PROGRESS</span>
+                    <h3>Emotional Intelligence (EQ)</h3>
+                    <p>Modern chatbots can:</p>
+                    <ul style="margin-top: 15px;">
+                        <li>Understand moods</li>
+                        <li>Respond empathetically</li>
+                        <li>Simulate emotional awareness</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <span class="status-badge in-progress">⚡ IN PROGRESS</span>
+                    <h3>Hallucinations</h3>
+                    <p>Solutions being developed:</p>
+                    <ul style="margin-top: 15px;">
+                        <li>Retrieval Augmented Generation (RAG)</li>
+                        <li>Mixture of Experts</li>
+                        <li>Model chaining</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Current Limitations 1 -->
+        <div class="slide">
+            <div class="slide-number">10 / 16</div>
+            <h2>Current Frontiers</h2>
+            <span class="status-badge future">🔮 FUTURE</span>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Artificial General Intelligence (AGI)</h3>
+                    <p>Smart across ALL domains, not just specialized areas</p>
+                    <p style="margin-top: 15px;">As capable as humans in every domain</p>
+                </div>
+                <div class="card">
+                    <h3>Artificial Super Intelligence (ASI)</h3>
+                    <p>Better than humans in EVERY domain</p>
+                    <p style="margin-top: 15px;">Currently science fiction</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Current Limitations 2 -->
+        <div class="slide">
+            <div class="slide-number">11 / 16</div>
+            <h2>Current Challenges: Sustainability</h2>
+            <span class="status-badge future">🔮 FUTURE</span>
+            <h3>The Problem</h3>
+            <ul>
+                <li><span class="emoji">⚡</span> Massive electricity consumption</li>
+                <li><span class="emoji">❄️</span> Extensive cooling requirements</li>
+                <li><span class="emoji">💰</span> Very expensive to run</li>
+                <li><span class="emoji">🌍</span> Not scalable with current approach</li>
+            </ul>
+            <h3 style="margin-top: 30px;">The Solution</h3>
+            <p>Use right-sized models for specific tasks, not always the biggest model</p>
+        </div>
+
+        <!-- Slide 12: Current Limitations 3 -->
+        <div class="slide">
+            <div class="slide-number">12 / 16</div>
+            <h2>Philosophical Frontiers</h2>
+            <span class="status-badge future">🔮 FUTURE</span>
+            <ul>
+                <li><span class="emoji">🧠</span> <strong>Self-Awareness:</strong> Does AI know it exists?</li>
+                <li><span class="emoji">💭</span> <strong>Understanding:</strong> Does it truly comprehend meaning?</li>
+                <li><span class="emoji">⚖️</span> <strong>Judgment:</strong> Can it make ethical decisions?</li>
+                <li><span class="emoji">🎯</span> <strong>Goal Setting:</strong> Can it determine "why" vs just "how"?</li>
+                <li><span class="emoji">👁️</span> <strong>Sensation:</strong> Can it truly sense beyond data?</li>
+                <li><span class="emoji">❤️</span> <strong>Deep Emotions:</strong> Can it feel joy, loss, or accomplishment?</li>
+            </ul>
+        </div>
+
+        <!-- Slide 13: Common Sense -->
+        <div class="slide">
+            <div class="slide-number">13 / 16</div>
+            <h2>The "Common Sense" Challenge</h2>
+            <div class="quote">
+                "Is it really all that common?"
+            </div>
+            <p style="margin-top: 40px;">Common sense remains elusive because:</p>
+            <ul>
+                <li>Different people define it differently</li>
+                <li>It requires implicit cultural knowledge</li>
+                <li>It involves unstated assumptions</li>
+                <li>It's context-dependent</li>
+            </ul>
+            <p style="margin-top: 30px; text-align: center; font-style: italic;">
+                Even humans struggle with this, so can we expect AI to master it?
+            </p>
+        </div>
+
+        <!-- Slide 14: Human vs AI Roles -->
+        <div class="slide">
+            <div class="slide-number">14 / 16</div>
+            <h2>Humans vs AI: Complementary Strengths</h2>
+            <div class="grid-2">
+                <div class="card" style="border-color: #43e97b; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+                    <h3>👥 HUMANS Excel At</h3>
+                    <ul>
+                        <li><strong>WHAT:</strong> Setting macro-level goals</li>
+                        <li><strong>WHY:</strong> Defining purpose and meaning</li>
+                        <li>Strategic vision</li>
+                        <li>Ethical judgment</li>
+                        <li>Emotional connection</li>
+                    </ul>
+                </div>
+                <div class="card" style="border-color: #667eea; background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);">
+                    <h3>🤖 AI Excels At</h3>
+                    <ul>
+                        <li><strong>HOW:</strong> Figuring out execution</li>
+                        <li><strong>DO:</strong> Performing tasks</li>
+                        <li>Speed and optimization</li>
+                        <li>Pattern recognition</li>
+                        <li>Automation at scale</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: The Trajectory -->
+        <div class="slide">
+            <div class="slide-number">15 / 16</div>
+            <h2>The AI Trajectory</h2>
+            <p style="text-align: center; font-size: 1.4em; margin-bottom: 40px;">
+                For the longest time: <span class="highlight">Slow progress</span>
+            </p>
+            <p style="text-align: center; font-size: 1.8em; margin-bottom: 40px;">
+                Then suddenly: <span class="highlight">Exponential growth</span> 🚀
+            </p>
+            <div class="quote">
+                "We're at an inflection point where the developments and where all of this is going to go, no one really knows."
+            </div>
+            <p style="margin-top: 40px; text-align: center;">
+                The future will bring systems that do things <strong>we haven't even imagined yet</strong>
+            </p>
+        </div>
+
+        <!-- Slide 16: Conclusion -->
+        <div class="slide">
+            <div class="slide-number">16 / 16</div>
+            <h2>Key Takeaway</h2>
+            <div class="quote" style="font-size: 1.6em; padding: 50px;">
+                "Don't bet against AI"
+            </div>
+            <div class="grid-2" style="margin-top: 40px;">
+                <div class="card">
+                    <h3>✅ What We Know</h3>
+                    <p>AI has repeatedly exceeded expectations</p>
+                    <p>Many "impossible" tasks are now routine</p>
+                </div>
+                <div class="card">
+                    <h3>🔮 What's Next</h3>
+                    <p>Exciting research opportunities</p>
+                    <p>Systems beyond our imagination</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 40px; font-size: 1.3em;">
+                <strong>The possibilities are endless - embrace the journey!</strong>
+            </p>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+        <button id="nextBtn" onclick="changeSlide(1)">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const progressBar = document.getElementById('progressBar');
+
+        function updateSlideNumbers() {
+            slides.forEach((slide, index) => {
+                const slideNumber = slide.querySelector('.slide-number');
+                if (slideNumber && index > 0) {
+                    slideNumber.textContent = `${index + 1} / ${totalSlides}`;
+                }
+            });
+        }
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            if (n >= totalSlides) currentSlide = totalSlides - 1;
+            if (n < 0) currentSlide = 0;
+            
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+            
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            progressBar.style.width = progress + '%';
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        updateSlideNumbers();
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

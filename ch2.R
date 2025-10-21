@@ -32,7 +32,7 @@ hist(y)
 par(mfrow=c(1,1))
 ### Reading in data
 Auto=read.csv("Auto.csv")
-pwd()
+
 Auto=read.csv("../Auto.csv")
 names(Auto)
 dim(Auto)

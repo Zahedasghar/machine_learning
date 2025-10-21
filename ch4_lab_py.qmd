@@ -1,0 +1,405 @@
+Here's your Jupyter notebook converted to a Quarto document:
+
+---
+title: "Classification Analysis with Python"
+format: html
+jupyter: python3
+---
+
+## Introduction
+
+This document presents a comprehensive classification analysis using Python, covering logistic regression, linear discriminant analysis, and other statistical learning methods. We'll work with financial market data to predict market direction.
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from ISLP import load_data
+from ISLP.models import ModelSpec as MS
+import statsmodels.api as sm
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
+import warnings
+warnings.filterwarnings('ignore')
+```
+
+## Data Loading and Exploration
+
+We begin by loading the Smarket dataset, which contains percentage returns for the S&P 500 stock index over 1,250 days from 2001 to 2005.
+
+```{python}
+# Load the Smarket data
+Smarket = load_data("Smarket")
+print("Dataset shape:", Smarket.shape)
+print("\nDataset info:")
+print(Smarket.info())
+print("\nFirst few rows:")
+print(Smarket.head())
+```
+
+```{python}
+# Display summary statistics
+print("Summary Statistics:")
+print(Smarket.describe())
+```
+
+The dataset contains the following variables:
+- **Year**: The year of the observation
+- **Lag1-Lag5**: Percentage returns for the previous 5 days
+- **Volume**: Number of shares traded (in billions)
+- **Today**: Percentage return for the current day
+- **Direction**: Whether the market went up or down on this date
+
+## Exploratory Data Analysis
+
+Let's examine the correlations between the lag variables and today's returns.
+
+```{python}
+# Calculate correlation matrix
+numeric_vars = ['Lag1', 'Lag2', 'Lag3', 'Lag4', 'Lag5', 'Volume', 'Today']
+corr_matrix = Smarket[numeric_vars].corr()
+
+# Create correlation heatmap
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', center=0, 
+            square=True, fmt='.3f')
+plt.title('Correlation Matrix of Market Variables')
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+# Examine the relationship between Volume and Year
+plt.figure(figsize=(12, 5))
+
+plt.subplot(1, 2, 1)
+plt.scatter(Smarket['Year'], Smarket['Volume'], alpha=0.6)
+plt.xlabel('Year')
+plt.ylabel('Volume (billions)')
+plt.title('Trading Volume by Year')
+
+plt.subplot(1, 2, 2)
+volume_by_year = Smarket.groupby('Year')['Volume'].mean()
+plt.plot(volume_by_year.index, volume_by_year.values, 'o-')
+plt.xlabel('Year')
+plt.ylabel('Average Volume (billions)')
+plt.title('Average Trading Volume by Year')
+
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+# Examine the distribution of Direction
+direction_counts = Smarket['Direction'].value_counts()
+print("Direction distribution:")
+print(direction_counts)
+print(f"\nPercentage Up: {direction_counts['Up']/len(Smarket)*100:.1f}%")
+print(f"Percentage Down: {direction_counts['Down']/len(Smarket)*100:.1f}%")
+
+plt.figure(figsize=(8, 6))
+direction_counts.plot(kind='bar')
+plt.title('Distribution of Market Direction')
+plt.xlabel('Direction')
+plt.ylabel('Count')
+plt.xticks(rotation=0)
+plt.show()
+```
+
+## Logistic Regression
+
+Now we'll fit a logistic regression model to predict the direction of the market using the lag variables and volume.
+
+```{python}
+# Prepare the design matrix
+design = MS(['Lag1', 'Lag2', 'Lag3', 'Lag4', 'Lag5', 'Volume'])
+X = design.fit_transform(Smarket)
+y = Smarket['Direction']
+
+# Fit logistic regression model
+logit_model = sm.Logit(y == 'Up', X)
+logit_results = logit_model.fit()
+
+print("Logistic Regression Results:")
+print(logit_results.summary())
+```
+
+```{python}
+# Extract and display coefficients
+coefficients = logit_results.params
+print("Model Coefficients:")
+for var, coef in coefficients.items():
+    print(f"{var}: {coef:.4f}")
+
+# Calculate p-values
+p_values = logit_results.pvalues
+print("\nP-values:")
+for var, p_val in p_values.items():
+    significance = "***" if p_val < 0.001 else "**" if p_val < 0.01 else "*" if p_val < 0.05 else ""
+    print(f"{var}: {p_val:.4f} {significance}")
+```
+
+```{python}
+# Make predictions on the training data
+predictions_prob = logit_results.predict()
+predictions = (predictions_prob > 0.5).astype(int)
+predicted_direction = ['Up' if p == 1 else 'Down' for p in predictions]
+
+# Create confusion matrix
+conf_matrix = confusion_matrix(y, predicted_direction)
+print("Confusion Matrix:")
+print(conf_matrix)
+
+# Calculate accuracy
+accuracy = accuracy_score(y, predicted_direction)
+print(f"\nTraining Accuracy: {accuracy:.4f}")
+```
+
+```{python}
+# Visualize the confusion matrix
+plt.figure(figsize=(8, 6))
+sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', 
+            xticklabels=['Down', 'Up'], yticklabels=['Down', 'Up'])
+plt.title('Confusion Matrix - Logistic Regression')
+plt.xlabel('Predicted Direction')
+plt.ylabel('Actual Direction')
+plt.show()
+```
+
+## Model Validation with Training/Test Split
+
+The training error rate can be misleading. Let's split the data and evaluate on a test set.
+
+```{python}
+# Create training and test sets based on year
+train_mask = Smarket['Year'] < 2005
+Smarket_train = Smarket[train_mask]
+Smarket_test = Smarket[~train_mask]
+
+print(f"Training set size: {len(Smarket_train)}")
+print(f"Test set size: {len(Smarket_test)}")
+print(f"Test set years: {sorted(Smarket_test['Year'].unique())}")
+```
+
+```{python}
+# Fit model on training data
+X_train = design.fit_transform(Smarket_train)
+y_train = Smarket_train['Direction']
+
+X_test = design.transform(Smarket_test)
+y_test = Smarket_test['Direction']
+
+# Fit logistic regression on training data
+logit_train = sm.Logit(y_train == 'Up', X_train).fit()
+
+# Predict on test data
+test_predictions_prob = logit_train.predict(X_test)
+test_predictions = ['Up' if p > 0.5 else 'Down' for p in test_predictions_prob]
+
+# Evaluate test performance
+test_accuracy = accuracy_score(y_test, test_predictions)
+print(f"Test Accuracy: {test_accuracy:.4f}")
+
+# Test confusion matrix
+test_conf_matrix = confusion_matrix(y_test, test_predictions)
+print("\nTest Confusion Matrix:")
+print(test_conf_matrix)
+```
+
+```{python}
+# Visualize test results
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
+
+# Plot prediction probabilities
+ax1.hist(test_predictions_prob[y_test == 'Up'], alpha=0.7, label='Actual Up', bins=20)
+ax1.hist(test_predictions_prob[y_test == 'Down'], alpha=0.7, label='Actual Down', bins=20)
+ax1.axvline(x=0.5, color='red', linestyle='--', label='Decision Threshold')
+ax1.set_xlabel('Predicted Probability of Up')
+ax1.set_ylabel('Frequency')
+ax1.set_title('Distribution of Predicted Probabilities')
+ax1.legend()
+
+# Plot confusion matrix
+sns.heatmap(test_conf_matrix, annot=True, fmt='d', cmap='Blues', 
+            xticklabels=['Down', 'Up'], yticklabels=['Down', 'Up'], ax=ax2)
+ax2.set_title('Test Confusion Matrix')
+ax2.set_xlabel('Predicted Direction')
+ax2.set_ylabel('Actual Direction')
+
+plt.tight_layout()
+plt.show()
+```
+
+## Simplified Logistic Regression
+
+Let's try a simpler model using only Lag1 and Lag2, as they showed some significance.
+
+```{python}
+# Simplified model with only Lag1 and Lag2
+simple_design = MS(['Lag1', 'Lag2'])
+X_train_simple = simple_design.fit_transform(Smarket_train)
+X_test_simple = simple_design.transform(Smarket_test)
+
+# Fit simplified logistic regression
+simple_logit = sm.Logit(y_train == 'Up', X_train_simple).fit()
+print("Simplified Logistic Regression Results:")
+print(simple_logit.summary())
+```
+
+```{python}
+# Predict with simplified model
+simple_predictions_prob = simple_logit.predict(X_test_simple)
+simple_predictions = ['Up' if p > 0.5 else 'Down' for p in simple_predictions_prob]
+
+# Evaluate simplified model
+simple_accuracy = accuracy_score(y_test, simple_predictions)
+print(f"Simplified Model Test Accuracy: {simple_accuracy:.4f}")
+
+# Compare accuracies
+print(f"Full Model Accuracy: {test_accuracy:.4f}")
+print(f"Simplified Model Accuracy: {simple_accuracy:.4f}")
+print(f"Improvement: {simple_accuracy - test_accuracy:.4f}")
+```
+
+## Linear Discriminant Analysis (LDA)
+
+Now let's try Linear Discriminant Analysis as an alternative to logistic regression.
+
+```{python}
+# Fit LDA model
+lda = LinearDiscriminantAnalysis()
+lda.fit(X_train_simple, y_train)
+
+# Make predictions
+lda_predictions = lda.predict(X_test_simple)
+lda_accuracy = accuracy_score(y_test, lda_predictions)
+
+print(f"LDA Test Accuracy: {lda_accuracy:.4f}")
+
+# Get prediction probabilities
+lda_probs = lda.predict_proba(X_test_simple)
+print("\nFirst 10 LDA prediction probabilities:")
+for i in range(10):
+    print(f"Day {i+1}: P(Down)={lda_probs[i,0]:.3f}, P(Up)={lda_probs[i,1]:.3f}, Predicted: {lda_predictions[i]}")
+```
+
+```{python}
+# Compare LDA and Logistic Regression results
+comparison_df = pd.DataFrame({
+    'Actual': y_test.values,
+    'Logistic_Reg': simple_predictions,
+    'LDA': lda_predictions
+})
+
+print("Model Comparison (first 20 predictions):")
+print(comparison_df.head(20))
+
+# Calculate agreement between models
+agreement = (comparison_df['Logistic_Reg'] == comparison_df['LDA']).mean()
+print(f"\nAgreement between Logistic Regression and LDA: {agreement:.3f}")
+```
+
+## Quadratic Discriminant Analysis (QDA)
+
+Let's also try Quadratic Discriminant Analysis, which allows for more flexible decision boundaries.
+
+```{python}
+# Fit QDA model
+qda = QuadraticDiscriminantAnalysis()
+qda.fit(X_train_simple, y_train)
+
+# Make predictions
+qda_predictions = qda.predict(X_test_simple)
+qda_accuracy = accuracy_score(y_test, qda_predictions)
+
+print(f"QDA Test Accuracy: {qda_accuracy:.4f}")
+
+# Compare all three methods
+print("\nModel Comparison Summary:")
+print(f"Logistic Regression: {simple_accuracy:.4f}")
+print(f"LDA: {lda_accuracy:.4f}")
+print(f"QDA: {qda_accuracy:.4f}")
+```
+
+## K-Nearest Neighbors (KNN)
+
+Finally, let's try K-Nearest Neighbors classification.
+
+```{python}
+# Try different values of K
+k_values = [1, 3, 5, 7, 9, 15, 21]
+knn_accuracies = []
+
+for k in k_values:
+    knn = KNeighborsClassifier(n_neighbors=k)
+    knn.fit(X_train_simple, y_train)
+    knn_pred = knn.predict(X_test_simple)
+    accuracy = accuracy_score(y_test, knn_pred)
+    knn_accuracies.append(accuracy)
+    print(f"KNN (k={k}): {accuracy:.4f}")
+
+# Plot KNN performance
+plt.figure(figsize=(10, 6))
+plt.plot(k_values, knn_accuracies, 'o-')
+plt.xlabel('Number of Neighbors (k)')
+plt.ylabel('Test Accuracy')
+plt.title('KNN Performance vs Number of Neighbors')
+plt.grid(True, alpha=0.3)
+plt.show()
+```
+
+```{python}
+# Find best k and compare with other methods
+best_k_idx = np.argmax(knn_accuracies)
+best_k = k_values[best_k_idx]
+best_knn_accuracy = knn_accuracies[best_k_idx]
+
+print(f"\nBest KNN performance: k={best_k}, accuracy={best_knn_accuracy:.4f}")
+```
+
+## Final Model Comparison
+
+```{python}
+# Create comprehensive comparison
+results_df = pd.DataFrame({
+    'Method': ['Logistic Regression', 'LDA', 'QDA', f'KNN (k={best_k})'],
+    'Test_Accuracy': [simple_accuracy, lda_accuracy, qda_accuracy, best_knn_accuracy]
+})
+
+results_df = results_df.sort_values('Test_Accuracy', ascending=False)
+print("Final Model Comparison (sorted by accuracy):")
+print(results_df)
+
+# Visualize final comparison
+plt.figure(figsize=(10, 6))
+bars = plt.bar(results_df['Method'], results_df['Test_Accuracy'])
+plt.ylabel('Test Accuracy')
+plt.title('Classification Method Comparison')
+plt.xticks(rotation=45)
+
+# Add value labels on bars
+for bar, accuracy in zip(bars, results_df['Test_Accuracy']):
+    plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.001, 
+             f'{accuracy:.3f}', ha='center', va='bottom')
+
+plt.tight_layout()
+plt.show()
+```
+
+## Conclusion
+
+In this analysis, we explored several classification methods for predicting stock market direction:
+
+1. **Logistic Regression**: Both full and simplified models were tested, with the simplified model (using only Lag1 and Lag2) performing better.
+
+2. **Linear Discriminant Analysis (LDA)**: Performed similarly to logistic regression, which is expected when the assumptions are met.
+
+3. **Quadratic Discriminant Analysis (QDA)**: Allowed for more flexible decision boundaries but didn't significantly improve performance.
+
+4. **K-Nearest Neighbors (KNN)**: Performance varied with the choice of k, with optimal performance around k={best_k}.
+
+The results suggest that predicting stock market direction is challenging, and no single method dramatically outperformed the others. This is consistent with the efficient market hypothesis
